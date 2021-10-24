@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class ImageModelImpl implements ImageModel{
   private Pixel[][] model;
+  private int width;
+  private int height;
 
   public ImageModelImpl(String filePath) throws FileNotFoundException {
     Scanner sc;
@@ -34,8 +36,8 @@ public class ImageModelImpl implements ImageModel{
     if (!token.equals("P3")) {
       throw new IllegalStateException("Invalid PPM file: plain RAW file should begin with P3");
     }
-    int width = sc.nextInt();
-    int height = sc.nextInt();
+    this.width = sc.nextInt();
+    this.height = sc.nextInt();
     this.model = new Pixel[height][width];
 
     int maxValue = sc.nextInt();
