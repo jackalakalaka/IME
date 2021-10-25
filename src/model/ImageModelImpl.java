@@ -79,16 +79,6 @@ public class ImageModelImpl implements ImageModel {
   }
 
   @Override
-  public Pixel getPixelAt(int row, int col) {
-    return pixelArray[row][col];
-  }
-
-  @Override
-  public <T> ImageModel convertToViz(T Viz) {
-    return null;
-  }
-
-  @Override
   public ImageModel changeBrightness(int change) {
     Pixel[][] brighterModel = new Pixel[this.height][this.width];
     for (int row = 0; row < height; row++) {
@@ -128,6 +118,16 @@ public class ImageModelImpl implements ImageModel {
       return 0;
     }
     return Math.min(colorValue, this.maxValue);
+  }
+
+  @Override
+  public Pixel getPixelAt(int row, int col) {
+    return pixelArray[row][col];
+  }
+
+  @Override
+  public <T> ImageModel convertToViz(T Viz) {
+    return null;
   }
 
   @Override
