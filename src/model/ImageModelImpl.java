@@ -6,11 +6,21 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Representation of an image from a PPM file.
+ */
 public class ImageModelImpl implements ImageModel {
-  private Pixel[][] pixelArray;
-  private int width;
-  private int height;
+  private final Pixel[][] pixelArray;
+  private final int width;
+  private final int height;
+  private final int maxValue;
 
+  /**
+   * Constructor for an image model using a PPM file.
+   *
+   * @param filePath The file path to the PPM file.
+   * @throws FileNotFoundException If the file cannot be found.
+   */
   public ImageModelImpl(String filePath) throws FileNotFoundException {
     Scanner sc;
 
@@ -42,6 +52,7 @@ public class ImageModelImpl implements ImageModel {
     this.pixelArray = new Pixel[height][width];
 
     int maxValue = sc.nextInt();
+    this.maxValue = maxValue;
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
@@ -53,15 +64,18 @@ public class ImageModelImpl implements ImageModel {
     }
   }
 
-  private ImageModelImpl(int height, int width) {
-    this.pixelArray = new Pixel[height][width];
-  }
-
-  private ImageModelImpl(Pixel[][] pixelArray){
+  /**
+   * Private constructor for making a new ImageModelImpl.
+   *
+   * @param pixelArray An array of pixels for the new model.
+   * @param maxValue   The maximum value carried over from the original model.
+   */
+  private ImageModelImpl(Pixel[][] pixelArray, int maxValue) {
     Objects.requireNonNull(pixelArray);
     this.pixelArray = pixelArray;
     this.height = pixelArray.length;
     this.width = pixelArray[0].length;
+    this.maxValue = maxValue;
   }
 
   @Override
@@ -80,20 +94,31 @@ public class ImageModelImpl implements ImageModel {
     for (int row = 0; row < height; row++) {
       for (int column = 0; column < width; column++) {
         Pixel oldPixel = this.getPixelAt(row, column);
-        HashMap<iPixel.Color, Integer> oldPixelColors = oldPixel.getColors();
-        int red = oldPixelColors.get(iPixel.Color.Red);
-        int green = oldPixelColors.get(iPixel.Color.Green);
-        int blue = oldPixelColors.get(iPixel.Color.Blue);
-        brighterModel[row][column] = new Pixel(255,
-                checkBrightness(red + change), checkBrightness(green + change),
-                checkBrightness(blue + change));
+        brighterModel[row][column] = changePixelBrightness(oldPixel, change);
       }
     }
-    return new ImageModelImpl(brighterModel);
+    return new ImageModelImpl(brighterModel, this.maxValue);
   }
 
   /**
-   * Helper for {@link #changeBrightness(int)}.
+   * Helper for {@link #changeBrightness(int)} to make brighter pixels.
+   *
+   * @param oldPixel The original pixel.
+   * @param change   The brightness change to be implemented.
+   * @return A new brighter or darker pixel.
+   */
+  private Pixel changePixelBrightness(Pixel oldPixel, int change) {
+    HashMap<iPixel.Color, Integer> oldPixelColors = oldPixel.getColors();
+    int red = oldPixelColors.get(iPixel.Color.Red);
+    int green = oldPixelColors.get(iPixel.Color.Green);
+    int blue = oldPixelColors.get(iPixel.Color.Blue);
+    return new Pixel(this.maxValue,
+            checkBrightness(red + change), checkBrightness(green + change),
+            checkBrightness(blue + change));
+  }
+
+  /**
+   * Helper for {@link #changePixelBrightness(Pixel, int)}.
    *
    * @param colorValue The desired color value after brightening or dimming.
    * @return The acceptable value or max/min.
@@ -102,21 +127,7 @@ public class ImageModelImpl implements ImageModel {
     if (colorValue < 0) {
       return 0;
     }
-    return Math.min(colorValue, 255);
-  }
-
-  /**
-   * Populates this current board with another boards contents.
-   * Assumes the boards are the same size.
-   *
-   * @param other ImageModel that this board is copying.
-   */
-  private void populateModel(ImageModel other) {
-    for (int row = 0; row < height; row++) {
-      for (int column = 0; column < width; ) {
-        this.pixelArray[row][column] = other.getPixelAt(row, column);
-      }
-    }
+    return Math.min(colorValue, this.maxValue);
   }
 
   @Override
