@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -7,24 +8,19 @@ import java.util.HashMap;
  */
 public class Pixel implements iPixel {
   private final int redValue;
-  private final int blueValue;
   private final int greenValue;
+  private final int blueValue;
   private final int maxValue;
 
   public Pixel(int maxValue, int grey) {
     this(maxValue, grey, grey, grey);
   }
 
-  public Pixel(int maxValue, int red, int blue, int green) {
-    if (red > maxValue || blue > maxValue || green > maxValue
-            || red < 0 || blue < 0 || green < 0) {
-      throw new IllegalArgumentException("Color values cannot exceed Maximum value " +
-              "or be less than zero.");
-    }
+  public Pixel(int maxValue, int red, int green, int blue) {
     this.maxValue = maxValue;
     this.redValue = red;
-    this.blueValue = blue;
-    this.greenValue = green;
+    this.blueValue = green;
+    this.greenValue = blue;
   }
 
   @Override

@@ -1,10 +1,10 @@
 package model;
 
+import java.io.FileNotFoundException;
+
 public interface ImageModel {
 
   Pixel getPixelAt(int row, int col);
-
-  ImageModel imageFromFile(String filePath);
 
   <T> ImageModel convertToViz(T Viz);
 

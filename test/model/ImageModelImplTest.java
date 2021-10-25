@@ -19,4 +19,11 @@ public class ImageModelImplTest {
             this.koala.getPixelAt(240,200).toString());
   }
 
+  @Test
+  public void testDimensions() {
+    Integer[][] testArray = new Integer[3][7];
+    assertEquals(3,testArray.length);
+    assertEquals(7,testArray[0].length);
+  }
+
 }
