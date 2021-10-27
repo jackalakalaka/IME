@@ -22,6 +22,13 @@ public interface iPixel {
   HashMap<Color, Double> getLuma();
 
   /**
+   * Returns the value of the pixel.
+   *
+   * @return An integer that represents the maximum value of the pixel.
+   */
+  int getValue();
+
+  /**
    * Enums for representing the three primary colors.
    */
   enum Color { Red, Green, Blue };

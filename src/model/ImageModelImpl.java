@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
+import model.FuncObjs.AConvertFromAbsolute;
+
 /**
  * Representation of an image from a PPM file.
  */
@@ -16,12 +18,12 @@ public class ImageModelImpl implements ImageModel {
   private final int maxValue;
 
   /**
-   * Constructor for an image model using a PPM file.
+   * 1-arg constructor for an image model using a PPM file.
    *
    * @param filePath The file path to the PPM file.
    * @throws FileNotFoundException If the file cannot be found.
    */
-  public ImageModelImpl(String filePath) throws FileNotFoundException {
+  ImageModelImpl(String filePath) throws FileNotFoundException {
     Scanner sc;
 
     try {
@@ -64,13 +66,31 @@ public class ImageModelImpl implements ImageModel {
     }
   }
 
+  @Override
+  public int getHeight() {
+    return this.height;
+  }
+
+  @Override
+  public int getWidth() {
+    return this.width;
+  }
+
   /**
-   * Private constructor for making a new ImageModelImpl.
+   * @return the maximum value of this image's pixels, defining white / the color scale.
+   */
+  @Override
+  public int getMaxValue() {
+    return this.maxValue;
+  }
+
+  /**
+   * 2-arg constructor for making a new ImageModelImpl.
    *
    * @param pixelArray An array of pixels for the new model.
    * @param maxValue   The maximum value carried over from the original model.
    */
-  private ImageModelImpl(Pixel[][] pixelArray, int maxValue) {
+  public ImageModelImpl(Pixel[][] pixelArray, int maxValue) {
     Objects.requireNonNull(pixelArray);
     this.pixelArray = pixelArray;
     this.height = pixelArray.length;
@@ -126,8 +146,8 @@ public class ImageModelImpl implements ImageModel {
   }
 
   @Override
-  public <T> ImageModel convertToViz(T Viz) {
-    return null;
+  public ImageModel convertToViz(AConvertFromAbsolute cmd) {
+    return cmd.apply(this);
   }
 
   @Override

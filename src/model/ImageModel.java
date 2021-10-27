@@ -1,6 +1,23 @@
 package model;
 
+import model.FuncObjs.AConvertFromAbsolute;
+
 public interface ImageModel {
+
+  /**
+   * @return height of image in pixels
+   */
+  public int getHeight();
+
+  /**
+   * @return width of image in pixels
+   */
+  public int getWidth();
+
+  /**
+   * @return the maximum value of this image's pixels, defining white / the color scale.
+   */
+  public int getMaxValue();
 
   /**
    * Retrieves the pixel at the given location in the Array.
@@ -11,7 +28,7 @@ public interface ImageModel {
    */
   Pixel getPixelAt(int row, int col);
 
-  <T> ImageModel convertToViz(T Viz);
+  ImageModel convertToViz(AConvertFromAbsolute cmd);
 
   /**
    * Creates a new ImageModel that mirrors the other model but with the brightness changed.
