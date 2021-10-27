@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -39,33 +41,12 @@ public class Pixel implements iPixel {
     pixelColors.put(Color.Blue, this.blueValue / totalValue);
     return pixelColors;
   }
-
-
-
-
-
-
-
-
-
-  /**
-   * Returns the value of the pixel.
-   *
-   * @return An integer that represents the maximum value of the pixel.
-   */
+  
   @Override
   public int getValue() {
-//    List<Integer> rgbVals =
-    //this.getColors().values().stream().max(Comparator.);
-    return 0;
+    Integer[] values = {redValue,greenValue,blueValue};
+    return Collections.max(Arrays.asList(values));
   }
-
-
-
-
-
-
-
 
   @Override
   public HashMap<Color, Integer> getColors() {
