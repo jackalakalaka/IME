@@ -1,7 +1,10 @@
 package model;
 
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
@@ -151,8 +154,43 @@ public class ImageModelImpl implements ImageModel {
   }
 
   @Override
-  public void saveImageToFile(String filePath) {
+  public void saveImageToFile(String fileName) throws IOException {
+    Appendable ap = new StringBuilder(); //Initialize the string for file creation
 
+    //Start by adding the correct PPM file format (P3 and dimensions)
+    try{
+      ap.append("P3\n")
+              .append("# Created by IME.\n")
+              .append(String.valueOf(this.width))
+              .append(" ")
+              .append(String.valueOf(this.height))
+              .append("\n")
+              .append(String.valueOf(this.maxValue))
+              .append("\n");
+    } catch (IOException e) {
+      throw new IllegalArgumentException("Save Image couldn't write to appendable.");
+    }
+
+    //Go through the whole array and populate the string with pixel values
+    for (int i = 0; i < this.height; i++) {
+      for (int j = 0; j < this.width; j++) {
+        HashMap<iPixel.Color, Integer> pixelColors = this.getPixelAt(i,j).getColors();
+        int red = pixelColors.get(iPixel.Color.Red);
+        int green = pixelColors.get(iPixel.Color.Green);
+        int blue = pixelColors.get(iPixel.Color.Blue);
+        try{
+          ap.append(String.valueOf(red)).append("\n")
+                  .append(String.valueOf(green)).append("\n")
+                  .append(String.valueOf(blue)).append("\n");
+        } catch (IOException e) {
+          throw new IllegalArgumentException("Save Image couldn't write to appendable.");
+        }
+      }
+    }
+    BufferedWriter writer = new BufferedWriter((new FileWriter(fileName+".PPM")));
+    String output = ap.toString();
+    writer.write(output);
+    writer.close();
   }
 
 }

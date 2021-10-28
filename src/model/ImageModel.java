@@ -1,5 +1,7 @@
 package model;
 
+import java.io.IOException;
+
 import model.FuncObjs.AConvertFromAbsolute;
 
 public interface ImageModel {
@@ -38,6 +40,6 @@ public interface ImageModel {
    */
   ImageModel changeBrightness(int change);
 
-  void saveImageToFile(String filepath);
+  void saveImageToFile(String filepath) throws IOException;
 
 }
