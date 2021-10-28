@@ -28,12 +28,12 @@ public class ImageModelImpl implements ImageModel {
    */
   ImageModelImpl(String filePath) throws FileNotFoundException {
     Scanner sc;
+
     try {
       sc = new Scanner(new FileInputStream(filePath));
     } catch (FileNotFoundException e) {
       throw new FileNotFoundException("File path leads to no file or was mistyped.");
     }
-
     StringBuilder builder = new StringBuilder();
     //read the file line by line, and populate a string. This will throw away any comment lines
     while (sc.hasNextLine()) {
@@ -45,14 +45,28 @@ public class ImageModelImpl implements ImageModel {
 
     //now set up the scanner to read from the string we just built
     sc = new Scanner(builder.toString());
-    String token = sc.next();
+
+    String token;
+
+    token = sc.next();
     if (!token.equals("P3")) {
       throw new IllegalStateException("Invalid PPM file: plain RAW file should begin with P3");
     }
-    this.height = sc.nextInt();
     this.width = sc.nextInt();
-    this.maxValue = sc.nextInt();
-    this.pixelArray = buildPixelArray(this.height, this.width, this.maxValue, sc);
+    this.height = sc.nextInt();
+    this.pixelArray = new Pixel[height][width];
+
+    int maxValue = sc.nextInt();
+    this.maxValue = maxValue;
+
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        int r = sc.nextInt();
+        int g = sc.nextInt();
+        int b = sc.nextInt();
+        this.pixelArray[i][j] = new Pixel(maxValue, r, g, b);
+      }
+    }
   }
 
   /**
@@ -63,8 +77,7 @@ public class ImageModelImpl implements ImageModel {
    * @param sc scanner constructed w/ data-containing string
    * @return pixel array corresponding to the modeled image
    */
-  private Pixel[][] buildPixelArray(int h, int w, int mV, Scanner sc) {
-    Pixel[][] pixels = new Pixel[h][w];
+  private void buildPixelArray(int h, int w, int mV, Scanner sc) {
     for (int i = 0; i < h; i++) {
       for (int j = 0; j < w; j++) {
         int r = sc.nextInt();
@@ -73,7 +86,6 @@ public class ImageModelImpl implements ImageModel {
         this.pixelArray[i][j] = new Pixel(mV, r, g, b);
       }
     }
-    return pixels;
   }
 
   @Override
