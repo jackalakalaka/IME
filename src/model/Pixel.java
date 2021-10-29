@@ -23,8 +23,8 @@ public class Pixel implements iPixel {
   public Pixel(int maxValue, int red, int green, int blue) {
     this.maxValue = maxValue;
     this.redValue = red;
-    this.blueValue = green;
-    this.greenValue = blue;
+    this.blueValue = blue;
+    this.greenValue = green;
   }
 
   @Override
