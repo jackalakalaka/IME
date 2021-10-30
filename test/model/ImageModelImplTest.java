@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 
 import static org.junit.Assert.*;
 
-public class ImageModelImplTest {
+public class ImageModelImplTest extends ImageModelTest {
 
   ImageModel koala = new ImageModelImpl("Koala.ppm");
 
