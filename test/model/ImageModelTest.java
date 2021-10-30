@@ -1,5 +1,11 @@
 package model;
 
+import java.io.FileNotFoundException;
+
 public class ImageModelTest {
-  ImageModel koala = new ImageModelImpl("Koala.ppm");
+  ImageModel koala;
+
+  public ImageModelTest() throws FileNotFoundException {
+    this.koala = new ImageModelPpm("Koala.ppm");
+  }
 }
