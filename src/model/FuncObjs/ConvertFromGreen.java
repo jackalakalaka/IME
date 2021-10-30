@@ -7,4 +7,9 @@ public class ConvertFromGreen extends AConvertFromAbsolute {
   protected int getAbsolute(iPixel p) {
     return p.getColors().get(iPixel.Color.Green);
   }
+
+  @Override
+  public String giveSignature() {
+    return "To get a heat map of green in the image type 'green' into the command line.\n\n";
+  }
 }

@@ -10,17 +10,17 @@ import model.FuncObjs.ConvertByHorizontalVertical;
 
 import static org.junit.Assert.*;
 
-public class ImageModelPpmTest extends ImageModelTest {
+public class ImagePpmTest extends ImageModelTest {
 
-  ImageModel koala = new ImageModelPpm("Koala.ppm");
+  iImage koala = new ImagePpm("Koala.ppm");
 
-  public ImageModelPpmTest() throws FileNotFoundException {
+  public ImagePpmTest() throws FileNotFoundException {
   }
 
   @Test
   public void testSaveImage() throws IOException {
-    ImageModel darker = koala.changeBrightness(-150);
-    ImageModel lost = darker.changeBrightness(150);
+    iImage darker = koala.changeBrightness(-150);
+    iImage lost = darker.changeBrightness(150);
     lost.saveImageToFile("LostKoala");
   }
 
@@ -53,7 +53,7 @@ public class ImageModelPpmTest extends ImageModelTest {
 
   @Test
   public void testRotation() throws IOException {
-    ImageModel rotated = koala.convertToViz(new ConvertByHorizontalVertical());
+    iImage rotated = koala.convertToViz(new ConvertByHorizontalVertical());
     rotated.saveImageToFile("rotate");
   }
 

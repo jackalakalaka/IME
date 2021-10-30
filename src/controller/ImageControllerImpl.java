@@ -1,16 +1,16 @@
 package controller;
 
-import java.util.HashMap;
 import java.util.Objects;
 
-import model.ImageModel;
+import model.IModel;
+import model.iImage;
 import view.ImageView;
 
 /**
  * Represents a controller for IME.
  */
 public class ImageControllerImpl implements ImageController{
-  HashMap<String,ImageModel> imgModels;
+  IModel model;
   ImageView view;
   Readable readable;
 
@@ -23,8 +23,8 @@ public class ImageControllerImpl implements ImageController{
   }
 
   @Override
-  public void addModel(String alias, ImageModel model) throws IllegalArgumentException {
-    imgModels.put(alias, model);
+  public void addImage(String alias, iImage image) throws IllegalArgumentException {
+    this.model.addImage(alias,image);
   }
 
   @Override

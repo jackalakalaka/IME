@@ -9,13 +9,12 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
-import model.FuncObjs.AConvertFromAbsolute;
 import model.FuncObjs.IConvertFrom;
 
 /**
  * Representation of an image from a PPM file.
  */
-public class ImageModelPpm implements ImageModel {
+public class ImagePpm implements iImage {
   private final Pixel[][] pixelArray;
   private final int width;
   private final int height;
@@ -27,7 +26,7 @@ public class ImageModelPpm implements ImageModel {
    * @param filePath The file path to the PPM file.
    * @throws FileNotFoundException If the file cannot be found.
    */
-  public ImageModelPpm(String filePath) throws FileNotFoundException {
+  public ImagePpm(String filePath) throws FileNotFoundException {
     Scanner sc;
 
     try {
@@ -113,7 +112,7 @@ public class ImageModelPpm implements ImageModel {
    * @param pixelArray An array of pixels for the new model.
    * @param maxValue   The maximum value carried over from the original model.
    */
-  public ImageModelPpm(Pixel[][] pixelArray, int maxValue) {
+  public ImagePpm(Pixel[][] pixelArray, int maxValue) {
     Objects.requireNonNull(pixelArray);
     this.pixelArray = pixelArray;
     this.height = pixelArray.length;
@@ -122,7 +121,7 @@ public class ImageModelPpm implements ImageModel {
   }
 
   @Override
-  public ImageModel changeBrightness(int change) {
+  public iImage changeBrightness(int change) {
     Pixel[][] brighterModel = new Pixel[this.height][this.width];
     for (int row = 0; row < height; row++) {
       for (int column = 0; column < width; column++) {
@@ -130,7 +129,7 @@ public class ImageModelPpm implements ImageModel {
         brighterModel[row][column] = changePixelBrightness(oldPixel, change);
       }
     }
-    return new ImageModelPpm(brighterModel, this.maxValue);
+    return new ImagePpm(brighterModel, this.maxValue);
   }
 
   /**
@@ -169,7 +168,7 @@ public class ImageModelPpm implements ImageModel {
   }
 
   @Override
-  public ImageModel convertToViz(IConvertFrom cmd) {
+  public iImage convertToViz(IConvertFrom cmd) {
     return cmd.apply(this);
   }
 

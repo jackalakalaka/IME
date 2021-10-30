@@ -1,6 +1,8 @@
 package view;
 
-import model.ImageModel;
+import java.io.IOException;
+
+import model.iImage;
 
 /**
  * Interface for displaying images.
@@ -13,6 +15,8 @@ public interface ImageView {
    * @param model The model that is represented.
    * @return String that represents the image.
    */
-  String createImage(ImageModel model);
+  void createImage(String model) throws IOException;
+
+  void printMenu() throws IOException;
 
 }

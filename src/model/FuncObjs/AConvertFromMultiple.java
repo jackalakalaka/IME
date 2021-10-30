@@ -2,8 +2,8 @@ package model.FuncObjs;
 
 import java.util.ArrayList;
 
-import model.ImageModel;
-import model.ImageModelPpm;
+import model.iImage;
+import model.ImagePpm;
 import model.Pixel;
 import model.iPixel;
 
@@ -15,7 +15,7 @@ public abstract class AConvertFromMultiple implements IConvertFrom {
    * @param initModel the function argument
    * @return the function result
    */
-  public ImageModel apply(ImageModel initModel) {
+  public iImage apply(iImage initModel) {
     int h = initModel.getHeight();
     int w = initModel.getWidth();
     Pixel[][] pixels = new Pixel[h][w];
@@ -31,7 +31,7 @@ public abstract class AConvertFromMultiple implements IConvertFrom {
         pixels[row][col] = new Pixel(maxValue, red, green, blue);
       }
     }
-    return new ImageModelPpm(pixels, maxValue);
+    return new ImagePpm(pixels, maxValue);
   }
 
   /**

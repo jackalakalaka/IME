@@ -2,8 +2,8 @@ package model;
 
 public interface IModel {
 
-  ImageModel getImageFromModel(String imageName);
+  iImage getImageFromModel(String imageName);
 
-  void addImage(String name,ImageModel imageModel);
+  void addImage(String name, iImage iImage);
 
 }

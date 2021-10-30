@@ -15,4 +15,9 @@ public class ConvertFromLuma extends AConvertFromMultiple{
     lumaDoubles.add(luma.get(iPixel.Color.Blue));
     return lumaDoubles;
   }
+
+  @Override
+  public String giveSignature() {
+    return "To get a heat map of luminosity in the image type 'luma' into the command line.\n\n";
+  }
 }

@@ -1,9 +1,7 @@
 package model.FuncObjs;
 
-import java.util.HashMap;
-
-import model.ImageModel;
-import model.ImageModelPpm;
+import model.iImage;
+import model.ImagePpm;
 import model.Pixel;
 
 public abstract class AConvertByDimensions implements IConvertFrom {
@@ -15,7 +13,7 @@ public abstract class AConvertByDimensions implements IConvertFrom {
    * @param initModel the function argument
    * @return the function result
    */
-  public ImageModel apply(ImageModel initModel) {
+  public iImage apply(iImage initModel) {
     int h = initModel.getHeight();
     int w = initModel.getWidth();
     Pixel[][] pixels = new Pixel[h][w];
@@ -27,10 +25,10 @@ public abstract class AConvertByDimensions implements IConvertFrom {
         pixels[i][j] = getOtherPixel(i,j,initModel);
       }
     }
-    return new ImageModelPpm(pixels, maxValue);
+    return new ImagePpm(pixels, maxValue);
   }
 
-  protected abstract Pixel getOtherPixel(int i, int j, ImageModel model);
+  protected abstract Pixel getOtherPixel(int i, int j, iImage model);
 
 
 }

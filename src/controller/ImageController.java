@@ -1,6 +1,6 @@
 package controller;
 
-import model.ImageModel;
+import model.iImage;
 
 public interface ImageController {
 
@@ -10,7 +10,7 @@ public interface ImageController {
    * @param alias user-input name of given model
    * @param model model for a processable image
    */
-  void addModel(String alias, ImageModel model) throws IllegalArgumentException;
+  void addImage(String alias, iImage model) throws IllegalArgumentException;
 
   /**
    * This method uses the controller to edit and view images.

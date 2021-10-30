@@ -7,4 +7,10 @@ public class ConvertFromValue extends AConvertFromAbsolute {
   protected int getAbsolute(iPixel p) {
     return p.getValue();
   }
+
+  @Override
+  public String giveSignature() {
+    return "To get a heat map of average value in the image " +
+            "type 'value' into the command line.\n\n";
+  }
 }
