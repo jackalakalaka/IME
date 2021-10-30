@@ -4,7 +4,14 @@ import java.io.IOException;
 
 import model.FuncObjs.IConvertFrom;
 
+<<<<<<< HEAD:src/model/iImage.java
 public interface iImage {
+=======
+/**
+ * Read-only: methods return new objects.
+ */
+public interface ImageModel {
+>>>>>>> 266e5074b2ed59cca12d59214ba9238efbe623e9:src/model/ImageModel.java
 
   /**
    * @return height of image in pixels
