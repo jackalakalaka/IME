@@ -7,7 +7,8 @@ import model.ImageModelImpl;
 import model.Pixel;
 import model.iPixel;
 
-public abstract class AConvertFromAbsolute implements Function<ImageModel, ImageModel> {
+public abstract class AConvertFromAbsolute implements IConvertFrom {
+
   /**
    * Applies this function to the given argument.
    *
