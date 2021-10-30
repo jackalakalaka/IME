@@ -5,6 +5,9 @@ import java.io.IOException;
 import model.FuncObjs.AConvertFromAbsolute;
 import model.FuncObjs.IConvertFrom;
 
+/**
+ * Read-only: methods return new objects.
+ */
 public interface ImageModel {
 
   /**

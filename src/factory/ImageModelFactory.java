@@ -13,7 +13,8 @@ public class ImageModelFactory {
 
     switch (imgFormat) {
       case "ppm": return new ImageModelPpm(filePath);
-      default: return null;
+      default: throw new IllegalArgumentException(String.format("Img format %1$s is not supported",
+              imgFormat));
     }
   }
 }
