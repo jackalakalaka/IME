@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
-import model.FuncObjs.AConvertFromRotate;
+import model.FuncObjs.ConvertByHorizontalVertical;
 
 import static org.junit.Assert.*;
 
@@ -53,8 +53,8 @@ public class ImageModelPpmTest extends ImageModelTest {
 
   @Test
   public void testRotation() throws IOException {
-    ImageModel rotated = koala.convertToViz(new AConvertFromRotate(koala));
-    rotated.saveImageToFile("rotated");
+    ImageModel rotated = koala.convertToViz(new ConvertByHorizontalVertical());
+    rotated.saveImageToFile("rotate");
   }
 
 }
