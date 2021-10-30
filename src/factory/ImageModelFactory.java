@@ -12,14 +12,9 @@ public class ImageModelFactory {
     Objects.requireNonNull(imgFormat, filePath);
 
     switch (imgFormat) {
-<<<<<<< HEAD
       case "ppm": return new ImagePpm(filePath);
-      default: return null;
-=======
-      case "ppm": return new ImageModelPpm(filePath);
       default: throw new IllegalArgumentException(String.format("Img format %1$s is not supported",
               imgFormat));
->>>>>>> 266e5074b2ed59cca12d59214ba9238efbe623e9
     }
   }
 }

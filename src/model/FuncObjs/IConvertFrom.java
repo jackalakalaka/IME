@@ -9,8 +9,8 @@ public interface IConvertFrom extends Function<iImage, iImage> {
   /**
    * Applies this function to the given argument.
    *
-   * @param initModel the function argument
-   * @return the function result
+   * @param iImage The image that is worked on via apply.
+   * @return A new iImage that has been altered form the original.
    */
   iImage apply(iImage iImage);
 

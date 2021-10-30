@@ -1,55 +1,30 @@
 package controller;
 
-<<<<<<< HEAD
-import java.util.Objects;
-
-import model.IModel;
-import model.iImage;
-=======
-import java.io.FileNotFoundException;
-import java.util.HashMap;
+import java.io.InputStreamReader;
 import java.util.Objects;
 
 import factory.ImageModelFactory;
-import model.ImageModel;
->>>>>>> 266e5074b2ed59cca12d59214ba9238efbe623e9
+import model.IModel;
+import model.iImage;
 import view.ImageView;
 
 /**
  * Represents a controller for IME.
  */
 public class ImageControllerImpl implements ImageController{
-<<<<<<< HEAD
+  ImageModelFactory fac = new ImageModelFactory();
   IModel model;
   ImageView view;
-=======
-  ImageModelFactory fac = new ImageModelFactory();
-  HashMap<String,ImageModel> imgModels;
-  HashMap<String,ImageView> imgViews;
->>>>>>> 266e5074b2ed59cca12d59214ba9238efbe623e9
   Readable readable;
 
-  public ImageControllerImpl(Readable readable) {
-    Objects.requireNonNull(readable);
-    this.readable = readable;
+  public ImageControllerImpl(IModel model, ImageView view){
+    this(model,view, new InputStreamReader(System.in));
   }
 
-  /**
-   * Adds an image model with the specified alias.
-   *
-   * @param alias  user-input name of given model
-   * @param format image format
-   */
-  @Override
-<<<<<<< HEAD
-  public void addImage(String alias, iImage image) throws IllegalArgumentException {
-    this.model.addImage(alias,image);
-=======
-  public void addImg(String alias, String format, String filePath) throws FileNotFoundException,
-          IllegalArgumentException  {
-    imgModels.put(alias, fac.createImageModel(format, filePath));
-    imgViews.put(alias, fac.createImageModel(format, filePath));
->>>>>>> 266e5074b2ed59cca12d59214ba9238efbe623e9
+  public ImageControllerImpl(IModel model, ImageView view, Readable readable) {
+    this.model = Objects.requireNonNull(model);
+    this.view = Objects.requireNonNull(view);
+    this.readable = Objects.requireNonNull(readable);
   }
 
   @Override
