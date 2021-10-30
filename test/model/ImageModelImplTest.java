@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
+import model.FuncObjs.AConvertFromRotate;
+
 import static org.junit.Assert.*;
 
 public class ImageModelImplTest {
@@ -47,6 +49,12 @@ public class ImageModelImplTest {
     Integer[][] testArray = new Integer[3][7];
     assertEquals(3,testArray.length);
     assertEquals(7,testArray[0].length);
+  }
+
+  @Test
+  public void testRotation() throws IOException {
+    ImageModel rotated = koala.convertToViz(new AConvertFromRotate(koala));
+    rotated.saveImageToFile("rotated");
   }
 
 }

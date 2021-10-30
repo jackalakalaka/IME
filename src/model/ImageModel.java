@@ -3,6 +3,7 @@ package model;
 import java.io.IOException;
 
 import model.FuncObjs.AConvertFromAbsolute;
+import model.FuncObjs.IConvertFrom;
 
 public interface ImageModel {
 
@@ -30,7 +31,7 @@ public interface ImageModel {
    */
   Pixel getPixelAt(int row, int col);
 
-  ImageModel convertToViz(AConvertFromAbsolute cmd);
+  ImageModel convertToViz(IConvertFrom cmd);
 
   /**
    * Creates a new ImageModel that mirrors the other model but with the brightness changed.

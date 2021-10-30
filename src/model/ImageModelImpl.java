@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import model.FuncObjs.AConvertFromAbsolute;
+import model.FuncObjs.IConvertFrom;
 
 /**
  * Representation of an image from a PPM file.
@@ -168,7 +169,7 @@ public class ImageModelImpl implements ImageModel {
   }
 
   @Override
-  public ImageModel convertToViz(AConvertFromAbsolute cmd) {
+  public ImageModel convertToViz(IConvertFrom cmd) {
     return cmd.apply(this);
   }
 
