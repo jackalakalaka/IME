@@ -10,11 +10,11 @@ import model.FuncObjs.AConvertFromRotate;
 
 import static org.junit.Assert.*;
 
-public class ImageModelImplTest {
+public class ImageModelPpmTest extends ImageModelTest {
 
-  ImageModel koala = new ImageModelImpl("Koala.ppm");
+  ImageModel koala = new ImageModelPpm("Koala.ppm");
 
-  public ImageModelImplTest() throws FileNotFoundException {
+  public ImageModelPpmTest() throws FileNotFoundException {
   }
 
   @Test

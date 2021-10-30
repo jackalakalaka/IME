@@ -15,7 +15,7 @@ import model.FuncObjs.IConvertFrom;
 /**
  * Representation of an image from a PPM file.
  */
-public class ImageModelImpl implements ImageModel {
+public class ImageModelPpm implements ImageModel {
   private final Pixel[][] pixelArray;
   private final int width;
   private final int height;
@@ -27,7 +27,7 @@ public class ImageModelImpl implements ImageModel {
    * @param filePath The file path to the PPM file.
    * @throws FileNotFoundException If the file cannot be found.
    */
-  ImageModelImpl(String filePath) throws FileNotFoundException {
+  public ImageModelPpm(String filePath) throws FileNotFoundException {
     Scanner sc;
 
     try {
@@ -113,7 +113,7 @@ public class ImageModelImpl implements ImageModel {
    * @param pixelArray An array of pixels for the new model.
    * @param maxValue   The maximum value carried over from the original model.
    */
-  public ImageModelImpl(Pixel[][] pixelArray, int maxValue) {
+  public ImageModelPpm(Pixel[][] pixelArray, int maxValue) {
     Objects.requireNonNull(pixelArray);
     this.pixelArray = pixelArray;
     this.height = pixelArray.length;
@@ -130,7 +130,7 @@ public class ImageModelImpl implements ImageModel {
         brighterModel[row][column] = changePixelBrightness(oldPixel, change);
       }
     }
-    return new ImageModelImpl(brighterModel, this.maxValue);
+    return new ImageModelPpm(brighterModel, this.maxValue);
   }
 
   /**

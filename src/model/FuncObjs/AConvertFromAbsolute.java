@@ -1,9 +1,7 @@
 package model.FuncObjs;
 
-import java.util.function.Function;
-
 import model.ImageModel;
-import model.ImageModelImpl;
+import model.ImageModelPpm;
 import model.Pixel;
 import model.iPixel;
 
@@ -28,7 +26,7 @@ public abstract class AConvertFromAbsolute implements IConvertFrom {
         pixels[row][col] = new Pixel(maxValue, absolute);
       }
     }
-    return new ImageModelImpl(pixels, maxValue);
+    return new ImageModelPpm(pixels, maxValue);
   }
 
   /**
