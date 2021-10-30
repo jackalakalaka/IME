@@ -1,13 +1,13 @@
 package model.FuncObjs;
 
+import java.util.HashMap;
+
 import model.ImageModel;
-import model.ImageModelImpl;
+import model.ImageModelPpm;
 import model.Pixel;
 
-public class AConvertFromRotate implements IConvertFrom {
+public abstract class AConvertByDimensions implements IConvertFrom {
 
-  public AConvertFromRotate(ImageModel koala) {
-  }
 
   /**
    * Applies this function to the given argument.
@@ -21,14 +21,16 @@ public class AConvertFromRotate implements IConvertFrom {
     Pixel[][] pixels = new Pixel[h][w];
     int maxValue = initModel.getMaxValue();
 
-    for (int i = h-1; i <= 0; i--) {
-      for (int j = w-1; j <= 0; j--) {
+    for (int i = 0; i < h; i++) {
+      for (int j = 0; j < w; j++) {
         Pixel oldPixel = initModel.getPixelAt(i,j);
-        pixels[i][j] = oldPixel;
+        pixels[i][j] = getOtherPixel(i,j,initModel);
       }
     }
-    return new ImageModelImpl(pixels, maxValue);
+    return new ImageModelPpm(pixels, maxValue);
   }
+
+  protected abstract Pixel getOtherPixel(int i, int j, ImageModel model);
 
 
 }

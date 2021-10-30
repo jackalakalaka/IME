@@ -10,17 +10,17 @@ public interface ImageModel {
   /**
    * @return height of image in pixels
    */
-  public int getHeight();
+  int getHeight();
 
   /**
    * @return width of image in pixels
    */
-  public int getWidth();
+  int getWidth();
 
   /**
    * @return the maximum value of this image's pixels, defining white / the color scale.
    */
-  public int getMaxValue();
+  int getMaxValue();
 
   /**
    * Retrieves the pixel at the given location in the Array.
