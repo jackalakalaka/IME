@@ -4,10 +4,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
-
-public class ImageViewImplTest {
-  ImageViewImpl basic = new ImageViewImpl();
+public class IMEViewImplTest {
+  IMEViewImpl basic = new IMEViewImpl();
 
   @Test
   public void testMenu() throws IOException {

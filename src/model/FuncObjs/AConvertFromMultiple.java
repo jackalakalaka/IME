@@ -1,13 +1,22 @@
 package model.FuncObjs;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import model.iImage;
+import factory.ImageFactory;
+import model.Image;
 import model.ImagePpm;
 import model.Pixel;
 import model.iPixel;
 
 public abstract class AConvertFromMultiple implements IConvertFrom {
+  ImageFactory imgFac;
+  String newName;
+
+  public AConvertFromMultiple(String newName) {
+    this.imgFac = new ImageFactory();
+    this.newName = newName;
+  }
 
   /**
    * Applies this function to the given argument.
@@ -15,7 +24,7 @@ public abstract class AConvertFromMultiple implements IConvertFrom {
    * @param initModel the function argument
    * @return the function result
    */
-  public iImage apply(iImage initModel) {
+  public Image apply(Image initModel) {
     int h = initModel.getHeight();
     int w = initModel.getWidth();
     Pixel[][] pixels = new Pixel[h][w];
@@ -31,7 +40,13 @@ public abstract class AConvertFromMultiple implements IConvertFrom {
         pixels[row][col] = new Pixel(maxValue, red, green, blue);
       }
     }
-    return new ImagePpm(pixels, maxValue);
+
+    try {
+      return this.imgFac.createImage("ppm", this.newName, pixels, maxValue);
+    } catch (FileNotFoundException e) {
+      System.out.println("Error - file not found using apply method.");
+      return null;
+    }
   }
 
   /**
