@@ -15,7 +15,7 @@ import model.FuncObjs.IConvertFrom;
  * Representation of an image from a PPM file.
  */
 public class ImagePpm implements Image {
-  private final Pixel[][] pixelArray;
+  private final iPixel[][] pixelArray;
   private final int width;
   private final int height;
   private final int maxValue;
@@ -23,7 +23,8 @@ public class ImagePpm implements Image {
 
   /**
    * 1-arg constructor for an image model using a PPM file.
-   * @param name image's name
+   *
+   * @param name     image's name
    * @param filePath The file path to the PPM file.
    * @throws FileNotFoundException If the file cannot be found.
    */
@@ -79,7 +80,7 @@ public class ImagePpm implements Image {
    * @param maxValue   The maximum value carried over from the original model.
    * @param pixelArray An array of pixels for the new model.
    */
-  public ImagePpm(String name, int maxValue, Pixel[][] pixelArray) {
+  public ImagePpm(String name, int maxValue, iPixel[][] pixelArray) {
     this.name = Objects.requireNonNull(name);
     this.pixelArray = Objects.requireNonNull(pixelArray);
     this.height = pixelArray.length;
@@ -89,8 +90,9 @@ public class ImagePpm implements Image {
 
   /**
    * Builds pixel array from a scanned string.
-   * @param h array height
-   * @param w array width
+   *
+   * @param h  array height
+   * @param w  array width
    * @param mV max value for color levels
    * @param sc scanner constructed w/ data-containing string
    * @return pixel array corresponding to the modeled image
@@ -137,7 +139,7 @@ public class ImagePpm implements Image {
     Pixel[][] brighterModel = new Pixel[this.height][this.width];
     for (int row = 0; row < height; row++) {
       for (int column = 0; column < width; column++) {
-        Pixel oldPixel = this.getPixelAt(row, column);
+        iPixel oldPixel = this.getPixelAt(row, column);
         brighterModel[row][column] = changePixelBrightness(oldPixel, change);
       }
     }
@@ -151,18 +153,18 @@ public class ImagePpm implements Image {
    * @param change   The brightness change to be implemented.
    * @return A new brighter or darker pixel.
    */
-  private Pixel changePixelBrightness(Pixel oldPixel, int change) {
-    HashMap<iPixel.Color, Integer> oldPixelColors = oldPixel.getColors();
-    int red = oldPixelColors.get(iPixel.Color.Red);
-    int green = oldPixelColors.get(iPixel.Color.Green);
-    int blue = oldPixelColors.get(iPixel.Color.Blue);
+  private Pixel changePixelBrightness(iPixel oldPixel, int change) {
+    HashMap<Pixel.Color, Integer> oldPixelColors = oldPixel.getColors();
+    int red = oldPixelColors.get(Pixel.Color.Red);
+    int green = oldPixelColors.get(Pixel.Color.Green);
+    int blue = oldPixelColors.get(Pixel.Color.Blue);
     return new Pixel(this.maxValue,
             checkBrightness(red + change), checkBrightness(green + change),
             checkBrightness(blue + change));
   }
 
   /**
-   * Helper for {@link #changePixelBrightness(Pixel, int)}.
+   * Helper for {@link #changePixelBrightness(iPixel, int)}.
    *
    * @param colorValue The desired color value after brightening or dimming.
    * @return The acceptable value or max/min.
@@ -175,7 +177,7 @@ public class ImagePpm implements Image {
   }
 
   @Override
-  public Pixel getPixelAt(int row, int col) {
+  public iPixel getPixelAt(int row, int col) {
     return pixelArray[row][col];
   }
 
@@ -189,7 +191,7 @@ public class ImagePpm implements Image {
     Appendable ap = new StringBuilder(); //Initialize the string for file creation
 
     //Start by adding the correct PPM file format (P3 and dimensions)
-    try{
+    try {
       ap.append("P3\n")
               .append("# Created by IME.\n")
               .append(String.valueOf(this.width))
@@ -205,11 +207,11 @@ public class ImagePpm implements Image {
     //Go through the whole array and populate the string with pixel values
     for (int i = 0; i < this.height; i++) {
       for (int j = 0; j < this.width; j++) {
-        HashMap<iPixel.Color, Integer> pixelColors = this.getPixelAt(i,j).getColors();
-        int red = pixelColors.get(iPixel.Color.Red);
-        int green = pixelColors.get(iPixel.Color.Green);
-        int blue = pixelColors.get(iPixel.Color.Blue);
-        try{
+        HashMap<Pixel.Color, Integer> pixelColors = this.getPixelAt(i, j).getColors();
+        int red = pixelColors.get(Pixel.Color.Red);
+        int green = pixelColors.get(Pixel.Color.Green);
+        int blue = pixelColors.get(Pixel.Color.Blue);
+        try {
           ap.append(String.valueOf(red)).append("\n")
                   .append(String.valueOf(green)).append("\n")
                   .append(String.valueOf(blue)).append("\n");

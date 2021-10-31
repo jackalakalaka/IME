@@ -1,16 +1,16 @@
 package model.FuncObjs;
 
 import model.Image;
-import model.Pixel;
+import model.iPixel;
 
-public class ConvertByHorizontal extends AConvertByDimensions{
+public class ConvertByHorizontal extends AConvertByDimensions {
   public ConvertByHorizontal(String newName) {
     super(newName);
   }
 
   @Override
-  protected Pixel getOtherPixel(int i, int j, Image model) {
-    return model.getPixelAt(i,model.getWidth() - j - 1);
+  protected iPixel getOtherPixel(int i, int j, Image model) {
+    return model.getPixelAt(i, model.getWidth() - j - 1);
   }
 
   @Override

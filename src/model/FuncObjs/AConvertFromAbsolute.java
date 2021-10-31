@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 
 import factory.ImageFactory;
 import model.Image;
-import model.ImagePpm;
 import model.Pixel;
 import model.iPixel;
 
@@ -31,7 +30,7 @@ public abstract class AConvertFromAbsolute implements IConvertFrom {
 
     for (int row = 0; row < h; row++) {
       for (int col = 0; col < w; col++) {
-        Pixel oldPixel = initModel.getPixelAt(row, col);
+        iPixel oldPixel = initModel.getPixelAt(row, col);
         int absolute = getAbsolute(oldPixel);
         pixels[row][col] = new Pixel(maxValue, absolute);
       }
@@ -48,6 +47,7 @@ public abstract class AConvertFromAbsolute implements IConvertFrom {
   /**
    * Gets this implementation of AConvertFromAbsolute's specific absolute value to convert into a
    * greyed pixel.
+   *
    * @param p old pixel
    * @return impl-specific absolute
    */

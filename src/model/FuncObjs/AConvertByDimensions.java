@@ -4,8 +4,7 @@ import java.io.FileNotFoundException;
 
 import factory.ImageFactory;
 import model.Image;
-import model.ImagePpm;
-import model.Pixel;
+import model.iPixel;
 
 public abstract class AConvertByDimensions implements IConvertFrom {
   ImageFactory imgFac;
@@ -25,13 +24,13 @@ public abstract class AConvertByDimensions implements IConvertFrom {
   public Image apply(Image initModel) {
     int h = initModel.getHeight();
     int w = initModel.getWidth();
-    Pixel[][] pixels = new Pixel[h][w];
+    iPixel[][] pixels = new iPixel[h][w];
     int maxValue = initModel.getMaxValue();
 
     for (int i = 0; i < h; i++) {
       for (int j = 0; j < w; j++) {
-        Pixel oldPixel = initModel.getPixelAt(i,j);
-        pixels[i][j] = getOtherPixel(i,j,initModel);
+        iPixel oldPixel = initModel.getPixelAt(i, j);
+        pixels[i][j] = getOtherPixel(i, j, initModel);
       }
     }
 
@@ -43,7 +42,7 @@ public abstract class AConvertByDimensions implements IConvertFrom {
     }
   }
 
-  protected abstract Pixel getOtherPixel(int i, int j, Image model);
+  protected abstract iPixel getOtherPixel(int i, int j, Image model);
 
 
 }

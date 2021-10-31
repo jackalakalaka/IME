@@ -34,7 +34,7 @@ public interface Image {
    * @param col The column in the array where the pixel is located.
    * @return A Pixel.
    */
-  Pixel getPixelAt(int row, int col);
+  iPixel getPixelAt(int row, int col);
 
   Image convertToViz(IConvertFrom cmd);
 

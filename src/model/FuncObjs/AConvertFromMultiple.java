@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import factory.ImageFactory;
 import model.Image;
-import model.ImagePpm;
 import model.Pixel;
 import model.iPixel;
 
@@ -27,12 +26,12 @@ public abstract class AConvertFromMultiple implements IConvertFrom {
   public Image apply(Image initModel) {
     int h = initModel.getHeight();
     int w = initModel.getWidth();
-    Pixel[][] pixels = new Pixel[h][w];
+    iPixel[][] pixels = new Pixel[h][w];
     int maxValue = initModel.getMaxValue();
 
     for (int row = 0; row < h; row++) {
       for (int col = 0; col < w; col++) {
-        Pixel oldPixel = initModel.getPixelAt(row, col);
+        iPixel oldPixel = initModel.getPixelAt(row, col);
         ArrayList<Double> multiple = getMultiple(oldPixel);
         int red = (int) (multiple.get(0) * maxValue);
         int green = (int) (multiple.get(1) * maxValue);

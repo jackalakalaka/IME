@@ -31,13 +31,15 @@ public interface iPixel {
   /**
    * Enums for representing the three primary colors.
    */
-  enum Color { Red, Green, Blue };
+  enum Color {Red, Green, Blue}
+
+  ;
 
   /**
    * Returns the HashMap for the pixel's colors and their values.
    *
    * @return A HashMap of Colors and their values.
    */
-  HashMap<Color,Integer> getColors();
+  HashMap<Color, Integer> getColors();
 
 }

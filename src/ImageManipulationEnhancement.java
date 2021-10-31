@@ -12,7 +12,7 @@ public final class ImageManipulationEnhancement {
     }
     IMEModelFactory modelFac = new IMEModelFactory();
 
-    IMEController ctrlr = new IMEControllerImpl(modelFac.createIMEModel("standard"));
-    ctrlr.runIME();
+    IMEController ctrl = new IMEControllerImpl(modelFac.createIMEModel("standard"));
+    ctrl.runIME();
   }
 }

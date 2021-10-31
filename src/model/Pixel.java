@@ -1,11 +1,8 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * This class represents an immutable pixel.
@@ -49,10 +46,10 @@ public class Pixel implements iPixel {
     pixelColors.put(Color.Blue, this.blueValue / totalValue);
     return pixelColors;
   }
-  
+
   @Override
   public int getValue() {
-    Integer[] values = {redValue,greenValue,blueValue};
+    Integer[] values = {redValue, greenValue, blueValue};
     return Collections.max(Arrays.asList(values));
   }
 

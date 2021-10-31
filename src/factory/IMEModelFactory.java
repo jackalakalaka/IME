@@ -12,9 +12,11 @@ public class IMEModelFactory {
     Objects.requireNonNull(variant);
 
     switch (variant) {
-      case "standard": return new IMEModelImpl();
-      default: throw new IllegalArgumentException(String.format("Img format %1$s is not supported",
-              variant));
+      case "standard":
+        return new IMEModelImpl();
+      default:
+        throw new IllegalArgumentException(String.format("Img format %1$s is not supported",
+                variant));
     }
   }
 }

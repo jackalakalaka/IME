@@ -3,7 +3,6 @@ package controller;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -22,18 +21,18 @@ import view.IMEView;
  * Represents a controller for IME.
  */
 public class IMEControllerImpl implements IMEController {
-  private static ImageFactory imgFac = new ImageFactory();
-  private static IMEModelFactory modelFac = new IMEModelFactory();
-  private static IMEViewFactory viewFac = new IMEViewFactory();
-  private HashMap<String,String> twoArgCmds; // Default 2-arg commands w/ instructions
-  private HashMap<String,String> threeArgCmds; // Default 3-arg commands w/ instructions
-  private HashMap<String,ConvertFactory> conversionCmds; // Unique 2-arg commands w/ corresponding func objs
+  private static final ImageFactory imgFac = new ImageFactory();
+  private static final IMEModelFactory modelFac = new IMEModelFactory();
+  private static final IMEViewFactory viewFac = new IMEViewFactory();
+  private HashMap<String, String> twoArgCmds; // Default 2-arg commands w/ instructions
+  private HashMap<String, String> threeArgCmds; // Default 3-arg commands w/ instructions
+  private HashMap<String, ConvertFactory> conversionCmds; // Unique 2-arg commands w/ corresponding func objs
   private final IMEModel model;
   private final IMEView view;
   private final Scanner sc;
 
-  private static String cmdSuccessful = "Command processed successfully.\n";
-  private static String imgNotFoundMsg = "Image name not found. Please create an image with that" +
+  private static final String imgNotFoundMsg = "Image name not found. " +
+          "Please create an image with that" +
           " name, or enter again.\n";
 
   public IMEControllerImpl(IMEModel model) throws FileNotFoundException {
@@ -67,7 +66,7 @@ public class IMEControllerImpl implements IMEController {
             this.twoArgCmds, this.threeArgCmds, this.conversionCmds);
   }
 
-  public IMEControllerImpl(IMEModel model, IMEView view){
+  public IMEControllerImpl(IMEModel model, IMEView view) {
     this(model, view, new InputStreamReader(System.in));
   }
 
@@ -80,7 +79,7 @@ public class IMEControllerImpl implements IMEController {
   @Override
   public void runIME() throws IllegalStateException, IOException {
     this.view.printMenu();
-    while(true) {
+    while (true) {
       this.view.renderMsg("\nPlease enter a command:\n");
 
       String cmdEntry = getNextIfExists();
@@ -100,7 +99,8 @@ public class IMEControllerImpl implements IMEController {
         this.view.renderMsg("Command not recognized. Please enter again.");
         continue;
       }
-      this.view.renderMsg(cmdSuccessful);
+//      String cmdSuccessful = "Command processed successfully.\n";
+//      this.view.renderMsg(cmdSuccessful);
     }
   }
 
@@ -108,16 +108,23 @@ public class IMEControllerImpl implements IMEController {
     String arg1 = getNextIfExists(); // File path
     String arg2 = getNextIfExists(); // Image name
     if (!arg1.contains(".")) {
-      throw new IllegalArgumentException("File extension must be provided.");
+      this.view.renderMsg("File extension must be provided.");
+      return;
     }
 
-    String[] splitbyPeriod = arg1.split("\\.");
-    String imgFormat = splitbyPeriod[splitbyPeriod.length - 1];
+    String[] splitByPeriod = arg1.split("\\.");
+    String imgFormat = splitByPeriod[splitByPeriod.length - 1];
 
     switch (cmdEntry) {
       case "load":
-        Image newImg = imgFac.createImage(imgFormat, arg2, arg1);
-        this.model.addImage(newImg);
+        try {
+          Image newImg = imgFac.createImage(imgFormat, arg2, arg1);
+          this.model.addImage(newImg);
+        } catch (Exception e) {
+          String message = String.format("Img format %1$s is not supported.\n", imgFormat);
+          this.view.renderMsg(message);
+          return;
+        }
         break;
       case "save":
         Image img = this.model.getImageFromModel(arg2);

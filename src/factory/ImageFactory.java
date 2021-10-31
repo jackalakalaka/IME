@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import model.Image;
 import model.ImagePpm;
-import model.Pixel;
+import model.iPixel;
 
 public class ImageFactory {
   public Image createImage(String imgFormat, String name, String filePath)
@@ -23,17 +23,19 @@ public class ImageFactory {
     }
   }
 
-    public Image createImage(String imgFormat, String name, Pixel[][] pixelArray, int maxValue)
+  public Image createImage(String imgFormat, String name, iPixel[][] pixelArray, int maxValue)
           throws FileNotFoundException {
-      Objects.requireNonNull(imgFormat);
-      Objects.requireNonNull(pixelArray);
-      Objects.requireNonNull(name);
+    Objects.requireNonNull(imgFormat);
+    Objects.requireNonNull(pixelArray);
+    Objects.requireNonNull(name);
 
-      switch (imgFormat) {
-        case "ppm": return new ImagePpm(name, maxValue, pixelArray);
-        default: throw new IllegalArgumentException(String.format(
+    switch (imgFormat) {
+      case "ppm":
+        return new ImagePpm(name, maxValue, pixelArray);
+      default:
+        throw new IllegalArgumentException(String.format(
                 "Img format %1$s is not supported", imgFormat));
-      }
+    }
   }
 }
 

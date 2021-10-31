@@ -7,23 +7,14 @@ import java.util.Map;
 import java.util.Objects;
 
 import factory.ConvertFactory;
-import model.FuncObjs.ConvertByHorizontal;
-import model.FuncObjs.ConvertByVertical;
-import model.FuncObjs.ConvertFromBlue;
-import model.FuncObjs.ConvertFromGreen;
-import model.FuncObjs.ConvertFromIntensity;
-import model.FuncObjs.ConvertFromLuma;
-import model.FuncObjs.ConvertFromRed;
-import model.FuncObjs.ConvertFromValue;
-import model.FuncObjs.IConvertFrom;
 
 /**
  * Implementation of an image viewer.
  */
 public class IMEViewImpl implements IMEView {
   private final Appendable appendable;
-  private final HashMap<String,String> twoArgCmds;
-  private final HashMap<String,String> threeArgCmds;
+  private final HashMap<String, String> twoArgCmds;
+  private final HashMap<String, String> threeArgCmds;
   private final HashMap<String, ConvertFactory> conversionCmds;
 
   /**
@@ -40,7 +31,7 @@ public class IMEViewImpl implements IMEView {
     String brightnessInstr = "- To chg brightness of the img, type 'brightness <value_chg>" +
             "<img_former> <img_new>'.\n";
     this.threeArgCmds.put("brightness", brightnessInstr);
-    
+
     this.conversionCmds = new HashMap<>();
     this.conversionCmds.put("horizontal-flip", new ConvertFactory("horizontal-flip"));
     this.conversionCmds.put("vertical-flip", new ConvertFactory("vertical-flip"));
@@ -55,8 +46,8 @@ public class IMEViewImpl implements IMEView {
     this.appendable = System.out;
   }
 
-  public IMEViewImpl(HashMap<String,String> twoArgCmds,
-                     HashMap<String,String> threeArgCmds,
+  public IMEViewImpl(HashMap<String, String> twoArgCmds,
+                     HashMap<String, String> threeArgCmds,
                      HashMap<String, ConvertFactory> conversionCmds) {
     this.appendable = System.out;
     this.twoArgCmds = twoArgCmds;
@@ -68,11 +59,11 @@ public class IMEViewImpl implements IMEView {
    * Two input constructor for the view.
    *
    * @param conversionCmds The list of commands that are used.
-   * @param appendable The appendable for the model or messages.
+   * @param appendable     The appendable for the model or messages.
    */
   public IMEViewImpl(Appendable appendable,
-                     HashMap<String,String> twoArgCmds,
-                     HashMap<String,String> threeArgCmds,
+                     HashMap<String, String> twoArgCmds,
+                     HashMap<String, String> threeArgCmds,
                      HashMap<String, ConvertFactory> conversionCmds) {
     this.appendable = Objects.requireNonNull(appendable);
     this.twoArgCmds = twoArgCmds;
@@ -96,10 +87,10 @@ public class IMEViewImpl implements IMEView {
    */
   private StringBuilder listDefaultInstr() {
     StringBuilder instructions = new StringBuilder();
-    for (Map.Entry<String,String> commandPair : this.twoArgCmds.entrySet()) {
+    for (Map.Entry<String, String> commandPair : this.twoArgCmds.entrySet()) {
       instructions.append(commandPair.getValue());
     }
-    for (Map.Entry<String,String> commandPair : this.threeArgCmds.entrySet()) {
+    for (Map.Entry<String, String> commandPair : this.threeArgCmds.entrySet()) {
       instructions.append(commandPair.getValue());
     }
     return instructions;
@@ -112,7 +103,7 @@ public class IMEViewImpl implements IMEView {
    */
   private StringBuilder listConversionInstr() throws FileNotFoundException {
     StringBuilder instructions = new StringBuilder();
-    for (Map.Entry<String,ConvertFactory> commandPair : this.conversionCmds.entrySet()) {
+    for (Map.Entry<String, ConvertFactory> commandPair : this.conversionCmds.entrySet()) {
       instructions.append(commandPair.getValue().createConverter("").giveSignature());
     }
     return instructions;

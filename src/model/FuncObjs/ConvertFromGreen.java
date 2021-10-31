@@ -1,5 +1,6 @@
 package model.FuncObjs;
 
+import model.Pixel;
 import model.iPixel;
 
 public class ConvertFromGreen extends AConvertFromAbsolute {
@@ -9,7 +10,7 @@ public class ConvertFromGreen extends AConvertFromAbsolute {
 
   @Override
   protected int getAbsolute(iPixel p) {
-    return p.getColors().get(iPixel.Color.Green);
+    return p.getColors().get(Pixel.Color.Green);
   }
 
   @Override

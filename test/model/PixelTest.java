@@ -26,6 +26,7 @@ public class PixelTest {
   private static final Pixel p10 = new Pixel(255, 122);
 
   //TODO
+
   /**
    * Test default constructor of Pixel class.
    */
@@ -39,15 +40,15 @@ public class PixelTest {
    */
   @Test
   public void constructor4ArgDefault() {
-    HashMap<iPixel.Color, Integer> p1Colors =
+    HashMap<Pixel.Color, Integer> p1Colors =
             colorsHashmapFac.createColorsHashmap(0, 0, 0);
-    HashMap<iPixel.Color, Integer> p2Colors =
+    HashMap<Pixel.Color, Integer> p2Colors =
             colorsHashmapFac.createColorsHashmap(255, 255, 255);
-    HashMap<iPixel.Color, Integer> p3Colors =
+    HashMap<Pixel.Color, Integer> p3Colors =
             colorsHashmapFac.createColorsHashmap(1, 0, 1);
-    HashMap<iPixel.Color, Integer> p4Colors =
+    HashMap<Pixel.Color, Integer> p4Colors =
             colorsHashmapFac.createColorsHashmap(0, 9129, 127);
-    HashMap<iPixel.Color, Integer> p5Colors =
+    HashMap<Pixel.Color, Integer> p5Colors =
             colorsHashmapFac.createColorsHashmap(120, 30, 202);
 
     assertEquals(p1Colors, p1.getColors());
@@ -62,15 +63,15 @@ public class PixelTest {
    */
   @Test
   public void constructor1ArgDefault() {
-    HashMap<iPixel.Color, Integer> p6Colors =
+    HashMap<Pixel.Color, Integer> p6Colors =
             colorsHashmapFac.createColorsHashmap(0, 0, 0);
-    HashMap<iPixel.Color, Integer> p7Colors =
+    HashMap<Pixel.Color, Integer> p7Colors =
             colorsHashmapFac.createColorsHashmap(255, 255, 255);
-    HashMap<iPixel.Color, Integer> p8Colors =
+    HashMap<Pixel.Color, Integer> p8Colors =
             colorsHashmapFac.createColorsHashmap(1, 1, 1);
-    HashMap<iPixel.Color, Integer> p9Colors =
+    HashMap<Pixel.Color, Integer> p9Colors =
             colorsHashmapFac.createColorsHashmap(0, 0, 0);
-    HashMap<iPixel.Color, Integer> p10Colors =
+    HashMap<Pixel.Color, Integer> p10Colors =
             colorsHashmapFac.createColorsHashmap(122, 122, 122);
 
     assertEquals(p6Colors, p6.getColors());
@@ -97,11 +98,11 @@ public class PixelTest {
   }
 
   public static class ColorsHashmapFactory {
-    public HashMap<iPixel.Color, Integer> createColorsHashmap(int red, int green, int blue) {
-      HashMap<iPixel.Color, Integer> hashmap = new HashMap<>();
-      hashmap.put(iPixel.Color.Red, red);
-      hashmap.put(iPixel.Color.Green, green);
-      hashmap.put(iPixel.Color.Blue, blue);
+    public HashMap<Pixel.Color, Integer> createColorsHashmap(int red, int green, int blue) {
+      HashMap<Pixel.Color, Integer> hashmap = new HashMap<>();
+      hashmap.put(Pixel.Color.Red, red);
+      hashmap.put(Pixel.Color.Green, green);
+      hashmap.put(Pixel.Color.Blue, blue);
       return hashmap;
     }
   }
