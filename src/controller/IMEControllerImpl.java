@@ -88,7 +88,6 @@ public class IMEControllerImpl implements IMEController {
         break;
       } else if (cmdEntry.equals("menu")) {
         this.view.printMenu();
-        continue;
       } else if (this.twoArgCmds.containsKey(cmdEntry)) {
         this.handle2ArgCmds(cmdEntry);
       } else if (this.threeArgCmds.containsKey(cmdEntry)) {
@@ -97,10 +96,7 @@ public class IMEControllerImpl implements IMEController {
         this.handleConversionCmds(cmdEntry);
       } else { // Invalid command
         this.view.renderMsg("Command not recognized. Please enter again.");
-        continue;
       }
-//      String cmdSuccessful = "Command processed successfully.\n";
-//      this.view.renderMsg(cmdSuccessful);
     }
   }
 
