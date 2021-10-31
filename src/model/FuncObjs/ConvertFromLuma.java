@@ -6,6 +6,10 @@ import java.util.HashMap;
 import model.iPixel;
 
 public class ConvertFromLuma extends AConvertFromMultiple{
+  public ConvertFromLuma(String newName) {
+    super(newName);
+  }
+
   @Override
   protected ArrayList<Double> getMultiple(iPixel p) {
     HashMap<iPixel.Color, Double> luma = p.getLuma();
@@ -18,6 +22,7 @@ public class ConvertFromLuma extends AConvertFromMultiple{
 
   @Override
   public String giveSignature() {
-    return "To get a heat map of luminosity in the image type 'luma' into the command line.\n\n";
+    return "- To get a heat map of luminosity in the img type 'luma  <img_former> <img_new>' into" +
+            " the command line.\n";
   }
 }

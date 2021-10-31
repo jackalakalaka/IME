@@ -6,29 +6,32 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
+import factory.ImageFactory;
 import model.FuncObjs.ConvertByHorizontalVertical;
 
 import static org.junit.Assert.*;
 
-public class ImagePpmTest extends ImageModelTest {
+public class IMEPpmTest extends IMEModelTest {
+  ImageFactory imgFac;
+  Image koala1;
 
-  iImage koala = new ImagePpm("Koala.ppm");
-
-  public ImagePpmTest() throws FileNotFoundException {
+  public IMEPpmTest() throws FileNotFoundException {
+    this.imgFac = new ImageFactory();
+    this.koala1 = this.imgFac.createImage("ppm", "koala1", "Koala.ppm");
   }
 
   @Test
   public void testSaveImage() throws IOException {
-    iImage darker = koala.changeBrightness(-150);
-    iImage lost = darker.changeBrightness(150);
+    Image darker = koala1.changeBrightness(-150, "darker-koala1");
+    Image lost = darker.changeBrightness(150, "info-lost-koala1");
     lost.saveImageToFile("LostKoala");
   }
 
   @Test
   public void testGetColors() {
-    int red = this.koala.getPixelAt(0,0).getColors().get(iPixel.Color.Red);
-    int green = this.koala.getPixelAt(0,0).getColors().get(iPixel.Color.Green);
-    int blue = this.koala.getPixelAt(0,0).getColors().get(iPixel.Color.Blue);
+    int red = this.koala1.getPixelAt(0,0).getColors().get(iPixel.Color.Red);
+    int green = this.koala1.getPixelAt(0,0).getColors().get(iPixel.Color.Green);
+    int blue = this.koala1.getPixelAt(0,0).getColors().get(iPixel.Color.Blue);
     assertEquals(101, red);
     assertEquals(58, green);
     assertEquals(90, blue);
@@ -53,7 +56,7 @@ public class ImagePpmTest extends ImageModelTest {
 
   @Test
   public void testRotation() throws IOException {
-    iImage rotated = koala.convertToViz(new ConvertByHorizontalVertical());
+    Image rotated = koala1.convertToViz(new ConvertByHorizontalVertical("rotated-koala1"));
     rotated.saveImageToFile("rotate");
   }
 

@@ -2,12 +2,12 @@ package view;
 
 import java.io.IOException;
 
-import model.iImage;
-
 /**
  * Interface for displaying images.
  */
-public interface ImageView {
+public interface IMEView {
+
+  void renderMsg(String str) throws IOException;
 
   /**
    * Creates a string representation of a model.

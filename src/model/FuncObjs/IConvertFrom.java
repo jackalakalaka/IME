@@ -2,17 +2,17 @@ package model.FuncObjs;
 
 import java.util.function.Function;
 
-import model.iImage;
+import model.Image;
 
-public interface IConvertFrom extends Function<iImage, iImage> {
+public interface IConvertFrom extends Function<Image, Image> {
 
   /**
    * Applies this function to the given argument.
    *
-   * @param iImage The image that is worked on via apply.
+   * @param Image The image that is worked on via apply.
    * @return A new iImage that has been altered form the original.
    */
-  iImage apply(iImage iImage);
+  Image apply(Image Image);
 
 
   /**

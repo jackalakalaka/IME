@@ -1,11 +1,20 @@
 package model.FuncObjs;
 
-import model.iImage;
+import java.io.FileNotFoundException;
+
+import factory.ImageFactory;
+import model.Image;
 import model.ImagePpm;
 import model.Pixel;
 
 public abstract class AConvertByDimensions implements IConvertFrom {
+  ImageFactory imgFac;
+  String newName;
 
+  public AConvertByDimensions(String newName) {
+    this.imgFac = new ImageFactory();
+    this.newName = newName;
+  }
 
   /**
    * Applies this function to the given argument.
@@ -13,7 +22,7 @@ public abstract class AConvertByDimensions implements IConvertFrom {
    * @param initModel the function argument
    * @return the function result
    */
-  public iImage apply(iImage initModel) {
+  public Image apply(Image initModel) {
     int h = initModel.getHeight();
     int w = initModel.getWidth();
     Pixel[][] pixels = new Pixel[h][w];
@@ -25,10 +34,16 @@ public abstract class AConvertByDimensions implements IConvertFrom {
         pixels[i][j] = getOtherPixel(i,j,initModel);
       }
     }
-    return new ImagePpm(pixels, maxValue);
+
+    try {
+      return this.imgFac.createImage("ppm", this.newName, pixels, maxValue);
+    } catch (FileNotFoundException e) {
+      System.out.println("Error - file not found using apply method.");
+      return null;
+    }
   }
 
-  protected abstract Pixel getOtherPixel(int i, int j, iImage model);
+  protected abstract Pixel getOtherPixel(int i, int j, Image model);
 
 
 }

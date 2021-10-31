@@ -14,19 +14,22 @@ import model.FuncObjs.IConvertFrom;
 /**
  * Representation of an image from a PPM file.
  */
-public class ImagePpm implements iImage {
+public class ImagePpm implements Image {
   private final Pixel[][] pixelArray;
   private final int width;
   private final int height;
   private final int maxValue;
+  private final String name;
 
   /**
    * 1-arg constructor for an image model using a PPM file.
-   *
+   * @param name image's name
    * @param filePath The file path to the PPM file.
    * @throws FileNotFoundException If the file cannot be found.
    */
-  public ImagePpm(String filePath) throws FileNotFoundException {
+  public ImagePpm(String name, String filePath) throws FileNotFoundException {
+    this.name = Objects.requireNonNull(name);
+    Objects.requireNonNull(filePath);
     Scanner sc;
 
     try {
@@ -70,6 +73,21 @@ public class ImagePpm implements iImage {
   }
 
   /**
+   * 2-arg constructor for making a new ImageModelImpl.
+   *
+   * @param name       Image's name
+   * @param maxValue   The maximum value carried over from the original model.
+   * @param pixelArray An array of pixels for the new model.
+   */
+  public ImagePpm(String name, int maxValue, Pixel[][] pixelArray) {
+    this.name = Objects.requireNonNull(name);
+    this.pixelArray = Objects.requireNonNull(pixelArray);
+    this.height = pixelArray.length;
+    this.width = pixelArray[0].length;
+    this.maxValue = maxValue;
+  }
+
+  /**
    * Builds pixel array from a scanned string.
    * @param h array height
    * @param w array width
@@ -86,6 +104,14 @@ public class ImagePpm implements iImage {
         this.pixelArray[i][j] = new Pixel(mV, r, g, b);
       }
     }
+  }
+
+  /**
+   * @return image name
+   */
+  @Override
+  public String getName() {
+    return this.name;
   }
 
   @Override
@@ -106,22 +132,8 @@ public class ImagePpm implements iImage {
     return this.maxValue;
   }
 
-  /**
-   * 2-arg constructor for making a new ImageModelImpl.
-   *
-   * @param pixelArray An array of pixels for the new model.
-   * @param maxValue   The maximum value carried over from the original model.
-   */
-  public ImagePpm(Pixel[][] pixelArray, int maxValue) {
-    Objects.requireNonNull(pixelArray);
-    this.pixelArray = pixelArray;
-    this.height = pixelArray.length;
-    this.width = pixelArray[0].length;
-    this.maxValue = maxValue;
-  }
-
   @Override
-  public iImage changeBrightness(int change) {
+  public Image changeBrightness(int change, String newName) {
     Pixel[][] brighterModel = new Pixel[this.height][this.width];
     for (int row = 0; row < height; row++) {
       for (int column = 0; column < width; column++) {
@@ -129,11 +141,11 @@ public class ImagePpm implements iImage {
         brighterModel[row][column] = changePixelBrightness(oldPixel, change);
       }
     }
-    return new ImagePpm(brighterModel, this.maxValue);
+    return new ImagePpm(newName, this.maxValue, brighterModel);
   }
 
   /**
-   * Helper for {@link #changeBrightness(int)} to make brighter pixels.
+   * Helper for {@link #changeBrightness(int, String)} to make brighter pixels.
    *
    * @param oldPixel The original pixel.
    * @param change   The brightness change to be implemented.
@@ -168,12 +180,12 @@ public class ImagePpm implements iImage {
   }
 
   @Override
-  public iImage convertToViz(IConvertFrom cmd) {
+  public Image convertToViz(IConvertFrom cmd) {
     return cmd.apply(this);
   }
 
   @Override
-  public void saveImageToFile(String fileName) throws IOException {
+  public void saveImageToFile(String filePath) throws IOException {
     Appendable ap = new StringBuilder(); //Initialize the string for file creation
 
     //Start by adding the correct PPM file format (P3 and dimensions)
@@ -206,7 +218,7 @@ public class ImagePpm implements iImage {
         }
       }
     }
-    BufferedWriter writer = new BufferedWriter((new FileWriter(fileName+".PPM")));
+    BufferedWriter writer = new BufferedWriter((new FileWriter(filePath)));
     String output = ap.toString();
     writer.write(output);
     writer.close();
