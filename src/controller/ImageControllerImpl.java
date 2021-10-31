@@ -5,7 +5,6 @@ import java.util.Objects;
 
 import factory.ImageModelFactory;
 import model.IModel;
-import model.iImage;
 import view.ImageView;
 
 /**
