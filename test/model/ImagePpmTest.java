@@ -50,6 +50,14 @@ public class ImagePpmTest {
     Image modelOne = new ImagePpm("hehehehehe");
   }
 
+  /**
+   * Test a null pixel array input to the 2-arg constructor.
+   */
+  @Test(expected = IllegalArgumentException.class)
+  public void constructor2ArgPixelsNull() throws IllegalArgumentException {
+    Image modelOne = new ImagePpm(255, null);
+  }
+
   //Test all the getter functions.
   @Test
   public void testGetters() {
