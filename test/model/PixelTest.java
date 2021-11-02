@@ -2,7 +2,6 @@ package model;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -29,6 +28,15 @@ public class PixelTest {
   private static final Pixel p8 = new Pixel(1, 1);
   private static final Pixel p9 = new Pixel(100000, 0);
   private static final Pixel p10 = new Pixel(255, 122);
+
+  /**
+   * {@link #getLuma()} & {@link #getValue()} data.
+   */
+  private static final Pixel p11 = new Pixel(255, 0);
+  private static final Pixel p12 = new Pixel(255, 255);
+  private static final Pixel p13 = new Pixel(255, 100, 100, 0);
+  private static final Pixel p14 = new Pixel(255, 25, 25, 50);
+  private static final Pixel p15 = new Pixel(255, 40, 5, 55);
 
   /**
    * Test invalid max value arg Pixel class's 4-arg constructor.
@@ -268,24 +276,77 @@ public class PixelTest {
     assertEquals((120 + 30 + 202) / 3, p5.getIntensity());
   }
 
+  /**
+   * Test default behavior of Pixel class's getLuma method.
+   */
   @Test
   public void getLuma() {
+    HashMap<Pixel.Color, Double> p11Colors =
+            colorsHashmapFac.createLumaHashmap(0.0, 0.0, 0.0);
+    HashMap<Pixel.Color, Double> p12Colors =
+            colorsHashmapFac.createLumaHashmap(
+                    0.3333333333333333,
+                    0.3333333333333333,
+                    0.3333333333333333);
+    HashMap<Pixel.Color, Double> p13Colors =
+            colorsHashmapFac.createLumaHashmap(0.5, 0.5, 0.0);
+    HashMap<Pixel.Color, Double> p14Colors =
+            colorsHashmapFac.createLumaHashmap(0.25, 0.25, 0.5);
+    HashMap<Pixel.Color, Double> p15Colors =
+            colorsHashmapFac.createLumaHashmap(0.4, 0.05, 0.55);
+
+    assertEquals(p11Colors, p11.getLuma());
+    assertEquals(p12Colors, p12.getLuma());
+    assertEquals(p13Colors, p13.getLuma());
+    assertEquals(p14Colors, p14.getLuma());
+    assertEquals(p15Colors, p15.getLuma());
   }
 
+  /**
+   * Test default behavior of Pixel class's getValue method.
+   */
   @Test
   public void getValue() {
   }
 
+  /**
+   * Test default behavior of Pixel class's getColors method.
+   */
   @Test
   public void getColors() {
   }
 
+  /**
+   * This factory class creates a desired hashmap that relates to an image's colors. This simplifies
+   * the repeated process of adding 3 pairs.
+   */
   public static class ColorsHashmapFactory {
+    /**
+     * @param red red value
+     * @param green green value
+     * @param blue blue value
+     * @return hashmap of colors to their values
+     */
     public HashMap<Pixel.Color, Integer> createColorsHashmap(int red, int green, int blue) {
       HashMap<Pixel.Color, Integer> hashmap = new HashMap<>();
       hashmap.put(Pixel.Color.Red, red);
       hashmap.put(Pixel.Color.Green, green);
       hashmap.put(Pixel.Color.Blue, blue);
+      return hashmap;
+    }
+
+    /**
+     * @param redWt red weight
+     * @param greenWt green weight
+     * @param blueWt blue weight
+     * @return hashmap of colors to their luma weights
+     */
+    public HashMap<Pixel.Color, Double> createLumaHashmap(
+            double redWt, double greenWt, double blueWt) {
+      HashMap<Pixel.Color, Double> hashmap = new HashMap<>();
+      hashmap.put(Pixel.Color.Red, redWt);
+      hashmap.put(Pixel.Color.Green, greenWt);
+      hashmap.put(Pixel.Color.Blue, blueWt);
       return hashmap;
     }
   }
