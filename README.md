@@ -14,6 +14,7 @@
 - To flip the img vertically type `vertical <img_former> <img_new>` into the command line.
 - To get a heat map of the max value in the img type `value <img_former> <img_new>` into the command line.
 - To get a heat map of luminosity in the img type `luma <img_former> <img_new>` into the command line.
+
 Example script:
 ```bash
 load dope_goat dope_goat.ppm
