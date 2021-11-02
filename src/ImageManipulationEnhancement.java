@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 import controller.IMEController;
 import controller.IMEControllerCompact;
 import factory.IMEModelFactory;
