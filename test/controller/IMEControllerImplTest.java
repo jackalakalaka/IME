@@ -85,6 +85,43 @@ public class IMEControllerImplTest {
     this.test = new IMEControllerCompact(this.goodModel, this.goodView, null);
   }
 
+  @Test(expected = IllegalStateException.class)
+  public void testIncompleteInputZero() {
+    Appendable appendable = new StringBuilder();
+    Readable readable = new StringReader("");
+    IMEView view = new IMEViewImpl(appendable);
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testIncompleteInputOne() {
+    Appendable appendable = new StringBuilder();
+    Readable readable = new StringReader("load ");
+    IMEView view = new IMEViewImpl(appendable);
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testIncompleteInputTwo() {
+    Appendable appendable = new StringBuilder();
+    Readable readable = new StringReader("load barney ");
+    IMEView view = new IMEViewImpl(appendable);
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+  }
+
+  @Test(expected = IllegalStateException.class)
+  public void testIncompleteInputThree() {
+    Appendable appendable = new StringBuilder();
+    Readable readable = new StringReader("load barney barney.ppm " +
+            "brightness barney 10 ");
+    IMEView view = new IMEViewImpl(appendable);
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+  }
+
   @Test
   public void testSimpleRun() {
     Appendable appendable = new StringBuilder();

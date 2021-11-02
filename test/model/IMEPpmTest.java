@@ -3,7 +3,6 @@ package model;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -16,7 +15,7 @@ public class IMEPpmTest extends IMEModelTest {
   Image koala1;
 
   @Before
-  public void setUp() throws FileNotFoundException {
+  public void setUp() {
     this.koala1 = new ImagePpm("koalaoriginal.ppm");
   }
 

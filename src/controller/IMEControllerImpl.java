@@ -173,9 +173,9 @@
 //  }
 //
 //
-//  private String getNextIfExists() {
+//  private String getNextIfExists(Scanner scanner) {
 //    if (!this.sc.hasNext()) { // Shouldn't happen for a System.in-based readable
-//      throw new NoSuchElementException("There is nothing to read.");
+//      throw new IllegalStateException("There is nothing to read.");
 //    }
 //    return this.sc.next();
 //  }

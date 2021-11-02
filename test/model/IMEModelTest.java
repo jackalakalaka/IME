@@ -1,16 +1,25 @@
 package model;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-
 public class IMEModelTest {
-  Image koala1;
+  Image mockImage;
+  IMEModel model;
+
+  @Before
+  public void setUp()  {
+    iPixel[][] pixels = new iPixel[1][1];
+    pixels[0][0] = new MockPixel(50);
+    this.mockImage = new ImagePpm(255,pixels);
+    this.model = new IMEModelImpl();
+    this.model.addImage("onePixel",this.mockImage);
+  }
 
   @Test
-  public void test() throws FileNotFoundException {
-    this.koala1 = new ImagePpm("koalaoriginal.ppm");
-    this.koala1.getPixelAt(0, 0);
+  public void testAddImage() {
+    this.model.addImage("mockImage",this.mockImage);
   }
+
 
 }
