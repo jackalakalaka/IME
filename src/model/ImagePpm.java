@@ -28,6 +28,7 @@ public class ImagePpm implements Image {
    * @throws IllegalArgumentException If the file cannot be found.
    */
   public ImagePpm(String filePath) throws IllegalArgumentException {
+    Objects.requireNonNull(filePath);
     Scanner sc;
 
     try {
@@ -118,6 +119,8 @@ public class ImagePpm implements Image {
    * @return A new brighter or darker pixel.
    */
   private Pixel changePixelBrightness(iPixel oldPixel, int change) {
+    Objects.requireNonNull(oldPixel);
+
     HashMap<Pixel.Color, Integer> oldPixelColors = oldPixel.getColors();
     int red = oldPixelColors.get(Pixel.Color.Red);
     int green = oldPixelColors.get(Pixel.Color.Green);
@@ -147,11 +150,13 @@ public class ImagePpm implements Image {
 
   @Override
   public Image convertToViz(ICommands cmd) {
+    Objects.requireNonNull(cmd);
     return cmd.apply(this);
   }
 
   @Override
   public void saveImageToFile(String filePath) throws IllegalStateException {
+    Objects.requireNonNull(filePath);
     Appendable ap = new StringBuilder(); //Initialize the string for file creation
 
     //Start by adding the correct PPM file format (P3 and dimensions)

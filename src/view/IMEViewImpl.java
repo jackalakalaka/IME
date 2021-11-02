@@ -32,6 +32,8 @@ public class IMEViewImpl implements IMEView {
 
   @Override
   public void printMenu(List<ICommands> commandsHashMap) {
+    Objects.requireNonNull(commandsHashMap);
+
     StringBuilder menu = new StringBuilder(("Here are the commands for using IME " +
             "(Image Manipulation & Enhancement).\n") +
             ("- To quit type: quit.\n") +
@@ -47,6 +49,8 @@ public class IMEViewImpl implements IMEView {
 
   @Override
   public void renderMsg(String str) throws IllegalStateException {
+    Objects.requireNonNull(str);
+
     try {
       this.appendable.append(str);
     } catch (IOException e) {

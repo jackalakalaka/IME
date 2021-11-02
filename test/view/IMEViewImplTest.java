@@ -44,19 +44,43 @@ public class IMEViewImplTest {
   }
 
   /**
+   * Test invalid null appendable input to 1-arg constructor.
+   */
+  @Test(expected = NullPointerException.class)
+  public void constructor1ArgAppendableNull() throws IOException {
+    IMEViewImpl invalidView = new IMEViewImpl(null);
+  }
+
+  /**
+   * Test invalid null appendable to method printMenu of IMEViewImpl class.
+   */
+  @Test(expected = NullPointerException.class)
+  public void printMenuNullAppendable() throws IOException {
+    this.view1.printMenu(null);
+  }
+
+  /**
    * Test method printMenu of IMEViewImpl class when appendable cannot be appended to.
    * @throws IOException when the appendable cannot be used
    */
-  @Test(expected = IOException.class)
+  @Test(expected = IllegalStateException.class)
   public void printMenuInvalidAppendable() throws IOException {
-    this.invalidAppendableView.renderMsg("I'm just a message :3");
+    this.invalidAppendableView.printMenu(this.allCommands);
+  }
+
+  /**
+   * Test invalid null string to method renderMsg of IMEViewImpl class.
+   */
+  @Test(expected = NullPointerException.class)
+  public void renderMsgNullStr() throws IllegalStateException {
+    this.view1.renderMsg(null);
   }
 
   /**
    * Test method renderMsg of IMEViewImpl class when appendable cannot be appended to.
    * @throws IOException when the appendable cannot be used
    */
-  @Test(expected = IOException.class)
+  @Test(expected = IllegalStateException.class)
   public void renderMsgInvalidAppendable() throws IOException {
     this.invalidAppendableView.renderMsg("I'm just a message :3");
   }
@@ -72,8 +96,8 @@ public class IMEViewImplTest {
             "- To quit type: quit.\n" +
             "- To load an image type: load <image-name> <file-path>.\n" +
             "- To save an image type: save <image-name> <file-name>.\n" +
-            "- To change brightness of the img, type 'brightness<img_former> <integer_change>" +
-            " <img_new>'.\n";
+            "- To change the brightness type: brightness <image-name> " +
+            "<integer-change> <new-name>.\n";
     this.view1.printMenu(mtCommands);
     assertEquals(menuPromptStr, this.appendable1.toString());
 

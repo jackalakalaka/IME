@@ -112,7 +112,6 @@ public class IMEControllerCompact implements IMEController {
       checkScanner(sc);
     }
     this.view.renderMsg("\nThank you for using IME!");
-
   }
 
   /**

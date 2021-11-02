@@ -7,8 +7,6 @@ import java.io.StringReader;
 
 import model.IMEModel;
 import model.IMEModelImpl;
-import model.Image;
-import model.ImagePpm;
 import view.IMEView;
 import view.IMEViewImpl;
 import view.InvalidMockAppendable;
