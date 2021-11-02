@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PixelTest {
   private static ColorsHashmapFactory colorsHashmapFac = new ColorsHashmapFactory();
@@ -182,8 +183,7 @@ public class PixelTest {
         } catch (IllegalArgumentException iAE) {
           threwIllegalArgumentException = true;
         }
-        assertEquals(String.format(testingMsg, maxVal, redVal, blueVal, greenVal),
-                true,
+        assertTrue(String.format(testingMsg, maxVal, redVal, blueVal, greenVal),
                 threwIllegalArgumentException);
 
         threwIllegalArgumentException = false;
@@ -210,8 +210,7 @@ public class PixelTest {
       } catch (IllegalArgumentException iAE) {
         threwIllegalArgumentException = true;
       }
-      assertEquals(String.format(testingMsg, maxVal, invalidColorVal),
-              true,
+      assertTrue(String.format(testingMsg, maxVal, invalidColorVal),
               threwIllegalArgumentException);
 
       threwIllegalArgumentException = false;

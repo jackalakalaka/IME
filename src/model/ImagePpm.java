@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
-import model.FuncObjs.IConvertFrom;
+import model.FuncObjs.ICommands;
 
 /**
  * Representation of an image from a PPM file.
@@ -19,18 +19,15 @@ public class ImagePpm implements Image {
   private final int width;
   private final int height;
   private final int maxValue;
-  private final String name;
+
 
   /**
    * 1-arg constructor for an image model using a PPM file.
    *
-   * @param name     image's name
    * @param filePath The file path to the PPM file.
    * @throws FileNotFoundException If the file cannot be found.
    */
-  public ImagePpm(String name, String filePath) throws FileNotFoundException {
-    this.name = Objects.requireNonNull(name);
-    Objects.requireNonNull(filePath);
+  public ImagePpm(String filePath) throws FileNotFoundException {
     Scanner sc;
 
     try {
@@ -76,12 +73,10 @@ public class ImagePpm implements Image {
   /**
    * 2-arg constructor for making a new ImageModelImpl.
    *
-   * @param name       Image's name
    * @param maxValue   The maximum value carried over from the original model.
    * @param pixelArray An array of pixels for the new model.
    */
-  public ImagePpm(String name, int maxValue, iPixel[][] pixelArray) {
-    this.name = Objects.requireNonNull(name);
+  public ImagePpm(int maxValue, iPixel[][] pixelArray) {
     this.pixelArray = Objects.requireNonNull(pixelArray);
     this.height = pixelArray.length;
     this.width = pixelArray[0].length;
@@ -108,14 +103,6 @@ public class ImagePpm implements Image {
     }
   }
 
-  /**
-   * @return image name
-   */
-  @Override
-  public String getName() {
-    return this.name;
-  }
-
   @Override
   public int getHeight() {
     return this.height;
@@ -135,7 +122,7 @@ public class ImagePpm implements Image {
   }
 
   @Override
-  public Image changeBrightness(int change, String newName) {
+  public Image changeBrightness(int change) {
     Pixel[][] brighterModel = new Pixel[this.height][this.width];
     for (int row = 0; row < height; row++) {
       for (int column = 0; column < width; column++) {
@@ -143,11 +130,11 @@ public class ImagePpm implements Image {
         brighterModel[row][column] = changePixelBrightness(oldPixel, change);
       }
     }
-    return new ImagePpm(newName, this.maxValue, brighterModel);
+    return new ImagePpm(this.maxValue, brighterModel);
   }
 
   /**
-   * Helper for {@link #changeBrightness(int, String)} to make brighter pixels.
+   * Helper for {@link #changeBrightness(int)} to make brighter pixels.
    *
    * @param oldPixel The original pixel.
    * @param change   The brightness change to be implemented.
@@ -182,7 +169,7 @@ public class ImagePpm implements Image {
   }
 
   @Override
-  public Image convertToViz(IConvertFrom cmd) {
+  public Image convertToViz(ICommands cmd) {
     return cmd.apply(this);
   }
 

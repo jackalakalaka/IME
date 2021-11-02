@@ -3,10 +3,7 @@ package model.FuncObjs;
 import model.Image;
 import model.iPixel;
 
-public class ConvertByHorizontalVertical extends AConvertByDimensions {
-  public ConvertByHorizontalVertical(String newName) {
-    super(newName);
-  }
+public class ConvertByHorizontalVertical extends ACommandDimension {
 
   @Override
   protected iPixel getOtherPixel(int i, int j, Image model) {
