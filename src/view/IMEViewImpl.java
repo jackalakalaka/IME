@@ -29,7 +29,7 @@ public class IMEViewImpl implements IMEView {
     this.appendable = Objects.requireNonNull(appendable);
   }
 
-  public void printMenu(List<ICommands> commandsHashMap) throws IOException {
+  public void printMenu(List<ICommands> commandsHashMap)  {
     StringBuilder menu = new StringBuilder(("Here are the commands for using IME " +
             "(Image Manipulation & Enhancement).\n") +
             ("- To quit type: quit.\n") +
@@ -40,12 +40,16 @@ public class IMEViewImpl implements IMEView {
             for (ICommands commands : commandsHashMap) {
               menu.append(commands.giveSignature());
             }
-    this.appendable.append(menu.toString());
+    this.renderMsg(menu.toString());
   }
 
   @Override
-  public void renderMsg(String str) throws IOException {
-    this.appendable.append(str);
+  public void renderMsg(String str) throws IllegalStateException {
+    try {
+      this.appendable.append(str);
+    } catch (IOException e) {
+      throw new IllegalStateException("There is nothing to append to.");
+    }
   }
 
 }
