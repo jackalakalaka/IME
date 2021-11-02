@@ -17,7 +17,7 @@ public class IMEModelFactory {
           throws FileNotFoundException {
     Objects.requireNonNull(variant);
 
-    // Will be ocnverted to a switch statement if extension is necessary.
+    // Will be converted to a switch statement if extension is necessary.
     if (variant.equals("standard")) {
       return new IMEModelImpl();
     }
