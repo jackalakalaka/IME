@@ -28,16 +28,35 @@ save dope_goat-redComponent dope_goat-redComponent.ppm
 save dope_goat-vertFlip dope_goat-vertFlip.ppm
 ```
 
-## Source Code Overview
-A text README file explaining your design. Your README file should give the graders an overview of what the purposes are for every class, interface, etc. that you include in your submission, so that they can quickly get a high-level overview of your code. It does not replace the need for proper Javadoc!
-
+## Code Overview
+### Source Code
 - **Class ImageManipulationEnhancement**
   - The main class for running the controller.
-  - **Interface IMEModel**
-    - Interface for models used by IME.
-    - **Class IMEModelImpl**
-      - A representation of an IME model.
-
+  - Package _model_:
+    - Package _funcobjs_:
+      - **Interface ICommands**
+        - An interface for command function objects. Can take in a subclass-decided amount of arguments.
+        - **Abstract Class ACommandDimension**
+          - An abstract class for function objects that work with dimensions.
+        - **Abstract Class ACommandsAbsolute**
+          - An abstract class for function objects that get a single value from pixels.
+        - **Class MockPixel**
+          - Simulates a pixel for the more simplistic testing of Image and IMEModel classes. Simplifies pixel construction and assertion.
+    - **Interface IMEModel**
+      - Interface for models used by IME.
+      - **Class IMEModelImpl**
+        - A representation of an IME model.
+    - **Interface Image**
+      - Interface for representing images.
+      - **Class ImagePpm**
+        - Representation of an image from a PPM file.
+    - **Interface IPixel**
+      - An interface for pixels of an image.
+      - **Class Pixel**
+        - This class represents an immutable pixel.
+      - **Class MockPixel**
+        - Simulates a pixel for the more simplistic testing of Image and IMEModel classes. Simplifies pixel construction and assertion.
+### Test Code
 ## Image License
 Title: "Goat Mammal Cute Animal Domestic Farm Funny"
 
