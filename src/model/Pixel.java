@@ -24,7 +24,10 @@ public class Pixel implements iPixel {
     if (red < 0 || green < 0 || blue < 0) {
       throw new IllegalArgumentException("Pixel cannot be constructed from negative RBG values.");
     }
-
+    if (red > maxValue || green > maxValue || blue > maxValue) {
+      throw new IllegalArgumentException("Pixel cannot be constructed from RBG values greater " +
+              "than the upper limit.");
+    }
 
     this.maxValue = maxValue;
     this.redValue = red;
