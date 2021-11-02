@@ -38,10 +38,30 @@ save dope_goat-vertFlip dope_goat-vertFlip.ppm
         - An interface for command function objects. Can take in a subclass-decided amount of arguments.
         - **Abstract Class ACommandDimension**
           - An abstract class for function objects that work with dimensions.
+          - **Class ConvertByHorizontal**
+            - A function object for getting the pixel on the other side of the image horizontally.
+          - **Class ConvertByVertical**
+            - A function object for getting the pixel on the other side of the image vertically.
         - **Abstract Class ACommandsAbsolute**
           - An abstract class for function objects that get a single value from pixels.
-        - **Class MockPixel**
-          - Simulates a pixel for the more simplistic testing of Image and IMEModel classes. Simplifies pixel construction and assertion.
+          - **Class CommandsRed**
+            - A function object for getting the red value of a pixel.
+          - **Class CommandsBlue**
+            - A function object for getting the blue value of a pixel.
+          - **Class CommandsGreen**
+            - A function object for getting the green value of a pixel.
+          - **Class CommandsIntensity**
+            - A function object for getting the intensity of a pixel.
+          - **Class CommandsValue**
+            - A function object for getting the value of a pixel.
+        - **Abstract Class ACommandsMultiple**
+          - An abstract class for function objects that get multiple values from pixels.
+          - **Class CommandsLuma**
+            - A function object for getting the luma of a pixel.
+      - **Interface IScannerCommands**
+        - Function objects for load and save commands. Called by model class.
+        - **Class ScannerLoadCommand**
+            - Function object for load command. Called by model class.
     - **Interface IMEModel**
       - Interface for models used by IME.
       - **Class IMEModelImpl**
