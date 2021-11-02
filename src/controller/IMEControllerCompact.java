@@ -36,7 +36,7 @@ public class IMEControllerCompact implements IMEController {
    * @param readable Scanner gives info to the controller.
    */
   public IMEControllerCompact(IMEModel model, IMEView view, Readable readable) {
-    if (model == null || view == null || readable == null){
+    if (model == null || view == null || readable == null) {
       throw new IllegalArgumentException("Controller cannot take null as an argument.");
     }
     this.model = model;
@@ -103,6 +103,7 @@ public class IMEControllerCompact implements IMEController {
                   errorAndReset("IME only saves .ppm files.", sc);
                 }
               }
+              break;
             default:
               errorAndReset("\nCommand not recognized. Please try again.\n", sc);
           }
@@ -122,7 +123,7 @@ public class IMEControllerCompact implements IMEController {
    */
   private void errorAndReset(String errorMessage, Scanner scanner) {
     this.view.renderMsg(errorMessage);
-      scanner.nextLine();
+    scanner.nextLine();
   }
 
   /**
