@@ -17,12 +17,13 @@ public class IMEModelFactory {
           throws FileNotFoundException {
     Objects.requireNonNull(variant);
 
-    switch (variant) {
-      case "standard":
-        return new IMEModelImpl();
-      default:
-        throw new IllegalArgumentException(String.format("Img format %1$s is not supported",
-                variant));
+    // Will be ocnverted to a switch statement if extension is necessary.
+    if (variant.equals("standard")) {
+      return new IMEModelImpl();
+    }
+    else {
+      throw new IllegalArgumentException(String.format("Img format %1$s is not supported",
+              variant));
     }
   }
 }
