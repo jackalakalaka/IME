@@ -50,16 +50,22 @@ public class IMEModelImpl implements IMEModel {
 
   @Override
   public Image getImageFromModel(String imageName) {
+    Objects.requireNonNull(imageName);
     return this.images.get(imageName);
   }
 
   @Override
   public void addImage(String name, Image image) {
+    Objects.requireNonNull(name);
+    Objects.requireNonNull(image);
     this.images.put(name, image);
   }
 
   @Override
   public void applyCommand(String command, String original, String newName) {
+    Objects.requireNonNull(command);
+    Objects.requireNonNull(original);
+    Objects.requireNonNull(newName);
     this.addImage(newName, commands.get(command).apply(images.get(original)));
   }
 
@@ -70,11 +76,13 @@ public class IMEModelImpl implements IMEModel {
 
   @Override
   public boolean containsCommand(String command) {
+    Objects.requireNonNull(command);
     return this.commands.containsKey(command);
   }
 
   @Override
   public boolean containsImage(String imageName) {
+    Objects.requireNonNull(imageName);
     return this.images.containsKey(imageName);
   }
 }

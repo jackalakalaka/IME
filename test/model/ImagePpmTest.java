@@ -3,18 +3,16 @@ package model;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-
-
 import model.FuncObjs.CommandsBlue;
-import model.FuncObjs.CommandsGreen;
-import model.FuncObjs.CommandsIntensity;
-import model.FuncObjs.CommandsRed;
 import model.FuncObjs.ConvertByHorizontal;
 import model.FuncObjs.CommandsValue;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests ImagePpm class's utility methods. Also checks that null cannot be input to methods,
+ * including the constructor.
+ */
 public class ImagePpmTest {
   private final iPixel[][] mockPixels = new iPixel[2][2];
   private final iPixel[][] mockPixelsWide = new iPixel[2][3];
@@ -94,17 +92,13 @@ public class ImagePpmTest {
   }
 
   /**
-   * Test that a command function object is able to be summoned.
+   * Test that a command function object can be summoned.
    */
   @Test
   public void testCommandReceive() {
     Image image = this.modelOne.convertToViz(new CommandsValue());
     assertEquals(1, image.getPixelAt(0, 0).getValue());
-    Image red = this.modelOne.convertToViz(new CommandsRed());
     Image blue = this.modelOne.convertToViz(new CommandsBlue());
-    Image green = this.modelOne.convertToViz(new CommandsGreen());
-    Image value = this.modelOne.convertToViz(new CommandsValue());
-    Image intensity = this.modelOne.convertToViz(new CommandsIntensity());
     assertEquals(1,blue.getPixelAt(0,0).getValue());
   }
 
