@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 
+
 import model.FuncObjs.CommandsBlue;
 import model.FuncObjs.CommandsGreen;
 import model.FuncObjs.CommandsIntensity;
@@ -81,12 +82,13 @@ public class ImagePpmTest {
    */
   @Test
   public void testCommandReceive() {
+    Image image = this.modelOne.convertToViz(new CommandsValue());
+    assertEquals(1, image.getPixelAt(0, 0).getValue());
     Image red = this.modelOne.convertToViz(new CommandsRed());
     Image blue = this.modelOne.convertToViz(new CommandsBlue());
     Image green = this.modelOne.convertToViz(new CommandsGreen());
     Image value = this.modelOne.convertToViz(new CommandsValue());
     Image intensity = this.modelOne.convertToViz(new CommandsIntensity());
-
     assertEquals(1,blue.getPixelAt(0,0).getValue());
   }
 
@@ -99,8 +101,8 @@ public class ImagePpmTest {
     Image bright = this.modelTwo.changeBrightness(10);
     Image dark = this.modelTwo.changeBrightness(-1);
 
-    assertEquals(1, same.getPixelAt(0,0).getValue());
-    assertEquals(11, bright.getPixelAt(0,0).getValue());
-    assertEquals(0, dark.getPixelAt(0,0).getValue());
+    assertEquals(1, same.getPixelAt(0, 0).getValue());
+    assertEquals(11, bright.getPixelAt(0, 0).getValue());
+    assertEquals(0, dark.getPixelAt(0, 0).getValue());
   }
 }

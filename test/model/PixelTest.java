@@ -52,7 +52,7 @@ public class PixelTest {
     int[] maxVals = new int[]{-75, -1, 0};
     boolean threwIllegalArgumentException = false;
 
-    for(int maxVal:maxVals) {
+    for (int maxVal : maxVals) {
       try {
         Pixel pA = new Pixel(maxVal, rand.nextInt(), rand.nextInt(), rand.nextInt());
       } catch (IllegalArgumentException iAE) {
@@ -72,7 +72,7 @@ public class PixelTest {
     int[] maxVals = new int[]{-75, -1, 0};
     boolean threwIllegalArgumentException = false;
 
-    for(int invalidMaxVal:maxVals) {
+    for (int invalidMaxVal : maxVals) {
       try {
         Pixel pA = new Pixel(invalidMaxVal, rand.nextInt());
       } catch (IllegalArgumentException iAE) {
@@ -98,7 +98,7 @@ public class PixelTest {
       colorsToVals.put(color, 0);
     }
 
-    for(int invalidColorVal:invalidColorVals) {
+    for (int invalidColorVal : invalidColorVals) {
       // For each color
       for (Map.Entry<iPixel.Color, Integer> colorAndVal : colorsToVals.entrySet()) {
         iPixel.Color color = colorAndVal.getKey();
@@ -137,17 +137,17 @@ public class PixelTest {
     int[] invalidColorVals = new int[]{-75, -1};
     boolean threwIllegalArgumentException = false;
 
-    for(int invalidColorVal:invalidColorVals) {
-        try {
-          Pixel pA = new Pixel(maxVal, invalidColorVal);
-        } catch (IllegalArgumentException iAE) {
-          threwIllegalArgumentException = true;
-        }
-        assertEquals(String.format(testingMsg, maxVal, invalidColorVal),
-                true,
-                threwIllegalArgumentException);
+    for (int invalidColorVal : invalidColorVals) {
+      try {
+        Pixel pA = new Pixel(maxVal, invalidColorVal);
+      } catch (IllegalArgumentException iAE) {
+        threwIllegalArgumentException = true;
+      }
+      assertEquals(String.format(testingMsg, maxVal, invalidColorVal),
+              true,
+              threwIllegalArgumentException);
 
-        threwIllegalArgumentException = false;
+      threwIllegalArgumentException = false;
     }
   }
 
@@ -168,7 +168,7 @@ public class PixelTest {
       colorsToVals.put(color, 0);
     }
 
-    for(int invalidColorVal:invalidColorVals) {
+    for (int invalidColorVal : invalidColorVals) {
       // For each color
       for (Map.Entry<iPixel.Color, Integer> colorAndVal : colorsToVals.entrySet()) {
         iPixel.Color color = colorAndVal.getKey();
@@ -208,7 +208,7 @@ public class PixelTest {
             maxVal + rand.nextInt()};
     boolean threwIllegalArgumentException = false;
 
-    for(int invalidColorVal:invalidColorVals) {
+    for (int invalidColorVal : invalidColorVals) {
       try {
         Pixel pA = new Pixel(maxVal, invalidColorVal);
       } catch (IllegalArgumentException iAE) {
@@ -325,9 +325,9 @@ public class PixelTest {
    */
   public static class ColorsHashmapFactory {
     /**
-     * @param red red value
+     * @param red   red value
      * @param green green value
-     * @param blue blue value
+     * @param blue  blue value
      * @return hashmap of colors to their values
      */
     public HashMap<Pixel.Color, Integer> createColorsHashmap(int red, int green, int blue) {
@@ -339,9 +339,9 @@ public class PixelTest {
     }
 
     /**
-     * @param redWt red weight
+     * @param redWt   red weight
      * @param greenWt green weight
-     * @param blueWt blue weight
+     * @param blueWt  blue weight
      * @return hashmap of colors to their luma weights
      */
     public HashMap<Pixel.Color, Double> createLumaHashmap(

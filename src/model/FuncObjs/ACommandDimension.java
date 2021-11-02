@@ -33,9 +33,9 @@ public abstract class ACommandDimension implements ICommands {
   /**
    * Gets a pixel from the other image at that location.
    *
-   * @param row The row.
+   * @param row    The row.
    * @param column The column.
-   * @param image The other image.
+   * @param image  The other image.
    * @return A new iPixel.
    */
   protected abstract iPixel getOtherPixel(int row, int column, Image image);

@@ -1,8 +1,10 @@
 package controller;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.File;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -33,9 +35,9 @@ public class IMEControllerCompact implements IMEController {
   /**
    * This is the constructor that takes in all the parameters.
    *
-   * @param model Model which has the commands and list of images.
-   * @param view  View has the appendable.
-   * @param readable    Scanner gives info to the controller.
+   * @param model    Model which has the commands and list of images.
+   * @param view     View has the appendable.
+   * @param readable Scanner gives info to the controller.
    */
   public IMEControllerCompact(IMEModel model, IMEView view, Readable readable) {
     this.model = Objects.requireNonNull(model);
@@ -45,7 +47,7 @@ public class IMEControllerCompact implements IMEController {
 
   @Override
   public void runIME() throws IllegalStateException {
-    Scanner sc =new Scanner(this.readable);
+    Scanner sc = new Scanner(this.readable);
     this.view.printMenu(this.model.getCommandList());
     this.view.renderMsg("\nPlease enter a command:\n");
 
@@ -53,7 +55,7 @@ public class IMEControllerCompact implements IMEController {
 
       String command = sc.next();
 
-      if (command.equals("quit")) {
+      if (command.equalsIgnoreCase("quit")) {
         this.view.renderMsg("\nThank you for using IME!\n");
         break;
       }
@@ -63,16 +65,13 @@ public class IMEControllerCompact implements IMEController {
       if (this.model.containsCommand(command) && this.model.containsImage(oldName)) {
 
         this.view.renderMsg("Please wait...");
-        String newName = sc.next();
-        this.model.applyCommand(command, oldName, newName);
+        this.model.applyCommand(command, oldName, sc.next());
 
-      }
-      else if (!command.equals("load") && !this.model.containsImage(oldName)) {
+      } else if (!command.equalsIgnoreCase("load") && !this.model.containsImage(oldName)) {
 
-        errorAndReset("Image not found. Please try again.",sc);
+        errorAndReset("Image not found. Please try again.", sc);
 
-      }
-      else {
+      } else {
         this.view.renderMsg("Please wait...");
         switch (command) {
           case "brightness":
@@ -82,31 +81,38 @@ public class IMEControllerCompact implements IMEController {
               Image oldVersion = this.model.getImageFromModel(oldName);
               this.model.addImage(newName, oldVersion.changeBrightness(change));
             } else {
-              errorAndReset("Image not found. Please try again.",sc);
+              errorAndReset("Image not found. Please try again.", sc);
             }
             break;
           case "load":
-            try {
-              String path = sc.next();
+            String path = sc.next();
+            File f = new File(path);
+            if (f.exists()) {
               this.model.addImage(oldName, new ImagePpm(path));
-              break;
-            } catch (FileNotFoundException e) {
-              errorAndReset("File name was not correct.",sc);
-              break;
-            }
-          case "save":
-            if (this.model.containsImage(oldName)) {
-              String path = sc.next();
-              this.model.getImageFromModel(oldName).saveImageToFile(path);
-              break;
             } else {
-              errorAndReset("Image not found. Please try again.",sc);
+              errorAndReset("\nFile name was not correct.\n", sc);
+            }
+            break;
+          case "save":
+            String filePath = sc.next();
+            if (this.model.containsImage(oldName) && filePathAvailable(filePath)) {
+                this.model.getImageFromModel(oldName).saveImageToFile(sc.next());
+                break;
+            } else {
+              if (!this.model.containsImage(oldName)) {
+                errorAndReset("Image not found. Please try again.", sc);
+              } else {
+                errorAndReset("Filepath does not exist. Please try again.", sc);
+              }
             }
           default:
-            errorAndReset("\nCommand not recognized. Please try again.", sc);
+            errorAndReset("\nCommand not recognized. Please try again.\n", sc);
         }
       }
       this.view.renderMsg("\nPlease enter a command:\n");
+    }
+    if (!sc.hasNext()) {
+      throw new IllegalStateException("The readable contains nothing.");
     }
   }
 
@@ -114,15 +120,22 @@ public class IMEControllerCompact implements IMEController {
    * Simple helper for {@link #runIME()} when an error or mistype occurs.
    *
    * @param errorMessage String of what to print to the user.
-   * @param scanner The scanner that is progressed to the next line.
+   * @param scanner      The scanner that is progressed to the next line.
    */
-  private void errorAndReset(String errorMessage,Scanner scanner) {
-    try {
-      this.view.renderMsg(errorMessage);
-    } catch (IOException e) {
-      throw new  IllegalStateException("The is nothing to append to.");
-    }
+  private void errorAndReset(String errorMessage, Scanner scanner) {
+    this.view.renderMsg(errorMessage);
     scanner.nextLine();
+  }
+
+  /**
+   * Helper for determining if the file path exists.
+   *
+   * @param filePath Given file path.
+   * @return True if the file path exists, otherwise false.
+   */
+  private boolean filePathAvailable(String filePath) {
+      final Path path = Paths.get(filePath);
+      return Files.exists(path);
   }
 
 

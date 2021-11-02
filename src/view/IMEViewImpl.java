@@ -4,6 +4,7 @@ package view;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
+
 import model.FuncObjs.ICommands;
 
 /**
@@ -23,13 +24,14 @@ public class IMEViewImpl implements IMEView {
   /**
    * Two input constructor for the view.
    *
-   * @param appendable     The appendable for the model or messages.
+   * @param appendable The appendable for the model or messages.
    */
   public IMEViewImpl(Appendable appendable) {
     this.appendable = Objects.requireNonNull(appendable);
   }
 
-  public void printMenu(List<ICommands> commandsHashMap)  {
+  @Override
+  public void printMenu(List<ICommands> commandsHashMap) {
     StringBuilder menu = new StringBuilder(("Here are the commands for using IME " +
             "(Image Manipulation & Enhancement).\n") +
             ("- To quit type: quit.\n") +
@@ -37,9 +39,9 @@ public class IMEViewImpl implements IMEView {
             ("- To save an image type: save <image-name> <file-name>.\n") +
             "- To change the brightness type: brightness <image-name> " +
             "<integer-change> <new-name>.\n");
-            for (ICommands commands : commandsHashMap) {
-              menu.append(commands.giveSignature());
-            }
+    for (ICommands commands : commandsHashMap) {
+      menu.append(commands.giveSignature());
+    }
     this.renderMsg(menu.toString());
   }
 

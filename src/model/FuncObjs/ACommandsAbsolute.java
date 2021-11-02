@@ -1,7 +1,5 @@
 package model.FuncObjs;
 
-import java.io.FileNotFoundException;
-
 import model.Image;
 import model.ImagePpm;
 import model.Pixel;
