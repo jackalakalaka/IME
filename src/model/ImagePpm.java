@@ -83,7 +83,6 @@ public class ImagePpm implements Image {
     this.maxValue = maxValue;
   }
 
-
   @Override
   public int getHeight() {
     return this.height;
@@ -94,9 +93,6 @@ public class ImagePpm implements Image {
     return this.width;
   }
 
-  /**
-   * @return the maximum value of this image's pixels, defining white / the color scale.
-   */
   @Override
   public int getMaxValue() {
     return this.maxValue;
@@ -193,5 +189,4 @@ public class ImagePpm implements Image {
     writer.write(output);
     writer.close();
   }
-
 }

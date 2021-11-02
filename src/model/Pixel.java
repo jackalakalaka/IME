@@ -41,9 +41,6 @@ public class Pixel implements iPixel {
   @Override
   public HashMap<Color, Double> getLuma() {
     double totalValue = this.redValue + this.blueValue+ this.greenValue;
-    double redVal = this.redValue;
-    double blueVal = this.blueValue;
-    double greenVal = this.greenValue;
 
     HashMap<Color, Double> pixelColors = new HashMap<>();
     if (totalValue == 0.0) {
@@ -51,9 +48,9 @@ public class Pixel implements iPixel {
       pixelColors.put(Color.Green, 0.0);
       pixelColors.put(Color.Blue, 0.0);
     } else {
-      pixelColors.put(Color.Red, redVal / totalValue);
-      pixelColors.put(Color.Green, greenVal / totalValue);
-      pixelColors.put(Color.Blue, blueVal / totalValue);
+      pixelColors.put(Color.Red, (double) this.redValue / totalValue);
+      pixelColors.put(Color.Green, (double) this.greenValue / totalValue);
+      pixelColors.put(Color.Blue, (double) this.blueValue / totalValue);
     }
     return pixelColors;
   }
