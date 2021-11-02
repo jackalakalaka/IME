@@ -83,26 +83,6 @@ public class ImagePpm implements Image {
     this.maxValue = maxValue;
   }
 
-  /**
-   * Builds pixel array from a scanned string.
-   *
-   * @param h  array height
-   * @param w  array width
-   * @param mV max value for color levels
-   * @param sc scanner constructed w/ data-containing string
-   * @return pixel array corresponding to the modeled image
-   */
-  private void buildPixelArray(int h, int w, int mV, Scanner sc) {
-    for (int i = 0; i < h; i++) {
-      for (int j = 0; j < w; j++) {
-        int r = sc.nextInt();
-        int g = sc.nextInt();
-        int b = sc.nextInt();
-        this.pixelArray[i][j] = new Pixel(mV, r, g, b);
-      }
-    }
-  }
-
   @Override
   public int getHeight() {
     return this.height;
@@ -113,9 +93,6 @@ public class ImagePpm implements Image {
     return this.width;
   }
 
-  /**
-   * @return the maximum value of this image's pixels, defining white / the color scale.
-   */
   @Override
   public int getMaxValue() {
     return this.maxValue;
@@ -212,5 +189,4 @@ public class ImagePpm implements Image {
     writer.write(output);
     writer.close();
   }
-
 }
