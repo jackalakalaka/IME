@@ -31,7 +31,12 @@ save dope_goat-vertFlip dope_goat-vertFlip.ppm
 ## Code Overview
 ### Source Code
 - **Class ImageManipulationEnhancement**
-  - The main class for running the controller.
+  - The main class for initializing and running the controller.
+  - Package _controller_:
+    - **Interface IMEController**
+      - Interface for controllers in IME.
+      - **Class IMEControllerCompact**
+            - This is the controller class for IME.
   - Package _model_:
     - Package _funcobjs_:
       - **Interface ICommands**
@@ -58,10 +63,6 @@ save dope_goat-vertFlip dope_goat-vertFlip.ppm
           - An abstract class for function objects that get multiple values from pixels.
           - **Class CommandsLuma**
             - A function object for getting the luma of a pixel.
-      - **Interface IScannerCommands**
-        - Function objects for load and save commands. Called by model class.
-        - **Class ScannerLoadCommand**
-            - Function object for load command. Called by model class.
     - **Interface IMEModel**
       - Interface for models used by IME.
       - **Class IMEModelImpl**
@@ -76,6 +77,14 @@ save dope_goat-vertFlip dope_goat-vertFlip.ppm
         - This class represents an immutable pixel.
       - **Class MockPixel**
         - Simulates a pixel for the more simplistic testing of Image and IMEModel classes. Simplifies pixel construction and assertion.
+  - Package _factory_:
+    - **Class IMEModelFactory**
+        - Creates a new IMEModel implementation object.
+  - Package _view_:
+    - **Interface IMEView**
+      - Interface for rendering messages and possibly eventually for displaying images.
+      - **Class IMEViewImpl**
+            - Implementation of an image viewer.
 ### Test Code
 ## Image License
 Title: "Goat Mammal Cute Animal Domestic Farm Funny"
