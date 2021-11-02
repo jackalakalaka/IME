@@ -28,6 +28,9 @@ save dope_goat-redComponent dope_goat-redComponent.ppm
 save dope_goat-vertFlip dope_goat-vertFlip.ppm
 ```
 
+## Source Code Overview
+A text README file explaining your design. Your README file should give the graders an overview of what the purposes are for every class, interface, etc. that you include in your submission, so that they can quickly get a high-level overview of your code. It does not replace the need for proper Javadoc!
+
 ## Image License
 Title: "Goat Mammal Cute Animal Domestic Farm Funny"
 
