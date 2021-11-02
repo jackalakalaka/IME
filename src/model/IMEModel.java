@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import model.FuncObjs.ICommands;
+import model.funcobjs.ICommands;
 
 /**
  * Interface for models used by IME.

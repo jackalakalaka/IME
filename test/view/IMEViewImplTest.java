@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import model.FuncObjs.CommandsBlue;
-import model.FuncObjs.CommandsGreen;
-import model.FuncObjs.CommandsIntensity;
-import model.FuncObjs.CommandsLuma;
-import model.FuncObjs.CommandsRed;
-import model.FuncObjs.CommandsValue;
-import model.FuncObjs.ConvertByHorizontal;
-import model.FuncObjs.ConvertByVertical;
-import model.FuncObjs.ICommands;
+import model.funcobjs.CommandsBlue;
+import model.funcobjs.CommandsGreen;
+import model.funcobjs.CommandsIntensity;
+import model.funcobjs.CommandsLuma;
+import model.funcobjs.CommandsRed;
+import model.funcobjs.CommandsValue;
+import model.funcobjs.ConvertByHorizontal;
+import model.funcobjs.ConvertByVertical;
+import model.funcobjs.ICommands;
 
 import static org.junit.Assert.assertEquals;
 

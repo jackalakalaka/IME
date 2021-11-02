@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
-import model.FuncObjs.ICommands;
+import model.funcobjs.ICommands;
 
 
 /**

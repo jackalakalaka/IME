@@ -1,6 +1,6 @@
 package model;
 
-import model.FuncObjs.ICommands;
+import model.funcobjs.ICommands;
 
 /**
  * Interface for representing images.

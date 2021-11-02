@@ -2,7 +2,7 @@ package view;
 
 import java.util.List;
 
-import model.FuncObjs.ICommands;
+import model.funcobjs.ICommands;
 
 /**
  * Interface for rendering messages and possibly eventually for displaying images.

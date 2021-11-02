@@ -1,4 +1,4 @@
-package model.FuncObjs;
+package model.funcobjs;
 
 import java.util.function.Function;
 

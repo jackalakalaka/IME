@@ -3,9 +3,9 @@ package model;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.FuncObjs.CommandsBlue;
-import model.FuncObjs.CommandsValue;
-import model.FuncObjs.ConvertByHorizontal;
+import model.funcobjs.CommandsBlue;
+import model.funcobjs.CommandsValue;
+import model.funcobjs.ConvertByHorizontal;
 
 import static org.junit.Assert.assertEquals;
 
