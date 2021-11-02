@@ -44,8 +44,11 @@ public class IMEModelImpl implements IMEModel {
    * @param commands A HashMap of String, ICommands.
    */
   public IMEModelImpl(HashMap<String, Image> images, HashMap<String, ICommands> commands) {
-    this.images = Objects.requireNonNull(images);
-    this.commands = Objects.requireNonNull(commands);
+    if (images == null || commands == null) {
+      throw new IllegalArgumentException("Model parameters cannot be null.");
+    }
+    this.images = images;
+    this.commands = commands;
   }
 
   @Override

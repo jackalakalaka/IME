@@ -62,7 +62,7 @@ public class IMEModelTest {
   /**
    * Test an invalid null images argument to the 2-arg constructor.
    */
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void constructor2ArgNullImages() {
     IMEModel model = new IMEModelImpl(null, mtCommands);
   }
@@ -70,7 +70,7 @@ public class IMEModelTest {
   /**
    * Test an invalid null commands argument to the 2-arg constructor.
    */
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void constructor2ArgNullCommands() {
     IMEModel model = new IMEModelImpl(mtImages, null);
   }
@@ -79,7 +79,7 @@ public class IMEModelTest {
    * Test invalid null imageName for getImageFromModel method.
    */
   @Test(expected = NullPointerException.class)
-  public void getImageFromModelNullImagename() {
+  public void getImageFromModelNullImageName() {
     Image invalidImg = this.model1.getImageFromModel(null);
   }
 
@@ -132,7 +132,7 @@ public class IMEModelTest {
    * Test invalid null newName for applyCommand method.
    */
   @Test(expected = NullPointerException.class)
-  public void applyCommandNullNewname() {
+  public void applyCommandNullNewName() {
     this.model1.applyCommand("horizontal", "img1", null);
   }
 
@@ -180,7 +180,6 @@ public class IMEModelTest {
     assertFalse(mtModel.containsImage("img1"));
     assertFalse(this.model1.containsImage("img2"));
     assertTrue(this.model1.containsImage("img1"));
-
   }
 
 

@@ -35,9 +35,9 @@ public class IMEControllerImplTest {
           "<img_former> <img_new>' into the command line.\n" +
           "- To get a heat map of intensity in the img type " +
           "'intensity <img_former> <img_new>' into the command line.\n" +
-          "- To flip the img horizontally type 'horizontal  " +
+          "- To flip the img horizontally type 'horizontal " +
           "<img_former> <img_new>' into the command line.\n" +
-          "- To get a heat map of green in the img type 'green  " +
+          "- To get a heat map of green in the img type 'green " +
           "<img_former> <img_new>' into the command line.\n" +
           "- To get a heat map of blue in the img type 'blue " +
           "<img_former> <img_new>'into the command line.\n" +
@@ -45,7 +45,7 @@ public class IMEControllerImplTest {
           "<img_new>' into the command line.\n" +
           "- To get a heat map of the max value in the img type 'value " +
           "<img_former> <img_new>' into the command line.\n" +
-          "- To get a heat map of luminosity in the img type 'luma  " +
+          "- To get a heat map of luminosity in the img type 'luma " +
           "<img_former> <img_new>' into the command line.\n";
 
   @Before
@@ -106,7 +106,7 @@ public class IMEControllerImplTest {
   @Test(expected = IllegalStateException.class)
   public void testIncompleteInputTwo() {
     Appendable appendable = new StringBuilder();
-    Readable readable = new StringReader("load barney ");
+    Readable readable = new StringReader("load res/onePixelImage.ppm ");
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
@@ -115,7 +115,7 @@ public class IMEControllerImplTest {
   @Test(expected = IllegalStateException.class)
   public void testIncompleteInputThree() {
     Appendable appendable = new StringBuilder();
-    Readable readable = new StringReader("load barney barney.ppm " +
+    Readable readable = new StringReader("load barney res/onePixelImage.ppm " +
             "brightness barney 10 ");
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
@@ -139,7 +139,7 @@ public class IMEControllerImplTest {
   @Test
   public void testLoad() {
     Appendable appendable = new StringBuilder();
-    Readable readable = new StringReader("load barney barney.ppm quit");
+    Readable readable = new StringReader("load pixel res/onePixelImage.ppm quit");
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
@@ -156,8 +156,8 @@ public class IMEControllerImplTest {
   @Test
   public void testSave() {
     Appendable appendable = new StringBuilder();
-    Readable readable = new StringReader("load barney barney.ppm " +
-            "save barney barney.ppm quit ");
+    Readable readable = new StringReader("load pixel res/onePixelImage.ppm " +
+            "save pixel res/onePixelImage.ppm quit ");
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
@@ -176,8 +176,8 @@ public class IMEControllerImplTest {
   @Test
   public void testBrightness() {
     Appendable appendable = new StringBuilder();
-    Readable readable = new StringReader("load barney barney.ppm " +
-            "brightness barney 20 barney.ppm quit ");
+    Readable readable = new StringReader("load pixel res/onePixelImage.ppm " +
+            "brightness pixel  50 bright quit ");
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
