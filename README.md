@@ -14,6 +14,19 @@
 - To flip the img vertically type `vertical <img_former> <img_new>` into the command line.
 - To get a heat map of the max value in the img type `value <img_former> <img_new>` into the command line.
 - To get a heat map of luminosity in the img type `luma <img_former> <img_new>` into the command line.
+Example script:
+```bash
+load dope_goat dope_goat.ppm
+
+brightness dope_goat 50 dope_goat-brighter
+red dope_goat dope_goat-redComponent
+vertical dope_goat dope_goat-vertFlip
+
+save dope_goat-brighter dope_goat-brighter.ppm
+save dope_goat-redComponent dope_goat-redComponent.ppm
+save dope_goat-vertFlip dope_goat-vertFlip.ppm
+```
+
 ## Image License
 Title: "Goat Mammal Cute Animal Domestic Farm Funny"
 
