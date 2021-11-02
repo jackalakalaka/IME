@@ -1,6 +1,5 @@
 package model.FuncObjs;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import model.Image;

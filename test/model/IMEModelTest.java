@@ -10,7 +10,7 @@ public class IMEModelTest {
   @Test
   public void test() throws FileNotFoundException {
     this.koala1 = new ImagePpm("koalaoriginal.ppm");
-    this.koala1.getPixelAt(0,0);
+    this.koala1.getPixelAt(0, 0);
   }
 
 }

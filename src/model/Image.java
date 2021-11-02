@@ -1,23 +1,29 @@
 package model;
 
-import java.io.IOException;
-
 import model.FuncObjs.ICommands;
 
-
+/**
+ * Interface for representing images.
+ */
 public interface Image {
 
   /**
-   * @return height of image in pixels
+   * Gets the height of the image.
+   *
+   * @return Integer image height.
    */
   int getHeight();
 
   /**
-   * @return width of image in pixels
+   * Gets the width of the image.
+   *
+   * @return Integer image width.
    */
   int getWidth();
 
   /**
+   * Gets the maximum value of the image
+   *
    * @return the maximum value of this image's pixels, defining white / the color scale.
    */
   int getMaxValue();
@@ -41,6 +47,12 @@ public interface Image {
    */
   Image changeBrightness(int change);
 
+  /**
+   * Takes ina  file path and attempts to save the image to a file.
+   *
+   * @param filepath The path to the file.
+   * @throws IllegalStateException If the file path does not exist.
+   */
   void saveImageToFile(String filepath) throws IllegalStateException;
 
 }

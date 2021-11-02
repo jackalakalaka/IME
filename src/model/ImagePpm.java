@@ -25,15 +25,15 @@ public class ImagePpm implements Image {
    * 1-arg constructor for an image model using a PPM file.
    *
    * @param filePath The file path to the PPM file.
-   * @throws FileNotFoundException If the file cannot be found.
+   * @throws IllegalArgumentException If the file cannot be found.
    */
-  public ImagePpm(String filePath) throws FileNotFoundException {
+  public ImagePpm(String filePath) throws IllegalArgumentException {
     Scanner sc;
 
     try {
       sc = new Scanner(new FileInputStream(filePath));
     } catch (FileNotFoundException e) {
-      throw new FileNotFoundException("File path leads to no file or was mistyped.");
+      throw new IllegalArgumentException("File path leads to no file or was mistyped.");
     }
     StringBuilder builder = new StringBuilder();
     //read the file line by line, and populate a string. This will throw away any comment lines

@@ -15,7 +15,7 @@ public class IMEControllerImplTest {
   public IMEControllerImplTest() {
     IMEModel model1 = new IMEModelImpl();
     IMEView view1 = new IMEViewImpl();
- //   this.ctrlr1 = new IMEControllerImpl(model1, view1);
+    //   this.ctrlr1 = new IMEControllerImpl(model1, view1);
   }
 
   @Test

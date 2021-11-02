@@ -1,11 +1,12 @@
 package controller;
 
-import java.io.IOException;
-
+/**
+ * Interface for controllers in IME.
+ */
 public interface IMEController {
 
   /**
    * This method uses the controller to load, edit, and save images.
    */
-  void runIME() throws IllegalStateException, IOException;
+  void runIME() throws IllegalStateException;
 }

@@ -12,10 +12,24 @@ public class Pixel implements iPixel {
   private final int greenValue;
   private final int blueValue;
 
+  /**
+   * Constructor which takes in the max value and grey value and makes a pixel.
+   *
+   * @param maxValue The maximum value for the pixel.
+   * @param grey The new value that will be shared by all the colors.
+   */
   public Pixel(int maxValue, int grey) {
     this(maxValue, grey, grey, grey);
   }
 
+  /**
+   * Constructor which takes in a max value and all color fields.
+   *
+   * @param maxValue The maximum value for the pixel.
+   * @param red The value of red in the pixel.
+   * @param green The value of green in the pixel.
+   * @param blue The value of blue in the pixel.
+   */
   public Pixel(int maxValue, int red, int green, int blue) {
     if (maxValue < 1) {
       throw new IllegalArgumentException("Upper limit of RGB values must be at least 1.");
@@ -40,7 +54,7 @@ public class Pixel implements iPixel {
 
   @Override
   public HashMap<Color, Double> getLuma() {
-    double totalValue = this.redValue + this.blueValue+ this.greenValue;
+    double totalValue = this.redValue + this.blueValue + this.greenValue;
 
     HashMap<Color, Double> pixelColors = new HashMap<>();
     if (totalValue == 0.0) {

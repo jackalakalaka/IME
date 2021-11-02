@@ -14,10 +14,16 @@ import model.FuncObjs.ConvertByHorizontal;
 import model.FuncObjs.ConvertByVertical;
 import model.FuncObjs.ICommands;
 
+/**
+ * A representation of an IME model.
+ */
 public class IMEModelImpl implements IMEModel {
   private final HashMap<String, Image> images;
   private final HashMap<String, ICommands> commands;
 
+  /**
+   * Default constructor that creates an empty image list and command list of all the commands.
+   */
   public IMEModelImpl() {
     this.images = new HashMap<>();
     this.commands = new HashMap<>();
@@ -31,6 +37,12 @@ public class IMEModelImpl implements IMEModel {
     this.commands.put("luma", new CommandsLuma());
   }
 
+  /**
+   * Constructor with both fields represented.
+   *
+   * @param images A HashMap of String, Images.
+   * @param commands A HashMap of String, ICommands.
+   */
   public IMEModelImpl(HashMap<String, Image> images, HashMap<String, ICommands> commands) {
     this.images = Objects.requireNonNull(images);
     this.commands = Objects.requireNonNull(commands);
@@ -38,16 +50,16 @@ public class IMEModelImpl implements IMEModel {
 
   @Override
   public Image getImageFromModel(String imageName) {
-    return images.get(imageName);
+    return this.images.get(imageName);
   }
 
   @Override
-  public void addImage(String name,Image image) {
-    this.images.put(name,image);
+  public void addImage(String name, Image image) {
+    this.images.put(name, image);
   }
 
   @Override
-  public void applyCommand(String command,String original, String newName) {
+  public void applyCommand(String command, String original, String newName) {
     this.addImage(newName, commands.get(command).apply(images.get(original)));
   }
 
@@ -58,7 +70,7 @@ public class IMEModelImpl implements IMEModel {
 
   @Override
   public boolean containsCommand(String command) {
-    return commands.containsKey(command);
+    return this.commands.containsKey(command);
   }
 
   @Override
