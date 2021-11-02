@@ -111,6 +111,9 @@ public class IMEControllerCompact implements IMEController {
       }
       this.view.renderMsg("\nPlease enter a command:\n");
     }
+    if (!sc.hasNext()) {
+      throw new IllegalStateException("The readable contains nothing.");
+    }
   }
 
   /**
