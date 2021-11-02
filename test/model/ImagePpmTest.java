@@ -44,17 +44,25 @@ public class ImagePpmTest {
   }
 
   /**
+   * Test an invalid null filepath argument to the 1-arg constructor.
+   */
+  @Test(expected = NullPointerException.class)
+  public void constructor1ArgNullFilepath() {
+    Image modelOne = new ImagePpm(null);
+  }
+
+  /**
    * Test an invalid filepath argument to the 1-arg constructor.
    */
-  @Test(expected = FileNotFoundException.class)
-  public void constructor1ArgInvalidFilepath() throws FileNotFoundException {
+  @Test(expected = IllegalArgumentException.class)
+  public void constructor1ArgInvalidFilepath() {
     Image modelOne = new ImagePpm("hehehehehe");
   }
 
   /**
-   * Test a null pixel array input to the 2-arg constructor.
+   * Test an invalid null pixel array input to the 2-arg constructor.
    */
-  @Test(expected = IllegalArgumentException.class)
+  @Test(expected = NullPointerException.class)
   public void constructor2ArgPixelsNull() throws IllegalArgumentException {
     Image modelOne = new ImagePpm(255, null);
   }
@@ -75,6 +83,14 @@ public class ImagePpmTest {
     Image horzFlipOne = new ConvertByHorizontal().apply(this.modelOne);
     assertEquals(this.pixelOne, horzFlipOne.getPixelAt(0, 1));
     assertEquals(this.pixelTwo, horzFlipOne.getPixelAt(0, 0));
+  }
+
+  /**
+   * Test an invalid null command argument to convertToViz method.
+   */
+  @Test(expected = NullPointerException.class)
+  public void convertToVizNullCmd() {
+    modelOne.convertToViz(null);
   }
 
   /**
@@ -104,5 +120,13 @@ public class ImagePpmTest {
     assertEquals(1, same.getPixelAt(0, 0).getValue());
     assertEquals(11, bright.getPixelAt(0, 0).getValue());
     assertEquals(0, dark.getPixelAt(0, 0).getValue());
+  }
+
+  /**
+   * Test an invalid null filepath argument to saveImageToFile method.
+   */
+  @Test(expected = NullPointerException.class)
+  public void saveImageToFileNullFilepath() {
+    modelOne.saveImageToFile(null);
   }
 }
