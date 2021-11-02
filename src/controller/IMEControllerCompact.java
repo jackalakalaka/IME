@@ -2,10 +2,6 @@ package controller;
 
 import java.io.File;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.Scanner;
 
 import model.IMEModel;
@@ -40,9 +36,12 @@ public class IMEControllerCompact implements IMEController {
    * @param readable Scanner gives info to the controller.
    */
   public IMEControllerCompact(IMEModel model, IMEView view, Readable readable) {
-    this.model = Objects.requireNonNull(model);
-    this.view = Objects.requireNonNull(view);
-    this.readable = Objects.requireNonNull(readable);
+    if (model == null || view == null || readable == null){
+      throw new IllegalArgumentException("Controller cannot take null as an argument.");
+    }
+    this.model = model;
+    this.view = view;
+    this.readable = readable;
   }
 
   @Override
@@ -51,69 +50,68 @@ public class IMEControllerCompact implements IMEController {
     this.view.printMenu(this.model.getCommandList());
     this.view.renderMsg("\nPlease enter a command:\n");
 
+    checkScanner(sc);
     while (sc.hasNext()) {
 
       String command = sc.next();
 
       if (command.equalsIgnoreCase("quit")) {
-        this.view.renderMsg("\nThank you for using IME!\n");
         break;
-      }
-
-      String oldName = sc.next();
-
-      if (this.model.containsCommand(command) && this.model.containsImage(oldName)) {
-
-        this.view.renderMsg("Please wait...");
-        this.model.applyCommand(command, oldName, sc.next());
-
-      } else if (!command.equalsIgnoreCase("load") && !this.model.containsImage(oldName)) {
-
-        errorAndReset("Image not found. Please try again.", sc);
-
       } else {
-        this.view.renderMsg("Please wait...");
-        switch (command) {
-          case "brightness":
-            int change = sc.nextInt();
-            String newName = sc.next();
-            if (this.model.containsImage(oldName)) {
-              Image oldVersion = this.model.getImageFromModel(oldName);
-              this.model.addImage(newName, oldVersion.changeBrightness(change));
-            } else {
-              errorAndReset("Image not found. Please try again.", sc);
-            }
-            break;
-          case "load":
-            String path = sc.next();
-            File f = new File(path);
-            if (f.exists()) {
-              this.model.addImage(oldName, new ImagePpm(path));
-            } else {
-              errorAndReset("\nFile name was not correct.\n", sc);
-            }
-            break;
-          case "save":
-            String filePath = sc.next();
-            if (this.model.containsImage(oldName) && filePathAvailable(filePath)) {
-                this.model.getImageFromModel(oldName).saveImageToFile(sc.next());
-                break;
-            } else {
-              if (!this.model.containsImage(oldName)) {
-                errorAndReset("Image not found. Please try again.", sc);
+
+        String imageName = sc.next();
+
+        if (this.model.containsCommand(command) && this.model.containsImage(imageName)) {
+
+          this.view.renderMsg("Please wait...");
+          this.model.applyCommand(command, imageName, sc.next());
+
+        } else if (!command.equalsIgnoreCase("load") && !this.model.containsImage(imageName)) {
+
+          errorAndReset("Image not found. Please try again.", sc);
+
+        } else {
+          String input = sc.next();
+          this.view.renderMsg("Please wait...");
+          switch (command) {
+            case "brightness":
+              int change = Integer.parseInt(input);
+              String name = sc.next();
+              if (this.model.containsImage(imageName)) {
+                Image oldVersion = this.model.getImageFromModel(imageName);
+                this.model.addImage(name, oldVersion.changeBrightness(change));
               } else {
-                errorAndReset("Filepath does not exist. Please try again.", sc);
+                errorAndReset("Image not found. Please try again.", sc);
               }
-            }
-          default:
-            errorAndReset("\nCommand not recognized. Please try again.\n", sc);
+              break;
+            case "load":
+              File f = new File(input);
+              if (f.exists()) {
+                this.model.addImage(imageName, new ImagePpm(input));
+              } else {
+                errorAndReset("\nFile name was not correct.\n", sc);
+              }
+              break;
+            case "save":
+              if (this.model.containsImage(imageName)) {
+                this.model.getImageFromModel(imageName).saveImageToFile(input);
+                break;
+              } else {
+                if (!this.model.containsImage(imageName)) {
+                  errorAndReset("Image not found. Please try again.", sc);
+                } else {
+                  errorAndReset("IME only saves .ppm files.", sc);
+                }
+              }
+            default:
+              errorAndReset("\nCommand not recognized. Please try again.\n", sc);
+          }
         }
+        this.view.renderMsg("\nPlease enter a command:\n");
       }
-      this.view.renderMsg("\nPlease enter a command:\n");
+      checkScanner(sc);
     }
-    if (!sc.hasNext()) {
-      throw new IllegalStateException("The readable contains nothing.");
-    }
+    this.view.renderMsg("\nThank you for using IME!");
   }
 
   /**
@@ -124,19 +122,18 @@ public class IMEControllerCompact implements IMEController {
    */
   private void errorAndReset(String errorMessage, Scanner scanner) {
     this.view.renderMsg(errorMessage);
-    scanner.nextLine();
+      scanner.nextLine();
   }
 
   /**
-   * Helper for determining if the file path exists.
+   * Simple helper for checking the state of the scanner.
    *
-   * @param filePath Given file path.
-   * @return True if the file path exists, otherwise false.
+   * @param scanner The scanner used in the controller.
    */
-  private boolean filePathAvailable(String filePath) {
-      final Path path = Paths.get(filePath);
-      return Files.exists(path);
+  private void checkScanner(Scanner scanner) {
+    if (!scanner.hasNext()) {
+      throw new IllegalStateException("The readable contains nothing.");
+    }
   }
-
 
 }
