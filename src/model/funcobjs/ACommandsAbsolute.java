@@ -1,9 +1,9 @@
 package model.FuncObjs;
 
+import model.IPixel;
 import model.Image;
 import model.ImagePpm;
 import model.Pixel;
-import model.iPixel;
 
 /**
  * An abstract class for function objects that get a single value from pixels.
@@ -24,7 +24,7 @@ public abstract class ACommandsAbsolute implements ICommands {
 
     for (int row = 0; row < h; row++) {
       for (int col = 0; col < w; col++) {
-        iPixel oldPixel = initModel.getPixelAt(row, col);
+        IPixel oldPixel = initModel.getPixelAt(row, col);
         int absolute = getAbsolute(oldPixel);
         pixels[row][col] = new Pixel(maxValue, absolute);
       }
@@ -39,5 +39,5 @@ public abstract class ACommandsAbsolute implements ICommands {
    * @param originalPixel The original pixel.
    * @return An integer.
    */
-  protected abstract int getAbsolute(iPixel originalPixel);
+  protected abstract int getAbsolute(IPixel originalPixel);
 }

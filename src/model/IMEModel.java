@@ -20,17 +20,17 @@ public interface IMEModel {
   /**
    * Adds an image to the model.
    *
-   * @param name The name for the image.
-   * @param Image The actual image,
+   * @param name  The name for the image.
+   * @param image The actual image,
    */
-  void addImage(String name, Image Image);
+  void addImage(String name, Image image);
 
   /**
    * Applies a command in the model to an image creating a new image in the model.
    *
-   * @param command A string representing the command's name.
+   * @param command  A string representing the command's name.
    * @param original The name of the original image.
-   * @param newName The name of the new image post application of the command.
+   * @param newName  The name of the new image post application of the command.
    */
   void applyCommand(String command, String original, String newName);
 

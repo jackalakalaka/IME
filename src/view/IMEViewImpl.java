@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import model.FuncObjs.ICommands;
 
+
 /**
  * Implementation of an image viewer.
  */

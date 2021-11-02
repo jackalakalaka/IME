@@ -22,7 +22,7 @@ public interface Image {
   int getWidth();
 
   /**
-   * Gets the maximum value of the image
+   * Gets the maximum value of the image.
    *
    * @return the maximum value of this image's pixels, defining white / the color scale.
    */
@@ -35,7 +35,7 @@ public interface Image {
    * @param col The column in the array where the pixel is located.
    * @return A Pixel.
    */
-  iPixel getPixelAt(int row, int col);
+  IPixel getPixelAt(int row, int col);
 
   Image convertToViz(ICommands cmd);
 

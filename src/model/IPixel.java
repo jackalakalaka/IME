@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * An interface for pixels of an image.
  */
-public interface iPixel {
+public interface IPixel {
 
   /**
    * Returns the intensity of the pixel.

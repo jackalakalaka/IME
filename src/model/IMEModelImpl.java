@@ -40,7 +40,7 @@ public class IMEModelImpl implements IMEModel {
   /**
    * Constructor with both fields represented.
    *
-   * @param images A HashMap of String, Images.
+   * @param images   A HashMap of String, Images.
    * @param commands A HashMap of String, ICommands.
    */
   public IMEModelImpl(HashMap<String, Image> images, HashMap<String, ICommands> commands) {

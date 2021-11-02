@@ -11,11 +11,12 @@ import java.util.Scanner;
 
 import model.FuncObjs.ICommands;
 
+
 /**
  * Representation of an image from a PPM file.
  */
 public class ImagePpm implements Image {
-  private final iPixel[][] pixelArray;
+  private final IPixel[][] pixelArray;
   private final int width;
   private final int height;
   private final int maxValue;
@@ -77,7 +78,7 @@ public class ImagePpm implements Image {
    * @param maxValue   The maximum value carried over from the original model.
    * @param pixelArray An array of pixels for the new model.
    */
-  public ImagePpm(int maxValue, iPixel[][] pixelArray) {
+  public ImagePpm(int maxValue, IPixel[][] pixelArray) {
     this.pixelArray = Objects.requireNonNull(pixelArray);
     this.height = pixelArray.length;
     this.width = pixelArray[0].length;
@@ -104,7 +105,7 @@ public class ImagePpm implements Image {
     Pixel[][] brighterModel = new Pixel[this.height][this.width];
     for (int row = 0; row < height; row++) {
       for (int column = 0; column < width; column++) {
-        iPixel oldPixel = this.getPixelAt(row, column);
+        IPixel oldPixel = this.getPixelAt(row, column);
         brighterModel[row][column] = changePixelBrightness(oldPixel, change);
       }
     }
@@ -118,7 +119,7 @@ public class ImagePpm implements Image {
    * @param change   The brightness change to be implemented.
    * @return A new brighter or darker pixel.
    */
-  private Pixel changePixelBrightness(iPixel oldPixel, int change) {
+  private Pixel changePixelBrightness(IPixel oldPixel, int change) {
     Objects.requireNonNull(oldPixel);
 
     HashMap<Pixel.Color, Integer> oldPixelColors = oldPixel.getColors();
@@ -131,7 +132,7 @@ public class ImagePpm implements Image {
   }
 
   /**
-   * Helper for {@link #changePixelBrightness(iPixel, int)}.
+   * Helper for {@link #changePixelBrightness(IPixel, int)}.
    *
    * @param colorValue The desired color value after brightening or dimming.
    * @return The acceptable value or max/min.
@@ -144,7 +145,7 @@ public class ImagePpm implements Image {
   }
 
   @Override
-  public iPixel getPixelAt(int row, int col) {
+  public IPixel getPixelAt(int row, int col) {
     return pixelArray[row][col];
   }
 

@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * This class represents an immutable pixel.
  */
-public class Pixel implements iPixel {
+public class Pixel implements IPixel {
   private final int redValue;
   private final int greenValue;
   private final int blueValue;
@@ -16,7 +16,7 @@ public class Pixel implements iPixel {
    * Constructor which takes in the max value and grey value and makes a pixel.
    *
    * @param maxValue The maximum value for the pixel.
-   * @param grey The new value that will be shared by all the colors.
+   * @param grey     The new value that will be shared by all the colors.
    */
   public Pixel(int maxValue, int grey) {
     this(maxValue, grey, grey, grey);
@@ -26,9 +26,9 @@ public class Pixel implements iPixel {
    * Constructor which takes in a max value and all color fields.
    *
    * @param maxValue The maximum value for the pixel.
-   * @param red The value of red in the pixel.
-   * @param green The value of green in the pixel.
-   * @param blue The value of blue in the pixel.
+   * @param red      The value of red in the pixel.
+   * @param green    The value of green in the pixel.
+   * @param blue     The value of blue in the pixel.
    */
   public Pixel(int maxValue, int red, int green, int blue) {
     if (maxValue < 1) {

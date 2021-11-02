@@ -1,19 +1,19 @@
 package model;
 
-import org.junit.Before;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import model.FuncObjs.CommandsBlue;
-import model.FuncObjs.CommandsGreen;
-import model.FuncObjs.CommandsIntensity;
-import model.FuncObjs.CommandsLuma;
-import model.FuncObjs.CommandsRed;
-import model.FuncObjs.CommandsValue;
-import model.FuncObjs.ConvertByHorizontal;
-import model.FuncObjs.ConvertByVertical;
-import model.FuncObjs.ICommands;
+import model.funcobjs.CommandsBlue;
+import model.funcobjs.CommandsGreen;
+import model.funcobjs.CommandsIntensity;
+import model.funcobjs.CommandsLuma;
+import model.funcobjs.CommandsRed;
+import model.funcobjs.CommandsValue;
+import model.funcobjs.ConvertByHorizontal;
+import model.funcobjs.ConvertByVertical;
+import model.funcobjs.ICommands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
  * test method. Uses mock pixels for instantiating an image.
  */
 public class IMEModelTest {
-  private final iPixel[][] mockPixels = new iPixel[2][2];
+  private final IPixel[][] mockPixels = new IPixel[2][2];
   private final Image img1 = new ImagePpm(255, mockPixels);
 
   private static final HashMap<String, Image> mtImages = new HashMap<>();
@@ -38,13 +38,13 @@ public class IMEModelTest {
    * Initialize test variables.
    */
   public IMEModelTest() {
-    iPixel pixelOne = new MockPixel(1);
+    IPixel pixelOne = new MockPixel(1);
     this.mockPixels[0][0] = pixelOne;
-    iPixel pixelThree = new MockPixel(3);
+    IPixel pixelThree = new MockPixel(3);
     this.mockPixels[1][0] = pixelThree;
-    iPixel pixelTwo = new MockPixel(2);
+    IPixel pixelTwo = new MockPixel(2);
     this.mockPixels[0][1] = pixelTwo;
-    iPixel pixelFour = new MockPixel(4);
+    IPixel pixelFour = new MockPixel(4);
     this.mockPixels[1][1] = pixelFour;
 
     this.model1Cmds = new HashMap<>();

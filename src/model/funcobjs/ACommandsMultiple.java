@@ -2,10 +2,10 @@ package model.FuncObjs;
 
 import java.util.ArrayList;
 
+import model.IPixel;
 import model.Image;
 import model.ImagePpm;
 import model.Pixel;
-import model.iPixel;
 
 /**
  * An abstract class for function objects that get multiple values from pixels.
@@ -22,12 +22,12 @@ public abstract class ACommandsMultiple implements ICommands {
   public Image apply(Image initModel) {
     int h = initModel.getHeight();
     int w = initModel.getWidth();
-    iPixel[][] pixels = new Pixel[h][w];
+    IPixel[][] pixels = new Pixel[h][w];
     int maxValue = initModel.getMaxValue();
 
     for (int row = 0; row < h; row++) {
       for (int col = 0; col < w; col++) {
-        iPixel oldPixel = initModel.getPixelAt(row, col);
+        IPixel oldPixel = initModel.getPixelAt(row, col);
         ArrayList<Double> multiple = getMultiple(oldPixel);
         int red = (int) (multiple.get(0) * maxValue);
         int green = (int) (multiple.get(1) * maxValue);
@@ -45,6 +45,6 @@ public abstract class ACommandsMultiple implements ICommands {
    * @param originalPixel The original pixel.
    * @return List of values from the old pixel.
    */
-  protected abstract ArrayList<Double> getMultiple(iPixel originalPixel);
+  protected abstract ArrayList<Double> getMultiple(IPixel originalPixel);
 
 }

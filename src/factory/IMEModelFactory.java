@@ -6,7 +6,13 @@ import java.util.Objects;
 import model.IMEModel;
 import model.IMEModelImpl;
 
+/**
+ * Creates a new IMEModel implementation object.
+ */
 public class IMEModelFactory {
+  /**
+   * Factory function object's primary method.
+   */
   public IMEModel createIMEModel(String variant)
           throws FileNotFoundException {
     Objects.requireNonNull(variant);

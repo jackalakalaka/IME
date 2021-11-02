@@ -9,7 +9,7 @@ import java.io.IOException;
 public class InvalidMockAppendable implements Appendable {
   /**
    * Always throws an IOException for testing purposes.
-
+   *
    * @param csq The character sequence to append.  If {@code csq} is
    *            {@code null}, then the four characters {@code "null"} are
    *            appended to this Appendable.
@@ -24,7 +24,7 @@ public class InvalidMockAppendable implements Appendable {
   /**
    * Appends a subsequence of the specified character sequence to this
    * {@code Appendable}.
-
+   * <p>
    * An invocation of this method of the form {@code out.append(csq, start, end)}
    * when {@code csq} is not {@code null}, behaves in
    * exactly the same way as the invocation

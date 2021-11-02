@@ -61,7 +61,7 @@ public class IMEControllerCompact implements IMEController {
       }
       String imageName = getNextIfExists(sc);
       //If the model isn't in the model and the command isn't load the remaining inputs are skipped.
-      if (checkImageCommandModel(imageName,command,sc)) {
+      if (checkImageCommandModel(imageName, command, sc)) {
         continue;
       }
       //If the command and image are in the model the command is applied.
@@ -70,7 +70,7 @@ public class IMEControllerCompact implements IMEController {
         this.model.applyCommand(command, imageName, sc.next());
       } else { //If the command isn't in the list it goes to default commands.
         this.view.renderMsg("Please wait...");
-        handleDefaults(command,imageName,sc); //Also handles mistypes or non-existent commands.
+        handleDefaults(command, imageName, sc); //Also handles mistypes or non-existent commands.
       }
       this.view.renderMsg("\nPlease enter a command:\n");
       //See if the scanner is empty after completing the operation.
@@ -84,8 +84,8 @@ public class IMEControllerCompact implements IMEController {
    * Checks to see if the model has the image or resets the scanner and prints error.
    *
    * @param imageName The name of the image.
-   * @param command The command in the list.
-   * @param sc The scanner to be reset.
+   * @param command   The command in the list.
+   * @param sc        The scanner to be reset.
    * @return True if the image/command are not in the model, false if they are.
    */
   private boolean checkImageCommandModel(String imageName, String command, Scanner sc) {
@@ -134,11 +134,11 @@ public class IMEControllerCompact implements IMEController {
   /**
    * A helper for handling commands that aren't function objects.
    *
-   * @param command The name of the command.
+   * @param command   The name of the command.
    * @param imageName The name of the image.
-   * @param scanner The scanner.
+   * @param scanner   The scanner.
    */
-  private void handleDefaults(String command, String imageName, Scanner scanner){
+  private void handleDefaults(String command, String imageName, Scanner scanner) {
     String input = getNextIfExists(scanner);
     switch (command) {
       case "brightness":
@@ -170,6 +170,7 @@ public class IMEControllerCompact implements IMEController {
             errorAndReset("IME only saves .ppm files.", scanner);
           }
         }
+        break;
       default:
         errorAndReset("\nCommand not recognized. Please try again.\n", scanner);
     }

@@ -1,6 +1,6 @@
 package model.FuncObjs;
 
-import model.iPixel;
+import model.IPixel;
 
 /**
  * A function object for getting the intensity of a pixel.
@@ -8,7 +8,7 @@ import model.iPixel;
 public class CommandsIntensity extends ACommandsAbsolute {
 
   @Override
-  protected int getAbsolute(iPixel originalPixel) {
+  protected int getAbsolute(IPixel originalPixel) {
     return originalPixel.getIntensity();
   }
 

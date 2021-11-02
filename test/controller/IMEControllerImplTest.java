@@ -14,7 +14,7 @@ import view.InvalidMockAppendable;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Test class for the controller.
+ * Test class for the controller implementation.
  */
 public class IMEControllerImplTest {
   IMEController test; //Is left undeclared by setUp().

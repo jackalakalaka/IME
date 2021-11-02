@@ -1,7 +1,7 @@
 package model.FuncObjs;
 
+import model.IPixel;
 import model.Pixel;
-import model.iPixel;
 
 /**
  * A function object for getting the blue value of a pixel.
@@ -9,7 +9,7 @@ import model.iPixel;
 public class CommandsBlue extends ACommandsAbsolute {
 
   @Override
-  protected int getAbsolute(iPixel originalPixel) {
+  protected int getAbsolute(IPixel originalPixel) {
     return originalPixel.getColors().get(Pixel.Color.Blue);
   }
 
