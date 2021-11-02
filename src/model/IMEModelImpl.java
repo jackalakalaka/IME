@@ -13,7 +13,6 @@ import model.FuncObjs.CommandsValue;
 import model.FuncObjs.ConvertByHorizontal;
 import model.FuncObjs.ConvertByVertical;
 import model.FuncObjs.ICommands;
-import model.FuncObjs.IncreaseBrightness;
 
 public class IMEModelImpl implements IMEModel {
   private final HashMap<String, Image> images;

@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 import java.util.Scanner;
 
-import model.FuncObjs.IncreaseBrightness;
 import model.IMEModel;
 import model.IMEModelImpl;
 import model.Image;
@@ -53,15 +52,27 @@ public class IMEControllerCompact implements IMEController {
     while (sc.hasNext()) {
 
       String command = sc.next();
+
       if (command.equals("quit")) {
         this.view.renderMsg("\nThank you for using IME!\n");
         break;
       }
+
       String oldName = sc.next();
-      if (this.model.containsCommand(command)) {
+
+      if (this.model.containsCommand(command) && this.model.containsImage(oldName)) {
+
         this.view.renderMsg("Please wait...");
-        this.model.applyCommand(command, oldName, sc.next());
-      } else {
+        String newName = sc.next();
+        this.model.applyCommand(command, oldName, newName);
+
+      }
+      else if (!command.equals("load") && !this.model.containsImage(oldName)) {
+
+        this.view.renderMsg("Image not found. Please try again.");
+
+      }
+      else {
         this.view.renderMsg("Please wait...");
         switch (command) {
           case "brightness":
@@ -69,14 +80,15 @@ public class IMEControllerCompact implements IMEController {
             String newName = sc.next();
             if (this.model.containsImage(oldName)) {
               Image oldVersion = this.model.getImageFromModel(oldName);
-              this.model.addImage(newName, new IncreaseBrightness(change).apply(oldVersion));
+              this.model.addImage(newName, oldVersion.changeBrightness(change));
             } else {
               this.view.renderMsg("Image not found. Please try again.");
             }
             break;
           case "load":
             try {
-              this.model.addImage(oldName, new ImagePpm(sc.next()));
+              String path = sc.next();
+              this.model.addImage(oldName, new ImagePpm(path));
               break;
             } catch (FileNotFoundException e) {
               this.view.renderMsg("File name was incorrect.");
@@ -84,7 +96,8 @@ public class IMEControllerCompact implements IMEController {
             }
           case "save":
             if (this.model.containsImage(oldName)) {
-              this.model.getImageFromModel(oldName).saveImageToFile(sc.next());
+              String path = sc.next();
+              this.model.getImageFromModel(oldName).saveImageToFile(path);
               break;
             } else {
               this.view.renderMsg("Image not found. Please try again.");
