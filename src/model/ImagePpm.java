@@ -151,7 +151,7 @@ public class ImagePpm implements Image {
   }
 
   @Override
-  public void saveImageToFile(String filePath) throws IOException {
+  public void saveImageToFile(String filePath) throws IllegalStateException {
     Appendable ap = new StringBuilder(); //Initialize the string for file creation
 
     //Start by adding the correct PPM file format (P3 and dimensions)
@@ -165,7 +165,7 @@ public class ImagePpm implements Image {
               .append(String.valueOf(this.maxValue))
               .append("\n");
     } catch (IOException e) {
-      throw new IllegalArgumentException("Save Image couldn't write to appendable.");
+      throw new IllegalStateException("Save Image couldn't write to appendable.");
     }
 
     //Go through the whole array and populate the string with pixel values
@@ -180,13 +180,17 @@ public class ImagePpm implements Image {
                   .append(String.valueOf(green)).append("\n")
                   .append(String.valueOf(blue)).append("\n");
         } catch (IOException e) {
-          throw new IllegalArgumentException("Save Image couldn't write to appendable.");
+          throw new IllegalStateException("Save Image couldn't write to appendable.");
         }
       }
     }
-    BufferedWriter writer = new BufferedWriter((new FileWriter(filePath)));
-    String output = ap.toString();
-    writer.write(output);
-    writer.close();
+    try {
+      BufferedWriter writer = new BufferedWriter((new FileWriter(filePath)));
+      String output = ap.toString();
+      writer.write(output);
+      writer.close();
+    } catch (IOException e) {
+      throw new IllegalStateException("File could not be saved to path.");
+    }
   }
 }

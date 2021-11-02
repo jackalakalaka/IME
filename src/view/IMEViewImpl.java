@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import model.FuncObjs.ICommands;
-import model.FuncObjs.IncreaseBrightness;
 
 /**
  * Implementation of an image viewer.
@@ -30,22 +29,27 @@ public class IMEViewImpl implements IMEView {
     this.appendable = Objects.requireNonNull(appendable);
   }
 
-  public void printMenu(List<ICommands> commands) throws IOException {
+  public void printMenu(List<ICommands> commandsHashMap)  {
     StringBuilder menu = new StringBuilder(("Here are the commands for using IME " +
             "(Image Manipulation & Enhancement).\n") +
             ("- To quit type: quit.\n") +
             ("- To load an image type: load <image-name> <file-path>.\n") +
             ("- To save an image type: save <image-name> <file-name>.\n") +
-            new IncreaseBrightness(0).giveSignature());
-            for (ICommands command : commands) {
-              menu.append(command.giveSignature());
+            "- To change the brightness type: brightness <image-name> " +
+            "<integer-change> <new-name>.\n");
+            for (ICommands commands : commandsHashMap) {
+              menu.append(commands.giveSignature());
             }
-    this.appendable.append(menu.toString());
+    this.renderMsg(menu.toString());
   }
 
   @Override
-  public void renderMsg(String str) throws IOException {
-    this.appendable.append(str);
+  public void renderMsg(String str) throws IllegalStateException {
+    try {
+      this.appendable.append(str);
+    } catch (IOException e) {
+      throw new IllegalStateException("There is nothing to append to.");
+    }
   }
 
 }

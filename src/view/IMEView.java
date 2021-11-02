@@ -10,8 +10,8 @@ import model.FuncObjs.ICommands;
  */
 public interface IMEView {
 
-  void renderMsg(String str) throws IOException;
+  void renderMsg(String str);
 
-  void printMenu(List<ICommands> commandsHashMap) throws IOException;
+  void printMenu(List<ICommands> commandsHashMap) throws IllegalStateException;
 
 }

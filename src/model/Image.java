@@ -41,6 +41,6 @@ public interface Image {
    */
   Image changeBrightness(int change);
 
-  void saveImageToFile(String filepath) throws IOException;
+  void saveImageToFile(String filepath) throws IllegalStateException;
 
 }
