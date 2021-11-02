@@ -2,15 +2,10 @@ package model;
 
 import java.io.IOException;
 
-import model.FuncObjs.IConvertFrom;
+import model.FuncObjs.ICommands;
 
 
 public interface Image {
-
-  /**
-   * @return image name
-   */
-  String getName();
 
   /**
    * @return height of image in pixels
@@ -36,7 +31,7 @@ public interface Image {
    */
   iPixel getPixelAt(int row, int col);
 
-  Image convertToViz(IConvertFrom cmd);
+  Image convertToViz(ICommands cmd);
 
   /**
    * Creates a new ImageModel that mirrors the other model but with the brightness changed.
@@ -44,7 +39,7 @@ public interface Image {
    * @param change The integer value in which the brightness is changed.
    * @return ImageModel with its brightness changed (or not if change == zero).
    */
-  Image changeBrightness(int change, String newName);
+  Image changeBrightness(int change);
 
   void saveImageToFile(String filepath) throws IOException;
 

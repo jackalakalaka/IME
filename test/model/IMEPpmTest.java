@@ -1,29 +1,29 @@
 package model;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
-import factory.ImageFactory;
 import model.FuncObjs.ConvertByHorizontalVertical;
 
 import static org.junit.Assert.assertEquals;
 
 public class IMEPpmTest extends IMEModelTest {
-  ImageFactory imgFac;
+
   Image koala1;
 
-  public IMEPpmTest() throws FileNotFoundException {
-    this.imgFac = new ImageFactory();
-    this.koala1 = this.imgFac.createImage("ppm", "koala1", "Koala.ppm");
+  @Before
+  public void setUp() throws FileNotFoundException {
+    this.koala1 = new ImagePpm("koalaoriginal.ppm");
   }
 
   @Test
   public void testSaveImage() throws IOException {
-    Image darker = koala1.changeBrightness(-150, "darker-koala1");
-    Image lost = darker.changeBrightness(150, "info-lost-koala1");
+    Image darker = koala1.changeBrightness(-150);
+    Image lost = darker.changeBrightness(150);
     lost.saveImageToFile("LostKoala");
   }
 
@@ -33,8 +33,8 @@ public class IMEPpmTest extends IMEModelTest {
     int green = this.koala1.getPixelAt(0, 0).getColors().get(Pixel.Color.Green);
     int blue = this.koala1.getPixelAt(0, 0).getColors().get(Pixel.Color.Blue);
     assertEquals(101, red);
-    assertEquals(58, green);
-    assertEquals(90, blue);
+    assertEquals(90, green);
+    assertEquals(58, blue);
   }
 
   @Test
@@ -56,7 +56,7 @@ public class IMEPpmTest extends IMEModelTest {
 
   @Test
   public void testRotation() throws IOException {
-    Image rotated = koala1.convertToViz(new ConvertByHorizontalVertical("rotated-koala1"));
+    Image rotated = koala1.convertToViz(new ConvertByHorizontalVertical());
     rotated.saveImageToFile("rotate");
   }
 

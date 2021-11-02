@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 import controller.IMEController;
-import controller.IMEControllerImpl;
+import controller.IMEControllerCompact;
 import factory.IMEModelFactory;
 
 public final class ImageManipulationEnhancement {
@@ -12,7 +12,7 @@ public final class ImageManipulationEnhancement {
     }
     IMEModelFactory modelFac = new IMEModelFactory();
 
-    IMEController ctrl = new IMEControllerImpl(modelFac.createIMEModel("standard"));
+    IMEController ctrl = new IMEControllerCompact();
     ctrl.runIME();
   }
 }

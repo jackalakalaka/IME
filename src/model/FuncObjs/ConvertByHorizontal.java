@@ -3,10 +3,7 @@ package model.FuncObjs;
 import model.Image;
 import model.iPixel;
 
-public class ConvertByHorizontal extends AConvertByDimensions {
-  public ConvertByHorizontal(String newName) {
-    super(newName);
-  }
+public class ConvertByHorizontal extends ACommandDimension {
 
   @Override
   protected iPixel getOtherPixel(int i, int j, Image model) {
@@ -15,7 +12,7 @@ public class ConvertByHorizontal extends AConvertByDimensions {
 
   @Override
   public String giveSignature() {
-    return "- To flip the img horizontally type 'horizontal-flip  <img_former> <img_new>' into the "
+    return "- To flip the img horizontally type 'horizontal  <img_former> <img_new>' into the "
             + "command line.\n";
   }
 }
