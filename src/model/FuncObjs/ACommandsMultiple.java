@@ -8,6 +8,9 @@ import model.ImagePpm;
 import model.Pixel;
 import model.iPixel;
 
+/**
+ * An abstract class for function objects that get multiple values from pixels.
+ */
 public abstract class ACommandsMultiple implements ICommands {
 
 
@@ -40,9 +43,9 @@ public abstract class ACommandsMultiple implements ICommands {
    * Gets this implementation of AConvertFromMultiple's specific list to convert into a
    * new pixel.
    *
-   * @param p old pixel
-   * @return impl-specific list
+   * @param originalPixel The original pixel.
+   * @return List of values from the old pixel.
    */
-  protected abstract ArrayList<Double> getMultiple(iPixel p);
+  protected abstract ArrayList<Double> getMultiple(iPixel originalPixel);
 
 }

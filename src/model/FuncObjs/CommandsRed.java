@@ -3,11 +3,14 @@ package model.FuncObjs;
 import model.Pixel;
 import model.iPixel;
 
+/**
+ * A function object for getting the red value of a pixel.
+ */
 public class CommandsRed extends ACommandsAbsolute {
 
   @Override
-  protected int getAbsolute(iPixel p) {
-    return p.getColors().get(Pixel.Color.Red);
+  protected int getAbsolute(iPixel originalPixel) {
+    return originalPixel.getColors().get(Pixel.Color.Red);
   }
 
   @Override

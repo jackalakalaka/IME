@@ -6,11 +6,14 @@ import java.util.HashMap;
 import model.Pixel;
 import model.iPixel;
 
+/**
+ * A function object for getting the luma of a pixel.
+ */
 public class CommandsLuma extends ACommandsMultiple {
 
   @Override
-  protected ArrayList<Double> getMultiple(iPixel p) {
-    HashMap<Pixel.Color, Double> luma = p.getLuma();
+  protected ArrayList<Double> getMultiple(iPixel originalPixel) {
+    HashMap<Pixel.Color, Double> luma = originalPixel.getLuma();
     ArrayList<Double> lumaDoubles = new ArrayList<>();
     lumaDoubles.add(luma.get(Pixel.Color.Red));
     lumaDoubles.add(luma.get(Pixel.Color.Green));

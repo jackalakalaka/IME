@@ -7,6 +7,9 @@ import model.ImagePpm;
 import model.Pixel;
 import model.iPixel;
 
+/**
+ * An abstract class for function objects that get a single value from pixels.
+ */
 public abstract class ACommandsAbsolute implements ICommands {
 
   /**
@@ -35,8 +38,8 @@ public abstract class ACommandsAbsolute implements ICommands {
    * Gets this implementation of AConvertFromAbsolute's specific absolute value to convert into a
    * greyed pixel.
    *
-   * @param p old pixel
-   * @return impl-specific absolute
+   * @param originalPixel The original pixel.
+   * @return An integer.
    */
-  protected abstract int getAbsolute(iPixel p);
+  protected abstract int getAbsolute(iPixel originalPixel);
 }

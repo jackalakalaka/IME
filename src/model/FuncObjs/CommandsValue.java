@@ -2,11 +2,14 @@ package model.FuncObjs;
 
 import model.iPixel;
 
+/**
+ * A function object for getting the value of a pixel.
+ */
 public class CommandsValue extends ACommandsAbsolute {
 
   @Override
-  protected int getAbsolute(iPixel p) {
-    return p.getValue();
+  protected int getAbsolute(iPixel originalPixel) {
+    return originalPixel.getValue();
   }
 
   @Override

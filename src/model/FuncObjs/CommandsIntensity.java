@@ -2,11 +2,14 @@ package model.FuncObjs;
 
 import model.iPixel;
 
+/**
+ * A function object for getting the intensity of a pixel.
+ */
 public class CommandsIntensity extends ACommandsAbsolute {
 
   @Override
-  protected int getAbsolute(iPixel p) {
-    return p.getIntensity();
+  protected int getAbsolute(iPixel originalPixel) {
+    return originalPixel.getIntensity();
   }
 
   @Override

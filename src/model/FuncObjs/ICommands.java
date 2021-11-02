@@ -4,6 +4,9 @@ import java.util.function.Function;
 
 import model.Image;
 
+/**
+ * An interface for
+ */
 public interface ICommands extends Function<Image, Image> {
 
   /**

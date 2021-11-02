@@ -4,6 +4,9 @@ import model.Image;
 import model.ImagePpm;
 import model.iPixel;
 
+/**
+ * An abstract class for function objects that work with dimensions.
+ */
 public abstract class ACommandDimension implements ICommands {
 
   /**
@@ -27,7 +30,15 @@ public abstract class ACommandDimension implements ICommands {
     return new ImagePpm(maxValue, pixels);
   }
 
-  protected abstract iPixel getOtherPixel(int i, int j, Image model);
+  /**
+   * Gets a pixel from the other image at that location.
+   *
+   * @param row The row.
+   * @param column The column.
+   * @param image The other image.
+   * @return A new iPixel.
+   */
+  protected abstract iPixel getOtherPixel(int row, int column, Image image);
 
 
 }

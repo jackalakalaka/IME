@@ -6,6 +6,9 @@ import java.util.HashMap;
 import model.Pixel;
 import model.iPixel;
 
+/**
+ * A function object for changing the brightness of a pixel.
+ */
 public class IncreaseBrightness extends ACommandsMultiple {
   private final int brightness;
 
@@ -14,8 +17,8 @@ public class IncreaseBrightness extends ACommandsMultiple {
   }
 
   @Override
-  protected ArrayList<Double> getMultiple(iPixel p) {
-    HashMap<iPixel.Color, Integer> colors = p.getColors();
+  protected ArrayList<Double> getMultiple(iPixel originalPixel) {
+    HashMap<iPixel.Color, Integer> colors = originalPixel.getColors();
     ArrayList<Double> changed = new ArrayList<>();
     changed.add(colors.get(Pixel.Color.Red) + brightness * 1.0);
     changed.add(colors.get(Pixel.Color.Green) + brightness * 1.0);
@@ -25,7 +28,7 @@ public class IncreaseBrightness extends ACommandsMultiple {
 
   @Override
   public String giveSignature() {
-    return "- To chg brightness of the img, type 'brightness <value_chg>" +
-            "<img_former> <img_new>'.\n";
+    return "- To change brightness of the img, type 'brightness" +
+            "<img_former> <integer_change> <img_new>'.\n";
   }
 }

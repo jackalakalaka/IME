@@ -3,11 +3,14 @@ package model.FuncObjs;
 import model.Image;
 import model.iPixel;
 
+/**
+ * A function object for getting the pixel on the other side of the image.
+ */
 public class ConvertByHorizontal extends ACommandDimension {
 
   @Override
-  protected iPixel getOtherPixel(int i, int j, Image model) {
-    return model.getPixelAt(i, model.getWidth() - j - 1);
+  protected iPixel getOtherPixel(int row, int column, Image image) {
+    return image.getPixelAt(row, image.getWidth() - column - 1);
   }
 
   @Override

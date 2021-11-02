@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import model.FuncObjs.ICommands;
+import model.FuncObjs.IncreaseBrightness;
 
 /**
  * Implementation of an image viewer.
@@ -34,7 +35,8 @@ public class IMEViewImpl implements IMEView {
             "(Image Manipulation & Enhancement).\n") +
             ("- To quit type: quit.\n") +
             ("- To load an image type: load <image-name> <file-path>.\n") +
-            ("- To save an image type: save <image-name> <file-name>.\n"));
+            ("- To save an image type: save <image-name> <file-name>.\n") +
+            new IncreaseBrightness(0).giveSignature());
             for (ICommands commands : commandsHashMap) {
               menu.append(commands.giveSignature());
             }
