@@ -70,6 +70,7 @@ public class IMEControllerCompact implements IMEController {
       else if (!command.equals("load") && !this.model.containsImage(oldName)) {
 
         this.view.renderMsg("Image not found. Please try again.");
+        sc.nextLine();
 
       }
       else {
@@ -83,6 +84,7 @@ public class IMEControllerCompact implements IMEController {
               this.model.addImage(newName, oldVersion.changeBrightness(change));
             } else {
               this.view.renderMsg("Image not found. Please try again.");
+              sc.nextLine();
             }
             break;
           case "load":
@@ -92,6 +94,7 @@ public class IMEControllerCompact implements IMEController {
               break;
             } catch (FileNotFoundException e) {
               this.view.renderMsg("File name was incorrect.");
+              sc.nextLine();
               break;
             }
           case "save":
@@ -101,9 +104,11 @@ public class IMEControllerCompact implements IMEController {
               break;
             } else {
               this.view.renderMsg("Image not found. Please try again.");
+              sc.nextLine();
             }
           default:
             this.view.renderMsg("\nCommand not recognized. Please try again.");
+            sc.nextLine();
         }
       }
       this.view.renderMsg("\nPlease enter a command:\n");
