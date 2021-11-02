@@ -14,3 +14,8 @@
 - To flip the img vertically type `vertical <img_former> <img_new>` into the command line.
 - To get a heat map of the max value in the img type `value <img_former> <img_new>` into the command line.
 - To get a heat map of luminosity in the img type `luma <img_former> <img_new>` into the command line.
+## Image License
+Title: "Goat Mammal Cute Animal Domestic Farm Funny"
+Author: [Max Pixel](https://www.maxpixel.net/)
+Source: https://www.maxpixel.net/Goat-Mammal-Cute-Animal-Domestic-Farm-Funny-3471349
+License: CC BY 2.0
