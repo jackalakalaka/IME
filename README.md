@@ -33,8 +33,10 @@ A text README file explaining your design. Your README file should give the grad
 
 - **Class ImageManipulationEnhancement**
   - The main class for running the controller.
-  - **Class IMEModel**
+  - **Interface IMEModel**
     - Interface for models used by IME.
+    - **Class IMEModelImpl**
+      - A representation of an IME model.
 
 ## Image License
 Title: "Goat Mammal Cute Animal Domestic Farm Funny"
