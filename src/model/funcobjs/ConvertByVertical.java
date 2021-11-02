@@ -1,15 +1,15 @@
-package model.FuncObjs;
+package model.funcobjs;
 
 import model.Image;
-import model.iPixel;
+import model.IPixel;
 
 /**
- * A function object for getting the pixel on the other side of the image.
+ * A function object for getting the pixel on the other side of the image vertically.
  */
 public class ConvertByVertical extends ACommandDimension {
 
   @Override
-  protected iPixel getOtherPixel(int row, int column, Image image) {
+  protected IPixel getOtherPixel(int row, int column, Image image) {
     return image.getPixelAt(image.getHeight() - row - 1, column);
   }
 

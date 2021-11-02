@@ -5,7 +5,7 @@
 //
 //import model.Image;
 //import model.ImagePpm;
-//import model.iPixel;
+//import model.IPixel;
 //
 //public class ImageFactory {
 //  public Image createImage(String imgFormat, String name, String filePath)
@@ -23,7 +23,7 @@
 //    }
 //  }
 //
-//  public Image createImage(String imgFormat, String name, iPixel[][] pixelArray, int maxValue)
+//  public Image createImage(String imgFormat, String name, IPixel[][] pixelArray, int maxValue)
 //          throws FileNotFoundException {
 //    Objects.requireNonNull(imgFormat);
 //    Objects.requireNonNull(pixelArray);

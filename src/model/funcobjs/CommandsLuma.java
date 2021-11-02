@@ -1,10 +1,10 @@
-package model.FuncObjs;
+package model.funcobjs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import model.Pixel;
-import model.iPixel;
+import model.IPixel;
 
 /**
  * A function object for getting the luma of a pixel.
@@ -12,7 +12,7 @@ import model.iPixel;
 public class CommandsLuma extends ACommandsMultiple {
 
   @Override
-  protected ArrayList<Double> getMultiple(iPixel originalPixel) {
+  protected ArrayList<Double> getMultiple(IPixel originalPixel) {
     HashMap<Pixel.Color, Double> luma = originalPixel.getLuma();
     ArrayList<Double> lumaDoubles = new ArrayList<>();
     lumaDoubles.add(luma.get(Pixel.Color.Red));
@@ -23,7 +23,7 @@ public class CommandsLuma extends ACommandsMultiple {
 
   @Override
   public String giveSignature() {
-    return "- To get a heat map of luminosity in the img type 'luma  <img_former> <img_new>' into" +
+    return "- To get a heat map of luminosity in the img type 'luma <img_former> <img_new>' into" +
             " the command line.\n";
   }
 }

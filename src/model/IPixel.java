@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * An interface for pixels of an image.
  */
-public interface iPixel {
+public interface IPixel {
 
   /**
    * Returns the intensity of the pixel.
@@ -31,7 +31,7 @@ public interface iPixel {
   /**
    * Enums for representing the three primary colors.
    */
-  enum Color {Red, Green, Blue}
+  enum Color { Red, Green, Blue }
 
   ;
 

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
-import model.FuncObjs.ICommands;
+import model.funcobjs.ICommands;
 
 /**
  * Implementation of an image viewer.

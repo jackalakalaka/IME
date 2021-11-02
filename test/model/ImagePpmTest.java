@@ -3,9 +3,9 @@ package model;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.FuncObjs.CommandsBlue;
-import model.FuncObjs.ConvertByHorizontal;
-import model.FuncObjs.CommandsValue;
+import model.funcobjs.CommandsBlue;
+import model.funcobjs.ConvertByHorizontal;
+import model.funcobjs.CommandsValue;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,15 +14,15 @@ import static org.junit.Assert.assertEquals;
  * including the constructor.
  */
 public class ImagePpmTest {
-  private final iPixel[][] mockPixels = new iPixel[2][2];
-  private final iPixel[][] mockPixelsWide = new iPixel[2][3];
+  private final IPixel[][] mockPixels = new IPixel[2][2];
+  private final IPixel[][] mockPixelsWide = new IPixel[2][3];
   private final Image modelOne = new ImagePpm(255, mockPixels);
   private final Image modelTwo = new ImagePpm(255, mockPixelsWide);
-  private final iPixel pixelZero = new MockPixel();
-  private final iPixel pixelOne = new MockPixel(1);
-  private final iPixel pixelTwo = new MockPixel(2);
-  private final iPixel pixelThree = new MockPixel(3);
-  private final iPixel pixelFour = new MockPixel(4);
+  private final IPixel pixelZero = new MockPixel();
+  private final IPixel pixelOne = new MockPixel(1);
+  private final IPixel pixelTwo = new MockPixel(2);
+  private final IPixel pixelThree = new MockPixel(3);
+  private final IPixel pixelFour = new MockPixel(4);
 
   /**
    * Initialize data.

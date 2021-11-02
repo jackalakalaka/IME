@@ -138,7 +138,7 @@ public class IMEControllerCompact implements IMEController {
    * @param imageName The name of the image.
    * @param scanner The scanner.
    */
-  private void handleDefaults(String command, String imageName, Scanner scanner){
+  private void handleDefaults(String command, String imageName, Scanner scanner) {
     String input = getNextIfExists(scanner);
     switch (command) {
       case "brightness":
@@ -170,6 +170,7 @@ public class IMEControllerCompact implements IMEController {
             errorAndReset("IME only saves .ppm files.", scanner);
           }
         }
+        break;
       default:
         errorAndReset("\nCommand not recognized. Please try again.\n", scanner);
     }

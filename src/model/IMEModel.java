@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-import model.FuncObjs.ICommands;
+import model.funcobjs.ICommands;
 
 /**
  * Interface for models used by IME.
@@ -19,11 +19,10 @@ public interface IMEModel {
 
   /**
    * Adds an image to the model.
-   *
-   * @param name The name for the image.
-   * @param Image The actual image,
+   *  @param name The name for the image.
+   * @param image The actual image,
    */
-  void addImage(String name, Image Image);
+  void addImage(String name, Image image);
 
   /**
    * Applies a command in the model to an image creating a new image in the model.

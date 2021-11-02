@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * This class represents an immutable pixel.
  */
-public class Pixel implements iPixel {
+public class Pixel implements IPixel {
   private final int redValue;
   private final int greenValue;
   private final int blueValue;

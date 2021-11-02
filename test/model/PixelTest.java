@@ -93,24 +93,24 @@ public class PixelTest {
     int maxVal = 255;
     int[] invalidColorVals = new int[]{-75, -1};
     boolean threwIllegalArgumentException = false;
-    HashMap<iPixel.Color, Integer> colorsToVals = new HashMap<>();
-    for (iPixel.Color color : iPixel.Color.values()) {
+    HashMap<IPixel.Color, Integer> colorsToVals = new HashMap<>();
+    for (IPixel.Color color : IPixel.Color.values()) {
       colorsToVals.put(color, 0);
     }
 
     for (int invalidColorVal : invalidColorVals) {
       // For each color
-      for (Map.Entry<iPixel.Color, Integer> colorAndVal : colorsToVals.entrySet()) {
-        iPixel.Color color = colorAndVal.getKey();
+      for (Map.Entry<IPixel.Color, Integer> colorAndVal : colorsToVals.entrySet()) {
+        IPixel.Color color = colorAndVal.getKey();
 
         // Set random valid color values
         colorsToVals.replaceAll((a, b) -> rand.nextInt() % maxVal);
         // Set map's value of current iteration's color to invalidColorVal
         colorsToVals.replace(color, invalidColorVal);
 
-        int redVal = colorsToVals.get(iPixel.Color.Red);
-        int blueVal = colorsToVals.get(iPixel.Color.Blue);
-        int greenVal = colorsToVals.get(iPixel.Color.Green);
+        int redVal = colorsToVals.get(IPixel.Color.Red);
+        int blueVal = colorsToVals.get(IPixel.Color.Blue);
+        int greenVal = colorsToVals.get(IPixel.Color.Green);
         // Test pixel construction where current iteration's color value is invalidColorVal
         try {
           Pixel pA = new Pixel(maxVal, redVal, blueVal, greenVal);
@@ -159,28 +159,26 @@ public class PixelTest {
     String testingMsg = "Testing construction of Pixel w/ maxValue of %1$s & color values of " +
             "R: %2$s, G: %3$s, B: %4$s:";
     int maxVal = 255;
-    int[] invalidColorVals = new int[]{
-            maxVal + 1,
-            maxVal + rand.nextInt()};
+    int[] invalidColorVals = new int[]{maxVal + 1, maxVal + rand.nextInt()};
     boolean threwIllegalArgumentException = false;
-    HashMap<iPixel.Color, Integer> colorsToVals = new HashMap<>();
-    for (iPixel.Color color : iPixel.Color.values()) {
+    HashMap<IPixel.Color, Integer> colorsToVals = new HashMap<>();
+    for (IPixel.Color color : IPixel.Color.values()) {
       colorsToVals.put(color, 0);
     }
 
     for (int invalidColorVal : invalidColorVals) {
       // For each color
-      for (Map.Entry<iPixel.Color, Integer> colorAndVal : colorsToVals.entrySet()) {
-        iPixel.Color color = colorAndVal.getKey();
+      for (Map.Entry<IPixel.Color, Integer> colorAndVal : colorsToVals.entrySet()) {
+        IPixel.Color color = colorAndVal.getKey();
 
         // Set random valid color values
         colorsToVals.replaceAll((a, b) -> rand.nextInt() % maxVal);
         // Set map's value of current iteration's color to invalidColorVal
         colorsToVals.replace(color, invalidColorVal);
 
-        int redVal = colorsToVals.get(iPixel.Color.Red);
-        int blueVal = colorsToVals.get(iPixel.Color.Blue);
-        int greenVal = colorsToVals.get(iPixel.Color.Green);
+        int redVal = colorsToVals.get(IPixel.Color.Red);
+        int blueVal = colorsToVals.get(IPixel.Color.Blue);
+        int greenVal = colorsToVals.get(IPixel.Color.Green);
         // Test pixel construction where current iteration's color value is invalidColorVal
         try {
           Pixel pA = new Pixel(maxVal, redVal, blueVal, greenVal);
@@ -203,9 +201,7 @@ public class PixelTest {
     String testingMsg = "Testing construction of Pixel w/ maxValue of %1$s & color values of " +
             "R: %2$s, G: %2$s, B: %2$s:";
     int maxVal = 255;
-    int[] invalidColorVals = new int[]{
-            maxVal + 1,
-            maxVal + rand.nextInt()};
+    int[] invalidColorVals = new int[]{maxVal + 1, maxVal + rand.nextInt()};
     boolean threwIllegalArgumentException = false;
 
     for (int invalidColorVal : invalidColorVals) {
@@ -325,6 +321,7 @@ public class PixelTest {
    */
   public static class ColorsHashmapFactory {
     /**
+     * Produces a color values hashmap.
      * @param red   red value
      * @param green green value
      * @param blue  blue value
@@ -339,6 +336,7 @@ public class PixelTest {
     }
 
     /**
+     * Produces a color weights hashmap.
      * @param redWt   red weight
      * @param greenWt green weight
      * @param blueWt  blue weight

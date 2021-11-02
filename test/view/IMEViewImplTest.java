@@ -8,18 +8,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import model.FuncObjs.CommandsBlue;
-import model.FuncObjs.CommandsGreen;
-import model.FuncObjs.CommandsIntensity;
-import model.FuncObjs.CommandsLuma;
-import model.FuncObjs.CommandsRed;
-import model.FuncObjs.CommandsValue;
-import model.FuncObjs.ConvertByHorizontal;
-import model.FuncObjs.ConvertByVertical;
-import model.FuncObjs.ICommands;
+import model.funcobjs.CommandsBlue;
+import model.funcobjs.CommandsGreen;
+import model.funcobjs.CommandsIntensity;
+import model.funcobjs.CommandsLuma;
+import model.funcobjs.CommandsRed;
+import model.funcobjs.CommandsValue;
+import model.funcobjs.ConvertByHorizontal;
+import model.funcobjs.ConvertByVertical;
+import model.funcobjs.ICommands;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Tests the view, which takes in or has a default list of commands that give the menu. The view
+ * also allows system messaging whose string appends are tested.
+ */
 public class IMEViewImplTest {
   private static final List<ICommands> mtCommands = new ArrayList<>();
   private final List<ICommands> allCommands;
@@ -30,6 +34,9 @@ public class IMEViewImplTest {
   private final IMEViewImpl view1 = new IMEViewImpl(appendable1);
   private final IMEViewImpl view2 = new IMEViewImpl(appendable2);
 
+  /**
+   * Initialize test variables.
+   */
   public IMEViewImplTest() {
     HashMap<String, ICommands> commandsHashmap = new HashMap<>();
     commandsHashmap.put("horizontal", new ConvertByHorizontal());
@@ -106,9 +113,9 @@ public class IMEViewImplTest {
             " command line.\n" +
             "- To get a heat map of intensity in the img type 'intensity <img_former> <img_new>'" +
             " into the command line.\n" +
-            "- To flip the img horizontally type 'horizontal  <img_former> <img_new>' into the" +
+            "- To flip the img horizontally type 'horizontal <img_former> <img_new>' into the" +
             " command line.\n" +
-            "- To get a heat map of green in the img type 'green  <img_former> <img_new>'" +
+            "- To get a heat map of green in the img type 'green <img_former> <img_new>'" +
             " into the command line.\n" +
             "- To get a heat map of blue in the img type 'blue <img_former> <img_new>'into the " +
             "command line.\n" +
@@ -116,7 +123,7 @@ public class IMEViewImplTest {
             "command line.\n" +
             "- To get a heat map of the max value in the img type 'value <img_former> <img_new>'" +
             " into the command line.\n" +
-            "- To get a heat map of luminosity in the img type 'luma  <img_former> <img_new>'" +
+            "- To get a heat map of luminosity in the img type 'luma <img_former> <img_new>'" +
             " into the command line.\n";
     this.view2.printMenu(this.allCommands);
     assertEquals(fullMenuStr, this.appendable2.toString());

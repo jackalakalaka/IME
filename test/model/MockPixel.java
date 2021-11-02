@@ -2,7 +2,11 @@ package model;
 
 import java.util.HashMap;
 
-public class MockPixel implements iPixel {
+/**
+ * Simulates a pixel for the more simplistic testing of Image and IMEModel classes. Simplifies pixel
+ * construction and assertion.
+ */
+public class MockPixel implements IPixel {
   private final int value;
 
   public MockPixel() {
