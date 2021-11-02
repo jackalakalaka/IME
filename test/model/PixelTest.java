@@ -9,6 +9,10 @@ import java.util.Random;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Employs a variety of looping and hashmap-factory methods to automate similar calls and simplify
+ * assertions, respectively. Tests the Pixel class.
+ */
 public class PixelTest {
   private static ColorsHashmapFactory colorsHashmapFac = new ColorsHashmapFactory();
   private static Random rand = new Random();
@@ -218,7 +222,8 @@ public class PixelTest {
   }
 
   /**
-   * Test default behavior of Pixel class's 4-arg constructor.
+   * Test default behavior of Pixel class's 4-arg constructor. Simultaneously tests getColors
+   * method.
    */
   @Test
   public void constructor4ArgDefault() {
@@ -241,7 +246,8 @@ public class PixelTest {
   }
 
   /**
-   * Test default behavior of Pixel class's 1-arg constructor.
+   * Test default behavior of Pixel class's 1-arg constructor. Simultaneously tests getColors
+   * method.
    */
   @Test
   public void constructor1ArgDefault() {
@@ -306,13 +312,11 @@ public class PixelTest {
    */
   @Test
   public void getValue() {
-  }
-
-  /**
-   * Test default behavior of Pixel class's getColors method.
-   */
-  @Test
-  public void getColors() {
+    assertEquals(0, p11.getValue());
+    assertEquals(255, p12.getValue());
+    assertEquals(100, p13.getValue());
+    assertEquals(50, p14.getValue());
+    assertEquals(55, p15.getValue());
   }
 
   /**
