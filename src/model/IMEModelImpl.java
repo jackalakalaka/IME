@@ -77,6 +77,4 @@ public class IMEModelImpl implements IMEModel {
   public boolean containsImage(String imageName) {
     return this.images.containsKey(imageName);
   }
-
-
 }

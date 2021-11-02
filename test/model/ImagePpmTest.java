@@ -5,13 +5,20 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 
+<<<<<<< HEAD
+=======
+import model.FuncObjs.CommandsBlue;
+import model.FuncObjs.CommandsGreen;
+import model.FuncObjs.CommandsIntensity;
+import model.FuncObjs.CommandsRed;
+import model.FuncObjs.ConvertByHorizontal;
+>>>>>>> 7febc8fef83abb8babfeb02bb3b8d2d8daa08895
 import model.FuncObjs.CommandsValue;
 import model.FuncObjs.ConvertByHorizontal;
 
 import static org.junit.Assert.assertEquals;
 
 public class ImagePpmTest {
-
   private final iPixel[][] mockPixels = new iPixel[2][2];
   private final iPixel[][] mockPixelsWide = new iPixel[2][3];
   private final Image modelOne = new ImagePpm(255, mockPixels);
@@ -70,8 +77,18 @@ public class ImagePpmTest {
    */
   @Test
   public void testCommandReceive() {
+<<<<<<< HEAD
     Image blue = this.modelOne.convertToViz(new CommandsValue());
     assertEquals(1, blue.getPixelAt(0, 0).getValue());
+=======
+    Image red = this.modelOne.convertToViz(new CommandsRed());
+    Image blue = this.modelOne.convertToViz(new CommandsBlue());
+    Image green = this.modelOne.convertToViz(new CommandsGreen());
+    Image value = this.modelOne.convertToViz(new CommandsValue());
+    Image intensity = this.modelOne.convertToViz(new CommandsIntensity());
+
+    assertEquals(1,blue.getPixelAt(0,0).getValue());
+>>>>>>> 7febc8fef83abb8babfeb02bb3b8d2d8daa08895
   }
 
   /**
