@@ -19,14 +19,13 @@ import view.IMEViewImpl;
 public class IMEControllerCompact implements IMEController {
   private final IMEModel model;
   private final IMEView view;
-  private final Scanner sc;
+  private final Readable readable;
 
   /**
    * This is the default constructor which sets all fields to their default and the scanner.
    */
   public IMEControllerCompact() {
-    Readable input = new InputStreamReader(System.in);
-    this.sc = new Scanner(input);
+    this.readable = new InputStreamReader(System.in);
     this.model = new IMEModelImpl();
     this.view = new IMEViewImpl();
   }
@@ -36,79 +35,80 @@ public class IMEControllerCompact implements IMEController {
    *
    * @param model Model which has the commands and list of images.
    * @param view  View has the appendable.
-   * @param sc    Scanner gives info to the controller.
+   * @param readable    Scanner gives info to the controller.
    */
-  public IMEControllerCompact(IMEModel model, IMEView view, Scanner sc) {
+  public IMEControllerCompact(IMEModel model, IMEView view, Readable readable) {
     this.model = Objects.requireNonNull(model);
     this.view = Objects.requireNonNull(view);
-    this.sc = Objects.requireNonNull(sc);
+    this.readable = Objects.requireNonNull(readable);
   }
 
   @Override
   public void runIME() throws IllegalStateException, IOException {
+    Scanner scanner =new Scanner(this.readable);
     this.view.printMenu(this.model.getCommandList());
     this.view.renderMsg("\nPlease enter a command:\n");
 
-    while (sc.hasNext()) {
+    while (scanner.hasNext()) {
 
-      String command = sc.next();
+      String command = scanner.next();
 
       if (command.equals("quit")) {
         this.view.renderMsg("\nThank you for using IME!\n");
         break;
       }
 
-      String oldName = sc.next();
+      String oldName = scanner.next();
 
       if (this.model.containsCommand(command) && this.model.containsImage(oldName)) {
 
         this.view.renderMsg("Please wait...");
-        String newName = sc.next();
+        String newName = scanner.next();
         this.model.applyCommand(command, oldName, newName);
 
       }
       else if (!command.equals("load") && !this.model.containsImage(oldName)) {
 
         this.view.renderMsg("Image not found. Please try again.");
-        sc.nextLine();
+        scanner.nextLine();
 
       }
       else {
         this.view.renderMsg("Please wait...");
         switch (command) {
           case "brightness":
-            int change = sc.nextInt();
-            String newName = sc.next();
+            int change = scanner.nextInt();
+            String newName = scanner.next();
             if (this.model.containsImage(oldName)) {
               Image oldVersion = this.model.getImageFromModel(oldName);
               this.model.addImage(newName, oldVersion.changeBrightness(change));
             } else {
               this.view.renderMsg("Image not found. Please try again.");
-              sc.nextLine();
+              scanner.nextLine();
             }
             break;
           case "load":
             try {
-              String path = sc.next();
+              String path = scanner.next();
               this.model.addImage(oldName, new ImagePpm(path));
               break;
             } catch (FileNotFoundException e) {
               this.view.renderMsg("File name was incorrect.");
-              sc.nextLine();
+              scanner.nextLine();
               break;
             }
           case "save":
             if (this.model.containsImage(oldName)) {
-              String path = sc.next();
+              String path = scanner.next();
               this.model.getImageFromModel(oldName).saveImageToFile(path);
               break;
             } else {
               this.view.renderMsg("Image not found. Please try again.");
-              sc.nextLine();
+              scanner.nextLine();
             }
           default:
             this.view.renderMsg("\nCommand not recognized. Please try again.");
-            sc.nextLine();
+            scanner.nextLine();
         }
       }
       this.view.renderMsg("\nPlease enter a command:\n");
