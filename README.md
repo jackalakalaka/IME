@@ -1,5 +1,7 @@
 # Image Manipulation & Enhancement (IME)
-Here are the commands for using IME.
+## To run IME:
+- Please run the ImageManipulationEnhancement.java class file's main method, with no arguments.
+## Here are the commands for using IME.
 - To quit type: `quit` into the command line.
 - To load an image type: `load <image-name> <file-path>` into the command line.
 - To save an image type: `save <image-name> <file-name>` into the command line.
