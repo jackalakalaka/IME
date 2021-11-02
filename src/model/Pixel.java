@@ -11,7 +11,6 @@ public class Pixel implements iPixel {
   private final int redValue;
   private final int greenValue;
   private final int blueValue;
-  private final int maxValue;
 
   public Pixel(int maxValue, int grey) {
     this(maxValue, grey, grey, grey);
@@ -29,7 +28,6 @@ public class Pixel implements iPixel {
               "than the upper limit.");
     }
 
-    this.maxValue = maxValue;
     this.redValue = red;
     this.blueValue = blue;
     this.greenValue = green;
@@ -42,11 +40,21 @@ public class Pixel implements iPixel {
 
   @Override
   public HashMap<Color, Double> getLuma() {
-    double totalValue = redValue + greenValue + blueValue;
+    double totalValue = this.redValue + this.blueValue+ this.greenValue;
+    double redVal = this.redValue;
+    double blueVal = this.blueValue;
+    double greenVal = this.greenValue;
+
     HashMap<Color, Double> pixelColors = new HashMap<>();
-    pixelColors.put(Color.Red, this.redValue / totalValue);
-    pixelColors.put(Color.Green, this.greenValue / totalValue);
-    pixelColors.put(Color.Blue, this.blueValue / totalValue);
+    if (totalValue == 0.0) {
+      pixelColors.put(Color.Red, 0.0);
+      pixelColors.put(Color.Green, 0.0);
+      pixelColors.put(Color.Blue, 0.0);
+    } else {
+      pixelColors.put(Color.Red, redVal / totalValue);
+      pixelColors.put(Color.Green, greenVal / totalValue);
+      pixelColors.put(Color.Blue, blueVal / totalValue);
+    }
     return pixelColors;
   }
 
