@@ -57,9 +57,13 @@ public class Pixel implements IPixel {
   @Override
   public Double getLuma() {
     double totalValue = this.redValue + this.blueValue + this.greenValue;
-    return (this.redValue * this.redValue +
-            this.greenValue * this.greenValue +
-            this.blueValue * this.blueValue)/totalValue;
+    if (totalValue == 0) {
+      return 0.0;
+    } else {
+      return (this.redValue * this.redValue +
+              this.greenValue * this.greenValue +
+              this.blueValue * this.blueValue) / totalValue;
+    }
   }
 
   @Override
