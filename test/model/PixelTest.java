@@ -296,7 +296,8 @@ public class PixelTest {
     HashMap<Pixel.Color, Double> p15Colors =
             colorsHashmapFac.createLumaHashmap(0.4, 0.05, 0.55);
 
-    assertEquals(p11Colors, p11.getLuma());
+    assertEquals(p11Colors,
+            p11.getLuma());
     assertEquals(p12Colors, p12.getLuma());
     assertEquals(p13Colors, p13.getLuma());
     assertEquals(p14Colors, p14.getLuma());

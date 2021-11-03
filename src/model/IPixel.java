@@ -29,6 +29,12 @@ public interface IPixel {
   int getValue();
 
   /**
+   * Returns the max value.
+   * @return Integer representing the maximum value of the pixel.
+   */
+  int getMaxValue();
+
+  /**
    * Enums for representing the three primary colors.
    */
   enum Color {Red, Green, Blue}

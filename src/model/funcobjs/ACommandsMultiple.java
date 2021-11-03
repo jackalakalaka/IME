@@ -28,10 +28,10 @@ public abstract class ACommandsMultiple implements ICommands {
     for (int row = 0; row < h; row++) {
       for (int col = 0; col < w; col++) {
         IPixel oldPixel = initModel.getPixelAt(row, col);
-        ArrayList<Double> multiple = getMultiple(oldPixel);
-        int red = (int) (multiple.get(0) * maxValue);
-        int green = (int) (multiple.get(1) * maxValue);
-        int blue = (int) (multiple.get(2) * maxValue);
+        ArrayList<Integer> multiple = getMultiple(oldPixel);
+        int red = multiple.get(0);
+        int green = multiple.get(1);
+        int blue = multiple.get(2);
         pixels[row][col] = new Pixel(maxValue, red, green, blue);
       }
     }
@@ -45,6 +45,6 @@ public abstract class ACommandsMultiple implements ICommands {
    * @param originalPixel The original pixel.
    * @return List of values from the old pixel.
    */
-  protected abstract ArrayList<Double> getMultiple(IPixel originalPixel);
+  protected abstract ArrayList<Integer> getMultiple(IPixel originalPixel);
 
 }

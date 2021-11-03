@@ -12,13 +12,14 @@ import model.Pixel;
 public class CommandsLuma extends ACommandsMultiple {
 
   @Override
-  protected ArrayList<Double> getMultiple(IPixel originalPixel) {
+  protected ArrayList<Integer> getMultiple(IPixel originalPixel) {
     HashMap<Pixel.Color, Double> luma = originalPixel.getLuma();
-    ArrayList<Double> lumaDoubles = new ArrayList<>();
-    lumaDoubles.add(luma.get(Pixel.Color.Red));
-    lumaDoubles.add(luma.get(Pixel.Color.Green));
-    lumaDoubles.add(luma.get(Pixel.Color.Blue));
-    return lumaDoubles;
+    ArrayList<Integer> lumaIntegers = new ArrayList<>();
+    lumaIntegers.add(luma.get(Pixel.Color.Red).intValue());
+    lumaIntegers.add(luma.get(Pixel.Color.Green).intValue());
+    lumaIntegers.add(luma.get(Pixel.Color.Blue).intValue());
+
+    return lumaIntegers;
   }
 
   @Override

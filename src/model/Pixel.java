@@ -11,6 +11,7 @@ public class Pixel implements IPixel {
   private final int redValue;
   private final int greenValue;
   private final int blueValue;
+  private final int maxValue;
 
   /**
    * Constructor which takes in the max value and grey value and makes a pixel.
@@ -42,6 +43,7 @@ public class Pixel implements IPixel {
               "than the upper limit.");
     }
 
+    this.maxValue = maxValue;
     this.redValue = red;
     this.blueValue = blue;
     this.greenValue = green;
@@ -57,15 +59,9 @@ public class Pixel implements IPixel {
     double totalValue = this.redValue + this.blueValue + this.greenValue;
 
     HashMap<Color, Double> pixelColors = new HashMap<>();
-    if (totalValue == 0.0) {
-      pixelColors.put(Color.Red, 0.0);
-      pixelColors.put(Color.Green, 0.0);
-      pixelColors.put(Color.Blue, 0.0);
-    } else {
       pixelColors.put(Color.Red, (double) this.redValue / totalValue);
       pixelColors.put(Color.Green, (double) this.greenValue / totalValue);
       pixelColors.put(Color.Blue, (double) this.blueValue / totalValue);
-    }
     return pixelColors;
   }
 
@@ -73,6 +69,11 @@ public class Pixel implements IPixel {
   public int getValue() {
     Integer[] values = {redValue, greenValue, blueValue};
     return Collections.max(Arrays.asList(values));
+  }
+
+  @Override
+  public int getMaxValue() {
+    return this.maxValue;
   }
 
   @Override
