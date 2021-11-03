@@ -59,7 +59,7 @@ public class Pixel implements IPixel {
     double totalValue = this.redValue + this.blueValue + this.greenValue;
     return (this.redValue * this.redValue +
             this.greenValue * this.greenValue +
-            this.blueValue * this.blueValue)/totalValue;
+            this.blueValue * this.blueValue) / totalValue;
   }
 
   @Override

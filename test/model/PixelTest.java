@@ -282,11 +282,11 @@ public class PixelTest {
    */
   @Test
   public void getLuma() {
-    assertEquals(0.0, p11.getLuma());
-    assertEquals(255.0, p12.getLuma());
-    assertEquals(1.0, p13.getLuma());
-    assertEquals(37.5, p14.getLuma());
-    assertEquals(46.5, p15.getLuma());
+    assertEquals(0.0, p11.getLuma(), 0.0001);
+    assertEquals(255.0, p12.getLuma(), 0.0001);
+    assertEquals(100.0, p13.getLuma(), 0.0001);
+    assertEquals(37.5, p14.getLuma(), 0.0001);
+    assertEquals(46.5, p15.getLuma(), 0.0001);
   }
 
   /**
