@@ -33,11 +33,6 @@ public class MockPixel implements IPixel {
   }
 
   @Override
-  public int getMaxValue() {
-    return 255;
-  }
-
-  @Override
   public HashMap<Color, Integer> getColors() {
     HashMap<Color, Integer> mapOfValue = new HashMap<>();
     mapOfValue.put(Color.Red, value);

@@ -24,7 +24,6 @@ public class InvalidMockAppendable implements Appendable {
   /**
    * Appends a subsequence of the specified character sequence to this
    * {@code Appendable}.
-   * <p>
    * An invocation of this method of the form {@code out.append(csq, start, end)}
    * when {@code csq} is not {@code null}, behaves in
    * exactly the same way as the invocation

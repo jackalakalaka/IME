@@ -1,4 +1,5 @@
 package model.funcobjs;
+
 import model.IPixel;
 
 /**

@@ -11,7 +11,6 @@ public class Pixel implements IPixel {
   private final int redValue;
   private final int greenValue;
   private final int blueValue;
-  private final int maxValue;
 
   /**
    * Constructor which takes in the max value and grey value and makes a pixel.
@@ -43,7 +42,6 @@ public class Pixel implements IPixel {
               "than the upper limit.");
     }
 
-    this.maxValue = maxValue;
     this.redValue = red;
     this.blueValue = blue;
     this.greenValue = green;
