@@ -57,11 +57,13 @@ public class Pixel implements IPixel {
   @Override
   public HashMap<Color, Double> getLuma() {
     double totalValue = this.redValue + this.blueValue + this.greenValue;
-
+    double luma = (this.redValue * this.redValue +
+            this.greenValue * this.greenValue +
+            this.blueValue * this.blueValue)/totalValue;
     HashMap<Color, Double> pixelColors = new HashMap<>();
-      pixelColors.put(Color.Red, (double) this.redValue / totalValue);
-      pixelColors.put(Color.Green, (double) this.greenValue / totalValue);
-      pixelColors.put(Color.Blue, (double) this.blueValue / totalValue);
+      pixelColors.put(Color.Red, luma);
+      pixelColors.put(Color.Green, luma) ;
+      pixelColors.put(Color.Blue, luma);
     return pixelColors;
   }
 
