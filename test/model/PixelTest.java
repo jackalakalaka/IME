@@ -282,26 +282,11 @@ public class PixelTest {
    */
   @Test
   public void getLuma() {
-    HashMap<Pixel.Color, Double> p11Colors =
-            colorsHashmapFac.createLumaHashmap(0.0, 0.0, 0.0);
-    HashMap<Pixel.Color, Double> p12Colors =
-            colorsHashmapFac.createLumaHashmap(
-                    0.3333333333333333,
-                    0.3333333333333333,
-                    0.3333333333333333);
-    HashMap<Pixel.Color, Double> p13Colors =
-            colorsHashmapFac.createLumaHashmap(0.5, 0.5, 0.0);
-    HashMap<Pixel.Color, Double> p14Colors =
-            colorsHashmapFac.createLumaHashmap(0.25, 0.25, 0.5);
-    HashMap<Pixel.Color, Double> p15Colors =
-            colorsHashmapFac.createLumaHashmap(0.4, 0.05, 0.55);
-
-    assertEquals(p11Colors,
-            p11.getLuma());
-    assertEquals(p12Colors, p12.getLuma());
-    assertEquals(p13Colors, p13.getLuma());
-    assertEquals(p14Colors, p14.getLuma());
-    assertEquals(p15Colors, p15.getLuma());
+    assertEquals(0.0, p11.getLuma());
+    assertEquals(255.0, p12.getLuma());
+    assertEquals(1.0, p13.getLuma());
+    assertEquals(37.5, p14.getLuma());
+    assertEquals(46.5, p15.getLuma());
   }
 
   /**
@@ -334,23 +319,6 @@ public class PixelTest {
       hashmap.put(Pixel.Color.Red, red);
       hashmap.put(Pixel.Color.Green, green);
       hashmap.put(Pixel.Color.Blue, blue);
-      return hashmap;
-    }
-
-    /**
-     * Produces a color weights hashmap.
-     *
-     * @param redWt   red weight
-     * @param greenWt green weight
-     * @param blueWt  blue weight
-     * @return hashmap of colors to their luma weights
-     */
-    public HashMap<Pixel.Color, Double> createLumaHashmap(
-            double redWt, double greenWt, double blueWt) {
-      HashMap<Pixel.Color, Double> hashmap = new HashMap<>();
-      hashmap.put(Pixel.Color.Red, redWt);
-      hashmap.put(Pixel.Color.Green, greenWt);
-      hashmap.put(Pixel.Color.Blue, blueWt);
       return hashmap;
     }
   }
