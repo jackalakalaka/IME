@@ -19,7 +19,7 @@ public interface IPixel {
    *
    * @return HashMap of the colors and their respective luma values.
    */
-  HashMap<Color, Double> getLuma();
+  Double getLuma();
 
   /**
    * Returns the value of the pixel.

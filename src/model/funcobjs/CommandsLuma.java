@@ -9,17 +9,11 @@ import model.Pixel;
 /**
  * A function object for getting the luma of a pixel.
  */
-public class CommandsLuma extends ACommandsMultiple {
+public class CommandsLuma extends ACommandsAbsolute {
 
   @Override
-  protected ArrayList<Integer> getMultiple(IPixel originalPixel) {
-    HashMap<Pixel.Color, Double> luma = originalPixel.getLuma();
-    ArrayList<Integer> lumaIntegers = new ArrayList<>();
-    lumaIntegers.add(luma.get(Pixel.Color.Red).intValue());
-    lumaIntegers.add(luma.get(Pixel.Color.Green).intValue());
-    lumaIntegers.add(luma.get(Pixel.Color.Blue).intValue());
-
-    return lumaIntegers;
+  protected int getAbsolute(IPixel originalPixel) {
+    return originalPixel.getLuma().intValue();
   }
 
   @Override

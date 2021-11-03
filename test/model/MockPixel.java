@@ -23,12 +23,8 @@ public class MockPixel implements IPixel {
   }
 
   @Override
-  public HashMap<Color, Double> getLuma() {
-    HashMap<Color, Double> mapOfValue = new HashMap<>();
-    mapOfValue.put(Color.Red, value * 1.0);
-    mapOfValue.put(Color.Green, value * 1.0);
-    mapOfValue.put(Color.Blue, value * 1.0);
-    return mapOfValue;
+  public Double getLuma() {
+    return value * 1.0;
   }
 
   @Override
