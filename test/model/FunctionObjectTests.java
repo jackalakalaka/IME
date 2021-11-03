@@ -80,9 +80,9 @@ public class FunctionObjectTests {
     int newBlue = lumaImage.getPixelAt(0,0).getColors().get(IPixel.Color.Blue);
     int newRed = lumaImage.getPixelAt(0,0).getColors().get(IPixel.Color.Red);
     int newGreen = lumaImage.getPixelAt(0,0).getColors().get(IPixel.Color.Green);
-    assertEquals(((double) this.red/totalValue)*lumaImage.getMaxValue(),newRed,1.0);
-    assertEquals(((double) this.green/totalValue)*lumaImage.getMaxValue(),newGreen,1.0);
-    assertEquals(((double) this.blue/totalValue)*lumaImage.getMaxValue(),newBlue,1.0);
+    assertEquals(75,newRed,1.0);
+    assertEquals(75,newGreen,1.0);
+    assertEquals(75,newBlue,1.0);
 
   }
 
