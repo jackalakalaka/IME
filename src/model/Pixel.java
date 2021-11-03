@@ -73,11 +73,6 @@ public class Pixel implements IPixel {
   }
 
   @Override
-  public int getMaxValue() {
-    return this.maxValue;
-  }
-
-  @Override
   public HashMap<Color, Integer> getColors() {
     HashMap<Color, Integer> pixelColors = new HashMap<>();
     pixelColors.put(Color.Red, this.redValue);

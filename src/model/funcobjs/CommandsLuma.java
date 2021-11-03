@@ -1,10 +1,5 @@
 package model.funcobjs;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import model.IPixel;
-import model.Pixel;
 
 /**
  * A function object for getting the luma of a pixel.
