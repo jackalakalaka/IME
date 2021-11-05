@@ -163,7 +163,7 @@ public class IMEControllerCompact implements IMEController {
         break;
       case "save":
         if (this.model.containsImage(imageName)) {
-          this.model.getImageFromModel(imageName).saveImageToFile(input);
+          new CommandSave(this.model.getImageFromModel(imageName),input );
           break;
         } else {
           if (!this.model.containsImage(imageName)) {

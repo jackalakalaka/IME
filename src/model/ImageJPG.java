@@ -16,7 +16,6 @@ public class ImageJPG extends AbstractImage {
    */
   public ImageJPG(String filePath) {
     super(filePath);
-    this.type = Type.JPG;
   }
 
   @Override
@@ -67,8 +66,6 @@ public class ImageJPG extends AbstractImage {
   @Override
   public void saveImageToFile(String filepath) throws IllegalStateException {
     setToCurrent();
-    System.out.println("inside save iamge");
-    System.out.println(filepath);
     try {
       File outFile = new File(filepath);
       ImageIO.write(this.buff, "jpg", outFile);
