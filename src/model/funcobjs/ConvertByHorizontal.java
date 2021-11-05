@@ -6,7 +6,7 @@ import model.Image;
 /**
  * A function object for getting the pixel on the other side of the image horizontally.
  */
-public class ConvertByHorizontal extends ACommandDimension {
+public class ConvertByHorizontal extends ACommandImageOp {
 
   @Override
   protected IPixel getOtherPixel(int row, int column, Image image) {

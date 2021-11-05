@@ -1,5 +1,6 @@
 package model.funcobjs;
 
+import factory.ImageFactory;
 import model.IPixel;
 import model.Image;
 import model.ImagePpm;
@@ -29,7 +30,7 @@ public abstract class ACommandsAbsolute implements ICommands {
         pixels[row][col] = new Pixel(maxValue, absolute);
       }
     }
-    return new ImagePpm(maxValue, pixels);
+    return new ImageFactory().createImage(initModel.getMaxValue(), pixels, initModel.getType());
   }
 
   /**

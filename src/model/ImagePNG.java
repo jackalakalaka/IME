@@ -11,20 +11,41 @@ import javax.imageio.ImageIO;
  */
 public class ImagePNG extends ImageJPG {
   /**
+   * Constructor that builds the image from a file.
+   *
    * @param filePath The string representing the path to the file.
    */
   public ImagePNG(String filePath) {
     super(filePath);
+    this.type = Type.PNG;
+  }
+
+  /**
+   * Constructor made for creating PNG images with a known pixel array.
+   * Alternative constructor that is used in tests and conversions.
+   *
+   * @param maxValue The maximum value for image.
+   * @param pixelArray The pixel arrray that makes up the image.
+   */
+  public ImagePNG(int maxValue, IPixel[][] pixelArray) {
+    super(maxValue,pixelArray);
+    this.type = Type.PNG;
   }
 
   @Override
   public void saveImageToFile(String filepath) throws IllegalStateException {
+    setToCurrent();
     try {
       File outFile = new File(filepath);
-      ImageIO.write(this.buff, "jpg", outFile);
+      ImageIO.write(this.buff, "png", outFile);
     } catch (IOException e) {
       throw new IllegalStateException("The file path does not exist.");
     }
+  }
+
+  @Override
+  public Type getType() {
+    return this.type;
   }
 }
 

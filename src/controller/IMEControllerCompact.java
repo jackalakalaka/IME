@@ -9,6 +9,7 @@ import model.IMEModel;
 import model.IMEModelImpl;
 import model.Image;
 import model.ImagePpm;
+import model.funcobjs.CommandSave;
 import view.IMEView;
 import view.IMEViewImpl;
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+import model.funcobjs.CommandBlur;
 import model.funcobjs.CommandsBlue;
 import model.funcobjs.CommandsGreen;
 import model.funcobjs.CommandsIntensity;
@@ -35,6 +36,7 @@ public class IMEModelImpl implements IMEModel {
     this.commands.put("intensity", new CommandsIntensity());
     this.commands.put("value", new CommandsValue());
     this.commands.put("luma", new CommandsLuma());
+    this.commands.put("blur",new CommandBlur());
   }
 
   /**

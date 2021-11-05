@@ -41,6 +41,7 @@ public class IMEControllerImplTest {
           "<img_former> <img_new>' into the command line.\n" +
           "- To get a heat map of blue in the img type 'blue " +
           "<img_former> <img_new>'into the command line.\n" +
+          "- To blur and image type 'blur <img_former> <img_new>'into the command line.\n" +
           "- To flip the img vertically type 'vertical <img_former> " +
           "<img_new>' into the command line.\n" +
           "- To get a heat map of the max value in the img type 'value " +

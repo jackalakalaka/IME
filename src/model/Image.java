@@ -8,6 +8,18 @@ import model.funcobjs.ICommands;
 public interface Image {
 
   /**
+   * This enum helps methods and commands know what type of image they are working with.
+   */
+  enum Type { PPM, JPG, PNG };
+
+  /**
+   * This is a simple getter for the type of the image.
+   *
+   * @return A Type enum.
+   */
+  Type getType();
+
+  /**
    * Gets the height of the image.
    *
    * @return Integer image height.

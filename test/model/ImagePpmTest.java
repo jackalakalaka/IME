@@ -18,7 +18,7 @@ public class ImagePpmTest {
   private final IPixel[][] mockPixelsWide = new IPixel[2][3];
   private final Image modelOne = new ImagePpm(255, mockPixels);
   private final Image modelTwo = new ImagePpm(255, mockPixelsWide);
-  private final IPixel pixelZero = new MockPixel();
+  private final IPixel pixelZero = new MockPixel(0);
   private final IPixel pixelOne = new MockPixel(1);
   private final IPixel pixelTwo = new MockPixel(2);
   private final IPixel pixelThree = new MockPixel(3);
@@ -76,11 +76,11 @@ public class ImagePpmTest {
   //Test to see if the getPixelAt function works consistently.
   @Test
   public void testPixelFetch() {
-    assertEquals(this.pixelOne, this.modelOne.getPixelAt(0, 0));
-    assertEquals(this.pixelTwo, this.modelOne.getPixelAt(0, 1));
+    assertEquals(this.pixelOne.getValue(), this.modelOne.getPixelAt(0, 0).getValue());
+    assertEquals(this.pixelTwo.getValue(), this.modelOne.getPixelAt(0, 1).getValue());
     Image horzFlipOne = new ConvertByHorizontal().apply(this.modelOne);
-    assertEquals(this.pixelOne, horzFlipOne.getPixelAt(0, 1));
-    assertEquals(this.pixelTwo, horzFlipOne.getPixelAt(0, 0));
+    assertEquals(this.pixelOne.getValue(), horzFlipOne.getPixelAt(0, 1).getValue());
+    assertEquals(this.pixelTwo.getValue(), horzFlipOne.getPixelAt(0, 0).getValue());
   }
 
   /**

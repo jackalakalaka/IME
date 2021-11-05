@@ -25,10 +25,12 @@ public class ImagePpm extends AbstractImage {
    */
   public ImagePpm(String filePath) throws IllegalArgumentException {
     super(filePath);
+    this.type = Type.PPM;
   }
 
   @Override
   protected void getImageFromFile(String filePath) {
+    this.type = Type.PPM;
     Objects.requireNonNull(filePath);
     Scanner sc;
 
@@ -80,6 +82,12 @@ public class ImagePpm extends AbstractImage {
    */
   public ImagePpm(int maxValue, IPixel[][] pixelArray) {
     super(maxValue,pixelArray);
+    this.type = Type.PPM;
+  }
+
+  @Override
+  public Type getType() {
+    return this.type;
   }
 
   @Override

@@ -16,10 +16,12 @@ public class FunctionObjectTests {
   IMEModel model = new IMEModelImpl();
   Image image = new ImagePpm("res/onePixelImage.ppm");
   Image four;
+  Image jpg;
   IPixel[][] fourPixels = new IPixel[2][2];
   int red;
   int green;
   int blue;
+  private IMEModelImpl jpgModel = new IMEModelImpl();
 
   @Before
   public void setUp() {
@@ -32,7 +34,9 @@ public class FunctionObjectTests {
     this.fourPixels[1][0] = new Pixel(255,150);
     this.fourPixels[1][1] = new Pixel(255,250);
     this.four = new ImagePpm(255, this.fourPixels );
+    this.jpg = new ImageJPG(255,this.fourPixels);
     this.model.addImage("four",this.four);
+    this.jpgModel.addImage("jpg",this.jpg);
   }
 
   @Test
@@ -138,6 +142,16 @@ public class FunctionObjectTests {
     assertEquals(250,vertical.getPixelAt(0,1).getValue());
     assertEquals(50,vertical.getPixelAt(1,0).getValue());
     assertEquals(100,vertical.getPixelAt(1,1).getValue());
+  }
+
+  @Test
+  public void testCommandBlur() {
+    this.jpgModel.applyCommand("blur","jpg","blur");
+    Image blur = this.jpgModel.getImageFromModel("blur");
+    assertEquals(57,blur.getPixelAt(0,0).getValue());
+    assertEquals(71,blur.getPixelAt(0,1).getValue());
+    assertEquals(80,blur.getPixelAt(1,0).getValue());
+    assertEquals(95,blur.getPixelAt(1,1).getValue());
   }
 
 }

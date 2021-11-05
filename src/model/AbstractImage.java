@@ -10,8 +10,9 @@ public abstract class AbstractImage implements Image {
   protected int width;
   protected int height;
   protected int maxValue;
+  protected Type type;
 
-  AbstractImage(String filePath){
+  AbstractImage(String filePath) {
     this.getImageFromFile(filePath);
   }
 
@@ -47,7 +48,9 @@ public abstract class AbstractImage implements Image {
 
   @Override
   public IPixel getPixelAt(int row, int col) {
-    return this.pixelArray[row][col];
+    HashMap<IPixel.Color, Integer> colors = this.pixelArray[row][col].getColors();
+    return new Pixel(this.maxValue, colors.get(IPixel.Color.Red)
+            , colors.get(IPixel.Color.Green), colors.get(IPixel.Color.Blue));
   }
 
   @Override
