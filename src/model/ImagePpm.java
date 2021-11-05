@@ -15,12 +15,7 @@ import model.funcobjs.ICommands;
 /**
  * Representation of an image from a PPM file.
  */
-public class ImagePpm implements Image {
-  private final IPixel[][] pixelArray;
-  private final int width;
-  private final int height;
-  private final int maxValue;
-
+public class ImagePpm extends AbstractImage {
 
   /**
    * 1-arg constructor for an image model using a PPM file.
@@ -29,6 +24,11 @@ public class ImagePpm implements Image {
    * @throws IllegalArgumentException If the file cannot be found.
    */
   public ImagePpm(String filePath) throws IllegalArgumentException {
+    super(filePath);
+  }
+
+  @Override
+  protected void getImageFromFile(String filePath) {
     Objects.requireNonNull(filePath);
     Scanner sc;
 
@@ -79,80 +79,7 @@ public class ImagePpm implements Image {
    * @param pixelArray An array of pixels for the new model.
    */
   public ImagePpm(int maxValue, IPixel[][] pixelArray) {
-    this.pixelArray = Objects.requireNonNull(pixelArray);
-    this.height = pixelArray.length;
-    this.width = pixelArray[0].length;
-    this.maxValue = maxValue;
-  }
-
-  @Override
-  public int getHeight() {
-    return this.height;
-  }
-
-  @Override
-  public int getWidth() {
-    return this.width;
-  }
-
-  @Override
-  public int getMaxValue() {
-    return this.maxValue;
-  }
-
-  @Override
-  public Image changeBrightness(int change) {
-    Pixel[][] brighterModel = new Pixel[this.height][this.width];
-    for (int row = 0; row < height; row++) {
-      for (int column = 0; column < width; column++) {
-        IPixel oldPixel = this.getPixelAt(row, column);
-        brighterModel[row][column] = changePixelBrightness(oldPixel, change);
-      }
-    }
-    return new ImagePpm(this.maxValue, brighterModel);
-  }
-
-  /**
-   * Helper for {@link #changeBrightness(int)} to make brighter pixels.
-   *
-   * @param oldPixel The original pixel.
-   * @param change   The brightness change to be implemented.
-   * @return A new brighter or darker pixel.
-   */
-  private Pixel changePixelBrightness(IPixel oldPixel, int change) {
-    Objects.requireNonNull(oldPixel);
-
-    HashMap<Pixel.Color, Integer> oldPixelColors = oldPixel.getColors();
-    int red = oldPixelColors.get(Pixel.Color.Red);
-    int green = oldPixelColors.get(Pixel.Color.Green);
-    int blue = oldPixelColors.get(Pixel.Color.Blue);
-    return new Pixel(this.maxValue,
-            checkBrightness(red + change), checkBrightness(green + change),
-            checkBrightness(blue + change));
-  }
-
-  /**
-   * Helper for {@link #changePixelBrightness(IPixel, int)}.
-   *
-   * @param colorValue The desired color value after brightening or dimming.
-   * @return The acceptable value or max/min.
-   */
-  private int checkBrightness(int colorValue) {
-    if (colorValue < 0) {
-      return 0;
-    }
-    return Math.min(colorValue, this.maxValue);
-  }
-
-  @Override
-  public IPixel getPixelAt(int row, int col) {
-    return pixelArray[row][col];
-  }
-
-  @Override
-  public Image convertToViz(ICommands cmd) {
-    Objects.requireNonNull(cmd);
-    return cmd.apply(this);
+    super(maxValue,pixelArray);
   }
 
   @Override
