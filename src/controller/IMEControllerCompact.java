@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+import factory.ImageFactory;
 import model.IMEModel;
 import model.IMEModelImpl;
 import model.Image;
@@ -154,7 +155,7 @@ public class IMEControllerCompact implements IMEController {
       case "load":
         File f = new File(input);
         if (f.exists()) {
-          this.model.addImage(imageName, new ImagePpm(input));
+          this.model.addImage(imageName, new ImageFactory().createImage(input));
         } else {
           errorAndReset("\nFile name was not correct.\n", scanner);
         }
