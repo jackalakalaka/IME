@@ -8,6 +8,7 @@ import factory.ImageFactory;
 import model.IMEModel;
 import model.IMEModelImpl;
 import model.Image;
+import model.ImageJPG;
 import model.ImagePpm;
 import model.funcobjs.CommandSave;
 import view.IMEView;
@@ -156,14 +157,14 @@ public class IMEControllerCompact implements IMEController {
       case "load":
         File f = new File(input);
         if (f.exists()) {
-          this.model.addImage(imageName, new ImageFactory().createImage(input));
+          this.model.addImage(imageName, new ImageJPG(input));
         } else {
           errorAndReset("\nFile name was not correct.\n", scanner);
         }
         break;
       case "save":
         if (this.model.containsImage(imageName)) {
-          new CommandSave(this.model.getImageFromModel(imageName),input );
+          this.model.getImageFromModel(imageName).saveImageToFile(input);
           break;
         } else {
           if (!this.model.containsImage(imageName)) {
