@@ -21,7 +21,7 @@ public class CommandBlur extends ACommandImageOp {
 
   @Override
   public String giveSignature() {
-    return "- To blur and image type 'blur <img_former> <img_new>'" +
+    return "- To blur an image type 'blur <img_former> <img_new>'" +
             "into the command line.\n";
   }
 
