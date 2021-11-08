@@ -26,7 +26,6 @@ public class ImageJPG extends AbstractImage {
     try {
       bufferedImage = ImageIO.read(f);
       this.buff = bufferedImage;
-      System.out.println(bufferedImage.getType());
     } catch (IOException e) {
       throw new IllegalArgumentException("File contains nothing.");
     }
@@ -79,7 +78,6 @@ public class ImageJPG extends AbstractImage {
    * Helper that sets the buffered image field to the current state of the pixel array.
    */
   protected void setToCurrent() {
-    System.out.println("reformat");
     this.buff = new BufferedImage(this.width, this.height,
             BufferedImage.TYPE_3BYTE_BGR);
     for (int i = 0; i < height; i++) {

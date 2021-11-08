@@ -8,14 +8,12 @@ import factory.ImageFactory;
 import model.IMEModel;
 import model.IMEModelImpl;
 import model.Image;
-import model.ImageJPG;
-import model.ImagePpm;
-import model.funcobjs.CommandSave;
 import view.IMEView;
 import view.IMEViewImpl;
 
 /**
- * This is the controller class for IME.
+ * This is the controller class for IME which by default prints to system out.
+ * And takes input from system in. It can be created with custom model/view/readable.
  */
 public class IMEControllerCompact implements IMEController {
   private final IMEModel model;
@@ -63,10 +61,6 @@ public class IMEControllerCompact implements IMEController {
         break;
       }
       String imageName = getNextIfExists(sc);
-      //If the model isn't in the model and the command isn't load the remaining inputs are skipped.
-      if (checkImageCommandModel(imageName, command, sc)) {
-        continue;
-      }
       //If the command and image are in the model the command is applied.
       if (this.model.containsCommand(command) && this.model.containsImage(imageName)) {
         this.view.renderMsg("Please wait...");
@@ -81,22 +75,6 @@ public class IMEControllerCompact implements IMEController {
     }
     //Exit message.
     this.view.renderMsg("\nThank you for using IME!");
-  }
-
-  /**
-   * Checks to see if the model has the image or resets the scanner and prints error.
-   *
-   * @param imageName The name of the image.
-   * @param command   The command in the list.
-   * @param sc        The scanner to be reset.
-   * @return True if the image/command are not in the model, false if they are.
-   */
-  private boolean checkImageCommandModel(String imageName, String command, Scanner sc) {
-    if (!this.model.containsImage(imageName) && !command.equalsIgnoreCase("load")) {
-      errorAndReset("Image not found. Please try again.", sc);
-      return true;
-    }
-    return false;
   }
 
   /**
@@ -157,7 +135,7 @@ public class IMEControllerCompact implements IMEController {
       case "load":
         File f = new File(input);
         if (f.exists()) {
-          this.model.addImage(imageName, new ImageJPG(input));
+          this.model.addImage(imageName, new ImageFactory().createImage(input));
         } else {
           errorAndReset("\nFile name was not correct.\n", scanner);
         }
@@ -175,7 +153,11 @@ public class IMEControllerCompact implements IMEController {
         }
         break;
       default:
-        errorAndReset("\nCommand not recognized. Please try again.\n", scanner);
+        if (!this.model.containsCommand(command)) {
+          errorAndReset("\nCommand not recognized. Please try again.\n", scanner);
+        } else {
+          errorAndReset("\nImage not found in model. Please try again.\n", scanner);
+        }
     }
   }
 

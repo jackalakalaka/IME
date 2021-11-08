@@ -3,15 +3,19 @@ package controller;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.PrintWriter;
 import java.io.StringReader;
+import java.io.StringWriter;
 
 import model.IMEModel;
 import model.IMEModelImpl;
+import model.Image;
 import view.IMEView;
 import view.IMEViewImpl;
 import view.InvalidMockAppendable;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for the controller implementation.
@@ -33,17 +37,22 @@ public class IMEControllerImplTest {
           "<image-name> <integer-change> <new-name>.\n" +
           "- To get a heat map of red in the img type 'red " +
           "<img_former> <img_new>' into the command line.\n" +
-          "- To get a heat map of intensity in the img type " +
-          "'intensity <img_former> <img_new>' into the command line.\n" +
+          "- To get a heat map of intensity in the img type 'intensity " +
+          "<img_former> <img_new>' into the command line.\n" +
           "- To flip the img horizontally type 'horizontal " +
           "<img_former> <img_new>' into the command line.\n" +
+          "- To get the sepia color transformation type 'sepia " +
+          "<img_former> <img_new>'into the command line.\n" +
           "- To get a heat map of green in the img type 'green " +
           "<img_former> <img_new>' into the command line.\n" +
           "- To get a heat map of blue in the img type 'blue " +
           "<img_former> <img_new>'into the command line.\n" +
-          "- To blur and image type 'blur <img_former> <img_new>'into the command line.\n" +
-          "- To flip the img vertically type 'vertical <img_former> " +
-          "<img_new>' into the command line.\n" +
+          "- To blur an image type 'blur " +
+          "<img_former> <img_new>'into the command line.\n" +
+          "- To flip the img vertically type 'vertical " +
+          "<img_former> <img_new>' into the command line.\n" +
+          "- To get the greyscale color transform type 'greyscale " +
+          "<img-former> <img-new>into the commandline.\n" +
           "- To get a heat map of the max value in the img type 'value " +
           "<img_former> <img_new>' into the command line.\n" +
           "- To get a heat map of luminosity in the img type 'luma " +
@@ -119,8 +128,11 @@ public class IMEControllerImplTest {
     Readable readable = new StringReader("load barney res/onePixelImage.ppm " +
             "brightness barney 10 ");
     IMEView view = new IMEViewImpl(appendable);
+
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+    assertTrue(this.goodModel.containsImage("barney"));
+    assertEquals(this.goodModel.getImageFromModel("barney").getType(), Image.Type.PPM);
   }
 
   @Test
@@ -138,12 +150,87 @@ public class IMEControllerImplTest {
   }
 
   @Test
+  public void testIncorrectCommandInput() {
+    Appendable appendable = new StringBuilder();
+    IMEView view = new IMEViewImpl(appendable);
+    StringWriter stringWriter = new StringWriter();
+    PrintWriter printWriter = new PrintWriter(stringWriter);
+    printWriter.println("command pixel res/onePixelImage.ppm");
+    printWriter.println("quit");
+    Readable readable = new StringReader(stringWriter.toString());
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+    String output = appendable.toString();
+    assertEquals(menu +
+            "\n" +
+            "Please enter a command:\n" +
+            "Please wait...\n" +
+            "Command not recognized. Please try again.\n" +
+            "\n" +
+            "Please enter a command:\n" +
+            "\n" +
+            "Thank you for using IME!", output);
+  }
+
+  @Test
+  public void testIncorrectFileInput() {
+    Appendable appendable = new StringBuilder();
+    IMEView view = new IMEViewImpl(appendable);
+    StringWriter stringWriter = new StringWriter();
+    PrintWriter printWriter = new PrintWriter(stringWriter);
+    printWriter.println("load pixel aFileThatDoesNotExist");
+    printWriter.println("quit");
+    Readable readable = new StringReader(stringWriter.toString());
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+    String output = appendable.toString();
+    assertEquals(menu +
+            "\n" +
+            "Please enter a command:\n" +
+            "Please wait...\n" +
+            "File name was not correct.\n" +
+            "\n" +
+            "Please enter a command:\n" +
+            "\n" +
+            "Thank you for using IME!", output);
+  }
+
+  @Test
+  public void testIncorrectImageInput() {
+    Appendable appendable = new StringBuilder();
+    IMEView view = new IMEViewImpl(appendable);
+    StringWriter stringWriter = new StringWriter();
+    PrintWriter printWriter = new PrintWriter(stringWriter);
+    printWriter.println("load pixel res/onePixelImage.ppm");
+    printWriter.println("blue imageNotInModel blue");
+    printWriter.println("quit");
+    Readable readable = new StringReader(stringWriter.toString());
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+    String output = appendable.toString();
+    assertEquals(menu +
+            "\n" +
+            "Please enter a command:\n" +
+            "Please wait...\n" +
+            "Please enter a command:\n" +
+            "Please wait...\n" +
+            "Image not found in model. Please try again.\n" +
+            "\n" +
+            "Please enter a command:\n" +
+            "\n" +
+            "Thank you for using IME!", output);
+  }
+
+
+  @Test
   public void testLoad() {
     Appendable appendable = new StringBuilder();
     Readable readable = new StringReader("load pixel res/onePixelImage.ppm quit");
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+    assertTrue(this.goodModel.containsImage("pixel"));
+    assertEquals(this.goodModel.getImageFromModel("pixel").getType(), Image.Type.PPM);
     String output = appendable.toString();
     assertEquals(menu +
             "\n" +
@@ -162,6 +249,8 @@ public class IMEControllerImplTest {
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+    assertTrue(this.goodModel.containsImage("pixel"));
+    assertEquals(this.goodModel.getImageFromModel("pixel").getType(), Image.Type.PPM);
     String output = appendable.toString();
     assertEquals(menu +
             "\n" +
@@ -182,6 +271,8 @@ public class IMEControllerImplTest {
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+    assertTrue(this.goodModel.containsImage("bright"));
+    assertEquals(this.goodModel.getImageFromModel("bright").getType(), Image.Type.PPM);
     String output = appendable.toString();
     assertEquals(menu +
             "\n" +
