@@ -1,5 +1,6 @@
 package model;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -34,7 +35,8 @@ public class ImageTest {
   /**
    * Initialize data.
    */
-  protected void setUp() {
+  @Before
+  public void setUp() {
     mockPixels[0][0] = pixelOne;
     mockPixels[1][0] = pixelThree;
     mockPixels[0][1] = pixelTwo;

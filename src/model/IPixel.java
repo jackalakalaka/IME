@@ -33,8 +33,6 @@ public interface IPixel {
    */
   enum Color { Red, Green, Blue }
 
-  ;
-
   /**
    * Returns the HashMap for the pixel's colors and their values.
    *

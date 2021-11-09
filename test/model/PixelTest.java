@@ -14,8 +14,8 @@ import static org.junit.Assert.assertTrue;
  * assertions, respectively. Tests the Pixel class.
  */
 public class PixelTest {
-  private static ColorsHashmapFactory colorsHashmapFac = new ColorsHashmapFactory();
-  private static Random rand = new Random();
+  private static final ColorsHashmapFactory colorsHashmapFac = new ColorsHashmapFactory();
+  private static final Random rand = new Random();
 
   /**
    * {@link #constructor4ArgDefault()} data.

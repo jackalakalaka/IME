@@ -10,7 +10,7 @@ public interface Image {
   /**
    * This enum helps methods and commands know what type of image they are working with.
    */
-  enum Type { PPM, JPG, PNG, BMP };
+  enum Type { PPM, JPG, PNG, BMP }
 
   /**
    * This is a simple getter for the type of the image.
