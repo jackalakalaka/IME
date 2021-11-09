@@ -21,7 +21,7 @@ public class FunctionObjectTests {
   int red;
   int green;
   int blue;
-  private IMEModelImpl jpgModel = new IMEModelImpl();
+  private final IMEModelImpl jpgModel = new IMEModelImpl();
 
   @Before
   public void setUp() {
