@@ -3,7 +3,6 @@ package model.funcobjs;
 import factory.ImageFactory;
 import model.IPixel;
 import model.Image;
-import model.ImagePpm;
 import model.Pixel;
 
 /**

@@ -68,7 +68,7 @@ public abstract class AbstractImage implements Image {
         brighterModel[row][column] = changePixelBrightness(oldPixel, change);
       }
     }
-    return new ImagePpm(this.maxValue, brighterModel);
+    return new ImagePPM(this.maxValue, brighterModel);
   }
 
   /**

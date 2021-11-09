@@ -43,6 +43,8 @@ public class IMEControllerImplTest {
           "<img_former> <img_new>' into the command line.\n" +
           "- To get the sepia color transformation type 'sepia " +
           "<img_former> <img_new>'into the command line.\n" +
+          "- To sharpen an image type 'sharpen " +
+          "<img_former> <img_new>'into the command line.\n" +
           "- To get a heat map of green in the img type 'green " +
           "<img_former> <img_new>' into the command line.\n" +
           "- To get a heat map of blue in the img type 'blue " +

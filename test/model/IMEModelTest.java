@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class IMEModelTest {
   private final IPixel[][] mockPixels = new IPixel[2][2];
-  private final Image img1 = new ImagePpm(255, mockPixels);
+  private final Image img1 = new ImagePPM(255, mockPixels);
 
   private static final HashMap<String, Image> mtImages = new HashMap<>();
   private static final HashMap<String, ICommands> mtCommands = new HashMap<>();

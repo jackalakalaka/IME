@@ -5,7 +5,7 @@ import model.Image;
 import model.Pixel;
 
 /**
- * Function object for sharpening an image.
+ * Function object for sharpening an image pixel by pixel.
  */
 public class CommandSharpen extends ACommandImageOp {
 

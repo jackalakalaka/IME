@@ -7,6 +7,7 @@ import java.util.Objects;
 import model.funcobjs.CommandBlur;
 import model.funcobjs.CommandGreyscale;
 import model.funcobjs.CommandSepia;
+import model.funcobjs.CommandSharpen;
 import model.funcobjs.CommandsBlue;
 import model.funcobjs.CommandsGreen;
 import model.funcobjs.CommandsIntensity;
@@ -41,6 +42,7 @@ public class IMEModelImpl implements IMEModel {
     this.commands.put("blur",new CommandBlur());
     this.commands.put("greyscale", new CommandGreyscale());
     this.commands.put("sepia", new CommandSepia());
+    this.commands.put("sharpen", new CommandSharpen());
   }
 
   /**

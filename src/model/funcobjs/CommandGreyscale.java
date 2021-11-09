@@ -2,6 +2,9 @@ package model.funcobjs;
 
 import model.IPixel;
 
+/**
+ * A function object that returns the greyscale version of a pixel.
+ */
 public class CommandGreyscale extends ACommandsAbsolute {
 
   @Override

@@ -5,7 +5,7 @@ import model.IPixel;
 import model.Image;
 
 /**
- * An abstract class for function objects that work with dimensions.
+ * An abstract class for function objects that require the whole image to work.
  */
 public abstract class ACommandImageOp implements ICommands {
 

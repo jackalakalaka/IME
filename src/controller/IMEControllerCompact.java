@@ -8,6 +8,7 @@ import factory.ImageFactory;
 import model.IMEModel;
 import model.IMEModelImpl;
 import model.Image;
+import model.funcobjs.CommandScript;
 import view.IMEView;
 import view.IMEViewImpl;
 
@@ -58,6 +59,11 @@ public class IMEControllerCompact implements IMEController {
       String command = getNextIfExists(sc);//Helper will throw if the scanner is ever empty.
       //Quit case if the command quit is entered.
       if (command.equalsIgnoreCase("quit")) {
+        break;
+      }
+      //Run the given script and end program.
+      if (command.equalsIgnoreCase("-file")){
+        new CommandScript(sc,this.view);
         break;
       }
       String imageName = getNextIfExists(sc);
@@ -142,7 +148,8 @@ public class IMEControllerCompact implements IMEController {
         break;
       case "save":
         if (this.model.containsImage(imageName)) {
-          this.model.getImageFromModel(imageName).saveImageToFile(input);
+          new ImageFactory().convertImage(this.model.getImageFromModel(imageName), input)
+                  .saveImageToFile(input);
           break;
         } else {
           if (!this.model.containsImage(imageName)) {

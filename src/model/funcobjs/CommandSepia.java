@@ -4,6 +4,9 @@ import model.IPixel;
 import model.Image;
 import model.Pixel;
 
+/**
+ * Function object that returns the sepia version of a given pixel.
+ */
 public class CommandSepia extends ACommandImageOp {
 
   @Override

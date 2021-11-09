@@ -1,0 +1,1 @@
+load goat res/JPGgoat.jpg blue goat blue save blue res/scriptSuccess.bmp quit

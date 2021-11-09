@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class FunctionObjectTests {
   IMEModel model = new IMEModelImpl();
-  Image image = new ImagePpm("res/onePixelImage.ppm");
+  Image image = new ImagePPM("res/onePixelImage.ppm");
   Image four;
   Image jpg;
   IPixel[][] fourPixels = new IPixel[2][2];
@@ -33,7 +33,7 @@ public class FunctionObjectTests {
     this.fourPixels[0][1] = new Pixel(255,100);
     this.fourPixels[1][0] = new Pixel(255,150);
     this.fourPixels[1][1] = new Pixel(255,250);
-    this.four = new ImagePpm(255, this.fourPixels );
+    this.four = new ImagePPM(255, this.fourPixels );
     this.jpg = new ImageJPG(255,this.fourPixels);
     this.model.addImage("four",this.four);
     this.jpgModel.addImage("jpg",this.jpg);
