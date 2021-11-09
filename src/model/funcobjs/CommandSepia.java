@@ -21,9 +21,12 @@ public class CommandSepia extends ACommandImageOp {
 
   private int getSepiaRed(IPixel originalPixel) {
     double newRed=0;
-    newRed = newRed + originalPixel.getColors().get(IPixel.Color.Red)*0.272;
-    newRed = newRed + originalPixel.getColors().get(IPixel.Color.Green)*0.534;
-    newRed = newRed + originalPixel.getColors().get(IPixel.Color.Green)*0.131;
+    newRed = newRed + originalPixel.getColors().get(IPixel.Color.Red)*0.393;
+    newRed = newRed + originalPixel.getColors().get(IPixel.Color.Green)*0.769;
+    newRed = newRed + originalPixel.getColors().get(IPixel.Color.Green)*0.189;
+    if (newRed > 255 ){
+      return 255;
+    }
     return ((int) newRed);
   }
 
@@ -32,14 +35,20 @@ public class CommandSepia extends ACommandImageOp {
     newGreen = newGreen + originalPixel.getColors().get(IPixel.Color.Red)*0.349;
     newGreen = newGreen + originalPixel.getColors().get(IPixel.Color.Green)*0.686;
     newGreen = newGreen + originalPixel.getColors().get(IPixel.Color.Green)*0.168;
+    if (newGreen > 255 ){
+      return 255;
+    }
     return ((int) newGreen);
   }
 
   private int getSepiaBlue(IPixel originalPixel) {
     double newBlue=0;
-    newBlue = newBlue + originalPixel.getColors().get(IPixel.Color.Red)*0.393;
-    newBlue = newBlue + originalPixel.getColors().get(IPixel.Color.Green)*0.769;
-    newBlue = newBlue + originalPixel.getColors().get(IPixel.Color.Green)*0.189;
+    newBlue = newBlue + originalPixel.getColors().get(IPixel.Color.Red)*0.272;
+    newBlue = newBlue + originalPixel.getColors().get(IPixel.Color.Green)*0.534;
+    newBlue = newBlue + originalPixel.getColors().get(IPixel.Color.Green)*0.131;
+    if (newBlue > 255 ){
+      return 255;
+    }
     return ((int) newBlue);
   }
 }
