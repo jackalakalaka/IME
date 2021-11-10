@@ -346,7 +346,7 @@ public class IMEControllerImplTest {
             "res/test/horizontalGoat.png", "res/test/verticalGoat.png", "res/test/blurryGoat.png",
             "res/test/greyGoat.png", "res/test/sharpGoat.bmp", "res/test/sepiaGoat.bmp",
             "res/test/greenGoat.bmp", "res/test/intenseGoat.bmp"));
-    for(String filepath:filesToCreate) {
+    for (String filepath:filesToCreate) {
       assertFalse(new File(filepath).exists());
     }
 
@@ -356,7 +356,7 @@ public class IMEControllerImplTest {
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
 
-    for(String filepath:filesToCreate) {
+    for (String filepath:filesToCreate) {
       File file = new File(filepath);
       assertTrue(file.exists());
       file.delete();

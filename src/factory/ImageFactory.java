@@ -25,7 +25,7 @@ public class ImageFactory {
   public Image createImage(String filePath) {
     Objects.requireNonNull(filePath);
     String[] pathSplit = filePath.split("\\.");
-    String fileType = pathSplit[(pathSplit.length-1)];
+    String fileType = pathSplit[(pathSplit.length - 1)];
     File file = new File(filePath);
     if (!file.exists()) {
       throw new IllegalArgumentException("File path given does not exist.");
@@ -54,11 +54,11 @@ public class ImageFactory {
    * @param type The type of image for formatting.
    * @return A new image from the fields.
    */
-  public Image createImage(int maxValue, IPixel[][] pixels, Image.Type type){
-    if (pixels == null || type == null){
+  public Image createImage(int maxValue, IPixel[][] pixels, Image.Type type) {
+    if (pixels == null || type == null) {
       throw new IllegalArgumentException("Inputs for created images must not be null.");
     }
-    switch(type) {
+    switch (type) {
       case PPM:
         return new ImagePPM(maxValue, pixels);
       case PNG:
@@ -82,14 +82,14 @@ public class ImageFactory {
    */
   public Image convertImage(Image image, String filePath) {
     String[] pathSplit = filePath.split("\\.");
-    String fileType = pathSplit[(pathSplit.length-1)];
+    String fileType = pathSplit[(pathSplit.length - 1)];
     IPixel[][] pixels = new IPixel[image.getHeight()][image.getWidth()];
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
         pixels[i][j] = image.getPixelAt(i, j);
       }
     }
-    switch(fileType) {
+    switch (fileType) {
       case "ppm":
         return new ImagePPM(image.getMaxValue(), pixels);
       case "png":

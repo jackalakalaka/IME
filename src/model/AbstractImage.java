@@ -5,6 +5,10 @@ import java.util.Objects;
 
 import model.funcobjs.ICommands;
 
+/**
+ * Shares identical information attributes between file formats, with subclasses mostly existing for
+ * filesystem-related functionality.
+ */
 public abstract class AbstractImage implements Image {
   protected IPixel[][] pixelArray;
   protected int width;

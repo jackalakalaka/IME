@@ -18,7 +18,12 @@ import view.IMEViewImpl;
 public class CommandScript {
   IMEView view;
 
-  public CommandScript(Scanner scanner, IMEView view){
+  /**
+   * Sets IO variables and prepares to read in a script.
+   * @param scanner scanner
+   * @param view IME view
+   */
+  public CommandScript(Scanner scanner, IMEView view) {
     this.view = Objects.requireNonNull(view);
     String filePath = scanner.next();
     Appendable appendable = new StringBuilder();
@@ -35,7 +40,7 @@ public class CommandScript {
   private Readable getReadable(String arg) {
     File file = new File(arg);
     Scanner sc = new Scanner(" ");
-    if (file.exists()){
+    if (file.exists()) {
       try {
         sc = new Scanner(new FileInputStream(arg));
       } catch (FileNotFoundException e) {
@@ -47,7 +52,7 @@ public class CommandScript {
         String s = sc.nextLine();
         builder.append(s).append(" ");
         inputCount++;
-        if(inputCount == 3){
+        if (inputCount == 3) {
           builder.append(System.lineSeparator());
           inputCount = 0;
         }

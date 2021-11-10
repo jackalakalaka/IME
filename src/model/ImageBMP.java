@@ -5,6 +5,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Representation of an image from a BMP file.
+ */
 public class ImageBMP extends ImageJPG {
 
   public ImageBMP(String filePath) {

@@ -12,6 +12,10 @@ import model.funcobjs.ConvertByHorizontal;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * Abstract image testing class that allows image formats to reuse structure-based logic for their
+ * pixels' data but extend with type-specific functionality.
+ */
 public abstract class ImageTest {
   // Factory obj whose methods are customized by image implementation.
   protected static ImageFactory imgFac = new ImageFactory();
@@ -34,13 +38,7 @@ public abstract class ImageTest {
   /**
    * Initialize data.
    */
-  public ImageTest() {
-  }
-
-  /**
-   * Initialize data.
-   */
-  public void setUp() {
+  protected void setUp() {
     mockPixels[0][0] = pixelOne;
     mockPixels[1][0] = pixelThree;
     mockPixels[0][1] = pixelTwo;

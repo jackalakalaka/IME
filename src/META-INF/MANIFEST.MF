@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: ImageManipulationEnhancement
+Class-Path: C:\Users\Jack\IntelliJ_Workspace\IME\src\
+

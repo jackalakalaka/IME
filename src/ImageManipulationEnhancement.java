@@ -1,9 +1,5 @@
-import java.util.Objects;
-
 import controller.IMEController;
 import controller.IMEControllerCompact;
-import model.IMEModelImpl;
-import view.IMEViewImpl;
 
 /**
  * The main class for running the controller.
@@ -20,4 +16,4 @@ public final class ImageManipulationEnhancement {
     ctrl.runIME();
   }
 
-  }
+}

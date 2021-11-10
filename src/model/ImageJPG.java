@@ -6,6 +6,9 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Representation of an image from a JPG file.
+ */
 public class ImageJPG extends AbstractImage {
   protected BufferedImage buff;
 
@@ -37,10 +40,10 @@ public class ImageJPG extends AbstractImage {
 
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++) {
-        int RGB = bufferedImage.getRGB(j, i);//note that the position call is inverted for JPG/PNG.
-        int red = (RGB >> 16) & 255;
-        int green = (RGB >> 8) & 255;
-        int blue = (RGB) & 255;
+        int rgb = bufferedImage.getRGB(j, i);//note that the position call is inverted for JPG/PNG.
+        int red = (rgb >> 16) & 255;
+        int green = (rgb >> 8) & 255;
+        int blue = (rgb) & 255;
         pixelArray[i][j] = new Pixel(255, red, green, blue);
       }
     }
@@ -86,11 +89,11 @@ public class ImageJPG extends AbstractImage {
         int red = this.pixelArray[i][j].getColors().get(IPixel.Color.Red);
         int green = this.pixelArray[i][j].getColors().get(IPixel.Color.Green);
         int blue = this.pixelArray[i][j].getColors().get(IPixel.Color.Blue);
-        int RGB = (alpha << 24);
-        RGB = RGB | (red << 16);
-        RGB = RGB | (green << 8);
-        RGB = RGB | (blue);
-        this.buff.setRGB(j,i,RGB);//note that the position call is inverted for JPG/PNG.
+        int rgb = (alpha << 24);
+        rgb = rgb | (red << 16);
+        rgb = rgb | (green << 8);
+        rgb = rgb | (blue);
+        this.buff.setRGB(j,i,rgb);//note that the position call is inverted for JPG/PNG.
       }
     }
   }
