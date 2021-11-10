@@ -38,10 +38,10 @@ public class CommandSharpen extends ACommandImageOp {
     for (int i = row - 2; i < row + 3; i++) {
       for (int j = column - 2; j < column + 3; j++) {
         try {
-          if (Math.abs(i -row) > 1 || Math.abs(j-column) > 1) {
-            colorValue = colorValue + image.getPixelAt(i,j).getColors().get(color)/-8;
+          if (Math.abs(i - row) > 1 || Math.abs(j - column) > 1) {
+            colorValue = colorValue + image.getPixelAt(i,j).getColors().get(color) / -8;
           } else if (Math.abs(i - row) == 1 || Math.abs(j - column) == 1) {
-            colorValue = colorValue + image.getPixelAt(i,j).getColors().get(color)/4;
+            colorValue = colorValue + image.getPixelAt(i,j).getColors().get(color) / 4;
           } else if (i == row && column == j) {
             colorValue = colorValue + image.getPixelAt(i,j).getColors().get(color);
           }

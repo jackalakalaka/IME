@@ -9,9 +9,6 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
-import model.funcobjs.ICommands;
-
-
 /**
  * Representation of an image from a PPM file.
  */

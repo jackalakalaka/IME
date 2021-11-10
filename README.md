@@ -1,40 +1,15 @@
 # Image Manipulation & Enhancement (IME)
-
-## To run IME:
-
-- Please run the ImageManipulationEnhancement.java class file's main method, with no arguments.
-
-## Commands for using IME:
-
-- To quit type: `quit` into the command line.
-- To load an image type: `load <image-name> <file-path>` into the command line.
-- To save an image type: `save <image-name> <file-name>` into the command line.
-- To change the brightness type: `brightness <image-name> <integer-change> <new-name>`.
-- To get a heat map of red in the img type `red <img_former> <img_new>` into the command line.
-- To get a heat map of intensity in the img type `intensity <img_former> <img_new>` into the command
-  line.
-- To flip the img horizontally type `horizontal <img_former> <img_new>` into the command line.
-- To get a heat map of green in the img type `green <img_former> <img_new>` into the command line.
-- To get a heat map of blue in the img type `blue <img_former> <img_new>` into the command line.
-- To flip the img vertically type `vertical <img_former> <img_new>` into the command line.
-- To get a heat map of the max value in the img type `value <img_former> <img_new>` into the command
-  line.
-- To get a heat map of luminosity in the img type `luma <img_former> <img_new>` into the command
-  line.
-
-Example script:
-
-```bash
-load dope_goat dope_goat.ppm
-
-brightness dope_goat 50 dope_goat-brighter
-red dope_goat dope_goat-redComponent
-vertical dope_goat dope_goat-vertFlip
-
-save dope_goat-brighter dope_goat-brighter.ppm
-save dope_goat-redComponent dope_goat-redComponent.ppm
-save dope_goat-vertFlip dope_goat-vertFlip.ppm
-```
+## Changes in pt2
+- In order to support a script entry to the app, we added a corresponding function class `CommandScript` that converts a given filepath to a readable for the controller.
+  - Additional tests for this were written in the controller test class `IMEControllerImplTest`.
+- To integrate the new commmands (blur, sharpening, greyscale, and sepia), we further implemented the `ICommands` interface in abstract-class-extending function classes.
+  - Tests for the new commands were appended to the function object testing class.
+  - The new commands are by default initialized by the model implementation's constructor.
+- Additional file formats were added through extension of the Image interface. Instead of inserting an abstract class into the mix, the format similarities and support from teh ImageIO library allowed the PNG and BMP classes to extend the JPG one with minimal add-ons.
+  - Conversion between these was tested via script in the controller test class.
+  - The workings of each variant of image class was abstractable, and so an abstract image test class `ImageTest` was created to be extended by the file format image implementations' corresponding testing classes. 
+  - ImageFactory was implemented and its construction cases populated for each file format to support.
+    - It is also utilized in the ImageTest abstract class and its children.
 
 ## Code Overview
 
@@ -60,6 +35,14 @@ save dope_goat-vertFlip dope_goat-vertFlip.ppm
                 - **Class ConvertByVertical**
                     - A function object for getting the pixel on the other side of the image
                       vertically.
+            - **Abstract Class ACommandImageOp**
+              - An abstract class for function objects that require the whole image to work.
+              - **Class CommandBlur**
+                - This function object creates a blurred version of the pixel.
+              - **Class CommandSharpen**
+                - Function object for sharpening an image pixel by pixel.
+              - **Class CommandSepia**
+                - Function object that returns the sepia version of a given pixel.
             - **Abstract Class ACommandsAbsolute**
                 - An abstract class for function objects that get a single value from pixels.
                 - **Class CommandsRed**
@@ -72,6 +55,8 @@ save dope_goat-vertFlip dope_goat-vertFlip.ppm
                     - A function object for getting the intensity of a pixel.
                 - **Class CommandsValue**
                     - A function object for getting the value of a pixel.
+                - **Class CommandGreyscale**
+                  - A function object that returns the greyscale version of a pixel.
             - **Abstract Class ACommandsMultiple**
                 - An abstract class for function objects that get multiple values from pixels.
                 - **Class CommandsLuma**
@@ -82,8 +67,14 @@ save dope_goat-vertFlip dope_goat-vertFlip.ppm
             - A representation of an IME model.
     - **Interface Image**
         - Interface for representing images.
-        - **Class ImagePpm**
+        - **Class ImagePPM**
             - Representation of an image from a PPM file.
+        - **Class ImageJPG**
+          - Representation of an image from a JPG file.
+        - **Class ImagePNG**
+            - Representation of an image from a PNG file.
+        - **Class ImageBMP**
+            - Representation of an image from a BMP file.
     - **Interface IPixel**
         - An interface for pixels of an image.
         - **Class Pixel**
@@ -106,16 +97,28 @@ save dope_goat-vertFlip dope_goat-vertFlip.ppm
     - **Class IMEControllerImplTest**
       - Test class for the controller implementation.
 - Package _model_:
+    - **Abstract Class ImageTest**
+      - **Class ImagePPMTest**
+        - Tests ImagePPM class's utility methods. Also checks that null cannot be input to methods,
+          including the constructor.
+      - **Class ImageJPGTest**
+        - Tests ImageJPG class's utility methods. Also checks that null cannot be input to methods,
+          including the constructor.
+      - **Class ImagePNGTest**
+          - Tests ImagePNG class's utility methods. Also checks that null cannot be input to methods,
+            including the constructor.
+      - **Class ImageBMPTest**
+          - Tests ImageBMP class's utility methods. Also checks that null cannot be input to methods,
+            including the constructor.
+    - **Class FunctionObjectTests**
+        - Test class for commands' function objects.
     - **Class IMEModelTest**
       - Tests IMEModelImpl class using standard assertions as well as multiple method calls in a
       single test method. Uses mock pixels for instantiating an image.
-    - **Class ImagePpmTest**
-      - Tests ImagePpm class's utility methods. Also checks that null cannot be input to methods,
-      including the constructor.
     - **Class PixelTest**
       - Employs a variety of looping and hashmap-factory methods to automate similar calls and
       simplify assertions, respectively. Tests the Pixel class.
-      **Class MockPixel**
+    - **Class MockPixel**
       - Simulates a pixel for the more simplistic testing of Image and IMEModel classes. Simplifies
       pixel construction and assertion.
 - Package _view_:

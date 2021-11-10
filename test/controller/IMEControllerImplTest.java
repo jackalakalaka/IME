@@ -3,9 +3,12 @@ package controller;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import model.IMEModel;
 import model.IMEModelImpl;
@@ -15,6 +18,7 @@ import view.IMEViewImpl;
 import view.InvalidMockAppendable;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -130,9 +134,9 @@ public class IMEControllerImplTest {
     Readable readable = new StringReader("load barney res/onePixelImage.ppm " +
             "brightness barney 10 ");
     IMEView view = new IMEViewImpl(appendable);
-
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+
     assertTrue(this.goodModel.containsImage("barney"));
     assertEquals(this.goodModel.getImageFromModel("barney").getType(), Image.Type.PPM);
   }
@@ -143,6 +147,7 @@ public class IMEControllerImplTest {
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, this.goodRead);
     test.runIME();
+
     String output = appendable.toString();
     assertEquals(menu +
             "\n" +
@@ -162,6 +167,7 @@ public class IMEControllerImplTest {
     Readable readable = new StringReader(stringWriter.toString());
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+
     String output = appendable.toString();
     assertEquals(menu +
             "\n" +
@@ -185,6 +191,7 @@ public class IMEControllerImplTest {
     Readable readable = new StringReader(stringWriter.toString());
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+
     String output = appendable.toString();
     assertEquals(menu +
             "\n" +
@@ -209,6 +216,7 @@ public class IMEControllerImplTest {
     Readable readable = new StringReader(stringWriter.toString());
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+
     String output = appendable.toString();
     assertEquals(menu +
             "\n" +
@@ -231,6 +239,7 @@ public class IMEControllerImplTest {
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+
     assertTrue(this.goodModel.containsImage("pixel"));
     assertEquals(this.goodModel.getImageFromModel("pixel").getType(), Image.Type.PPM);
     String output = appendable.toString();
@@ -251,6 +260,7 @@ public class IMEControllerImplTest {
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+
     assertTrue(this.goodModel.containsImage("pixel"));
     assertEquals(this.goodModel.getImageFromModel("pixel").getType(), Image.Type.PPM);
     String output = appendable.toString();
@@ -273,6 +283,7 @@ public class IMEControllerImplTest {
     IMEView view = new IMEViewImpl(appendable);
     IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
     test.runIME();
+
     assertTrue(this.goodModel.containsImage("bright"));
     assertEquals(this.goodModel.getImageFromModel("bright").getType(), Image.Type.PPM);
     String output = appendable.toString();
@@ -285,5 +296,70 @@ public class IMEControllerImplTest {
             "Please enter a command:\n" +
             "\n" +
             "Thank you for using IME!", output);
+  }
+
+  @Test
+  public void scriptEntryNotFound() {
+    String scriptPath = "iDontExist.txt";
+    Appendable appendable = new StringBuilder();
+    Readable readable = new StringReader("-file " + scriptPath);
+    IMEView view = new IMEViewImpl(appendable);
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+
+    String output = appendable.toString();
+    assertEquals(menu +
+            "\n" +
+            "Please enter a command:\n" +
+            "The file given was not valid.\n" +
+            "Thank you for using IME!", output);
+  }
+
+  @Test
+  public void scriptEntryInvalidFilename() {
+    String scriptPath = "iDontExistAndAmNotInTheRightFormat";
+    Appendable appendable = new StringBuilder();
+    Readable readable = new StringReader("-file " + scriptPath);
+    IMEView view = new IMEViewImpl(appendable);
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+
+    String output = appendable.toString();
+    assertEquals(menu +
+            "\n" +
+            "Please enter a command:\n" +
+            "The file given was not valid.\n" +
+            "Thank you for using IME!", output);
+  }
+
+  /**
+   * Ensures files, which demonstrate all IME functionality, are created with example script. Then,
+   * delete them.
+   */
+  @Test
+  public void scriptEntryDefault() {
+    String scriptPath = "script.txt";
+    ArrayList<String> filesToCreate = new ArrayList<>(Arrays.asList("res/test/redGoat.ppm",
+            "res/test/blueGoat.ppm",
+            "res/test/greenGoat.ppm", "res/test/intenseGoat.ppm", "res/test/valuedGoat.jpg",
+            "res/test/luminousGoat.jpg", "res/test/brightGoat.jpg", "res/test/darkGoat.jpg",
+            "res/test/horizontalGoat.png", "res/test/verticalGoat.png", "res/test/blurryGoat.png",
+            "res/test/greyGoat.png", "res/test/sharpGoat.bmp", "res/test/sepiaGoat.bmp",
+            "res/test/greenGoat.bmp", "res/test/intenseGoat.bmp"));
+    for (String filepath:filesToCreate) {
+      assertFalse(new File(filepath).exists());
+    }
+
+    Appendable appendable = new StringBuilder();
+    Readable readable = new StringReader("-file " + scriptPath);
+    IMEView view = new IMEViewImpl(appendable);
+    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    test.runIME();
+
+    for (String filepath:filesToCreate) {
+      File file = new File(filepath);
+      assertTrue(file.exists());
+      file.delete();
+    }
   }
 }

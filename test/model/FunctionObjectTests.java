@@ -154,4 +154,34 @@ public class FunctionObjectTests {
     assertEquals(95,blur.getPixelAt(1,1).getValue());
   }
 
+  @Test
+  public void testCommandSharpen() {
+    this.jpgModel.applyCommand("sharpen","jpg","sharpen");
+    Image sharpen = this.jpgModel.getImageFromModel("sharpen");
+    assertEquals(174,sharpen.getPixelAt(0,0).getValue());
+    assertEquals(211,sharpen.getPixelAt(0,1).getValue());
+    assertEquals(249,sharpen.getPixelAt(1,0).getValue());
+    assertEquals(255,sharpen.getPixelAt(1,1).getValue());
+  }
+
+  @Test
+  public void testCommandGreyscale() {
+    this.jpgModel.applyCommand("greyscale","jpg","greyscale");
+    Image greyscale = this.jpgModel.getImageFromModel("greyscale");
+    assertEquals(50,greyscale.getPixelAt(0,0).getValue());
+    assertEquals(100,greyscale.getPixelAt(0,1).getValue());
+    assertEquals(150,greyscale.getPixelAt(1,0).getValue());
+    assertEquals(250,greyscale.getPixelAt(1,1).getValue());
+  }
+
+  @Test
+  public void testCommandSepia() {
+    this.jpgModel.applyCommand("sepia","jpg","sepia");
+    Image sepia = this.jpgModel.getImageFromModel("sepia");
+    assertEquals(67,sepia.getPixelAt(0,0).getValue());
+    assertEquals(135,sepia.getPixelAt(0,1).getValue());
+    assertEquals(202,sepia.getPixelAt(1,0).getValue());
+    assertEquals(255,sepia.getPixelAt(1,1).getValue());
+  }
+
 }

@@ -62,7 +62,7 @@ public class IMEControllerCompact implements IMEController {
         break;
       }
       //Run the given script and end program.
-      if (command.equalsIgnoreCase("-file")){
+      if (command.equalsIgnoreCase("-file")) {
         new CommandScript(sc,this.view);
         break;
       }

@@ -1,6 +1,5 @@
 package model;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -13,7 +12,11 @@ import model.funcobjs.ConvertByHorizontal;
 
 import static org.junit.Assert.assertEquals;
 
-public class ImageTest {
+/**
+ * Abstract image testing class that allows image formats to reuse structure-based logic for their
+ * pixels' data but extend with type-specific functionality.
+ */
+public abstract class ImageTest {
   // Factory obj whose methods are customized by image implementation.
   protected static ImageFactory imgFac = new ImageFactory();
   protected static Image.Type imgType;
@@ -35,8 +38,7 @@ public class ImageTest {
   /**
    * Initialize data.
    */
-  @Before
-  public void setUp() {
+  protected void setUp() {
     mockPixels[0][0] = pixelOne;
     mockPixels[1][0] = pixelThree;
     mockPixels[0][1] = pixelTwo;
@@ -72,7 +74,7 @@ public class ImageTest {
   /**
    * Test an invalid null pixel array input to the 2-arg constructor.
    */
-  @Test(expected = NullPointerException.class)
+  @Test(expected = IllegalArgumentException.class)
   public void constructor2ArgPixelsNull() throws IllegalArgumentException {
     Image modelOne = imgFac.createImage(255, null, imgType);
   }
@@ -144,8 +146,8 @@ public class ImageTest {
    * Tests what should be identical pixel arrays of the same image in different image formats.
    */
   @Test
-  public void testLoading() {
-    String filepathNoExt = "dog"; // Example image for type-type comparison
+  public void testLoadingAndSameness() {
+    String filepathNoExt = "./res/goat"; // Example image for type-type comparison
 
     // Create a hashmap of each image type and other types that its type's pixels have been compared
     // with. Before comparison, each type's HashSet should be empty.
@@ -176,11 +178,11 @@ public class ImageTest {
         for (int i = 0; i < imgH; i++) {
           for (int j = 0; j < imgW; j++) {
             assertEquals(thisImg.getPixelAt(i,j).getColors().get(IPixel.Color.Red),
-                    thatImg.getPixelAt(i,j).getColors().get(IPixel.Color.Red),10);
+                    thatImg.getPixelAt(i,j).getColors().get(IPixel.Color.Red),20);
             assertEquals(thisImg.getPixelAt(i,j).getColors().get(IPixel.Color.Green),
-                    thatImg.getPixelAt(i,j).getColors().get(IPixel.Color.Green),10);
+                    thatImg.getPixelAt(i,j).getColors().get(IPixel.Color.Green),20);
             assertEquals(thisImg.getPixelAt(i,j).getColors().get(IPixel.Color.Blue),
-                    thatImg.getPixelAt(i,j).getColors().get(IPixel.Color.Blue),10);
+                    thatImg.getPixelAt(i,j).getColors().get(IPixel.Color.Blue),20);
           }
         }
       }
