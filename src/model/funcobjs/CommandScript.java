@@ -7,7 +7,7 @@ import java.io.StringReader;
 import java.util.Objects;
 import java.util.Scanner;
 
-import controller.IMEControllerCompact;
+import controller.IMEControllerText;
 import model.IMEModelImpl;
 import view.IMEView;
 import view.IMEViewImpl;
@@ -27,7 +27,7 @@ public class CommandScript {
     this.view = Objects.requireNonNull(view);
     String filePath = scanner.next();
     Appendable appendable = new StringBuilder();
-    new IMEControllerCompact(new IMEModelImpl(), new IMEViewImpl(appendable),
+    new IMEControllerText(new IMEModelImpl(), new IMEViewImpl(appendable),
             getReadable(filePath)).runIME();
   }
 

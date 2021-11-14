@@ -71,8 +71,8 @@ public class IMEControllerImplTest {
     this.goodRead = new StringReader("quit");
     this.emptyRead = new StringReader("");
     this.badView = new IMEViewImpl(new InvalidMockAppendable());
-    this.emptyReadModel = new IMEControllerCompact(goodModel, goodView, emptyRead);
-    this.badAppendableModel = new IMEControllerCompact(goodModel, badView, goodRead);
+    this.emptyReadModel = new IMEControllerText(goodModel, goodView, emptyRead);
+    this.badAppendableModel = new IMEControllerText(goodModel, badView, goodRead);
 
   }
 
@@ -88,17 +88,17 @@ public class IMEControllerImplTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testBadConstructionModel() {
-    this.test = new IMEControllerCompact(null, this.goodView, this.goodRead);
+    this.test = new IMEControllerText(null, this.goodView, this.goodRead);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testBadConstructionView() {
-    this.test = new IMEControllerCompact(this.goodModel, null, this.goodRead);
+    this.test = new IMEControllerText(this.goodModel, null, this.goodRead);
   }
 
   @Test(expected = IllegalArgumentException.class)
   public void testBadConstructionReadable() {
-    this.test = new IMEControllerCompact(this.goodModel, this.goodView, null);
+    this.test = new IMEControllerText(this.goodModel, this.goodView, null);
   }
 
   @Test(expected = IllegalStateException.class)
@@ -106,7 +106,7 @@ public class IMEControllerImplTest {
     Appendable appendable = new StringBuilder();
     Readable readable = new StringReader("");
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
   }
 
@@ -115,7 +115,7 @@ public class IMEControllerImplTest {
     Appendable appendable = new StringBuilder();
     Readable readable = new StringReader("load ");
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
   }
 
@@ -124,7 +124,7 @@ public class IMEControllerImplTest {
     Appendable appendable = new StringBuilder();
     Readable readable = new StringReader("load res/onePixelImage.ppm ");
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
   }
 
@@ -134,7 +134,7 @@ public class IMEControllerImplTest {
     Readable readable = new StringReader("load barney res/onePixelImage.ppm " +
             "brightness barney 10 ");
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     assertTrue(this.goodModel.containsImage("barney"));
@@ -145,7 +145,7 @@ public class IMEControllerImplTest {
   public void testSimpleRun() {
     Appendable appendable = new StringBuilder();
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, this.goodRead);
+    IMEController test = new IMEControllerText(this.goodModel, view, this.goodRead);
     test.runIME();
 
     String output = appendable.toString();
@@ -165,7 +165,7 @@ public class IMEControllerImplTest {
     printWriter.println("command pixel res/onePixelImage.ppm");
     printWriter.println("quit");
     Readable readable = new StringReader(stringWriter.toString());
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     String output = appendable.toString();
@@ -189,7 +189,7 @@ public class IMEControllerImplTest {
     printWriter.println("load pixel aFileThatDoesNotExist");
     printWriter.println("quit");
     Readable readable = new StringReader(stringWriter.toString());
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     String output = appendable.toString();
@@ -214,7 +214,7 @@ public class IMEControllerImplTest {
     printWriter.println("blue imageNotInModel blue");
     printWriter.println("quit");
     Readable readable = new StringReader(stringWriter.toString());
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     String output = appendable.toString();
@@ -237,7 +237,7 @@ public class IMEControllerImplTest {
     Appendable appendable = new StringBuilder();
     Readable readable = new StringReader("load pixel res/onePixelImage.ppm quit");
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     assertTrue(this.goodModel.containsImage("pixel"));
@@ -258,7 +258,7 @@ public class IMEControllerImplTest {
     Readable readable = new StringReader("load pixel res/onePixelImage.ppm " +
             "save pixel res/onePixelImage.ppm quit ");
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     assertTrue(this.goodModel.containsImage("pixel"));
@@ -281,7 +281,7 @@ public class IMEControllerImplTest {
     Readable readable = new StringReader("load pixel res/onePixelImage.ppm " +
             "brightness pixel  50 bright quit ");
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     assertTrue(this.goodModel.containsImage("bright"));
@@ -304,7 +304,7 @@ public class IMEControllerImplTest {
     Appendable appendable = new StringBuilder();
     Readable readable = new StringReader("-file " + scriptPath);
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     String output = appendable.toString();
@@ -321,7 +321,7 @@ public class IMEControllerImplTest {
     Appendable appendable = new StringBuilder();
     Readable readable = new StringReader("-file " + scriptPath);
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     String output = appendable.toString();
@@ -353,7 +353,7 @@ public class IMEControllerImplTest {
     Appendable appendable = new StringBuilder();
     Readable readable = new StringReader("-file " + scriptPath);
     IMEView view = new IMEViewImpl(appendable);
-    IMEController test = new IMEControllerCompact(this.goodModel, view, readable);
+    IMEController test = new IMEControllerText(this.goodModel, view, readable);
     test.runIME();
 
     for (String filepath:filesToCreate) {
