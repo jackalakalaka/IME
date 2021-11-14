@@ -10,7 +10,7 @@ import model.IMEModelImpl;
 import model.Image;
 import model.funcobjs.CommandScript;
 import view.IMEView;
-import view.IMEViewImpl;
+import view.IMEViewText;
 
 /**
  * This is the controller class for IME which by default prints to system out.
@@ -27,7 +27,7 @@ public class IMEControllerGUI implements IMEController {
   public IMEControllerGUI() {
     this.readable = new InputStreamReader(System.in);
     this.model = new IMEModelImpl();
-    this.view = new IMEViewImpl();
+    this.view = new IMEViewText();
   }
 
   /**
