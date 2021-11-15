@@ -359,7 +359,7 @@ public class IMEControllerImplTest {
     for (String filepath:filesToCreate) {
       File file = new File(filepath);
       assertTrue(file.exists());
-      file.delete();
+      assertTrue(file.delete());
     }
   }
 }

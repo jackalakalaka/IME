@@ -37,7 +37,7 @@ public class CommandSharpen extends ACommandImageOp {
     int colorValue = 0;
     for (int i = row - 2; i < row + 3; i++) {
       for (int j = column - 2; j < column + 3; j++) {
-        try {
+        if (i >= 0 && i <= image.getHeight() - 1 && j >= 0 && j <= image.getWidth() - 1) {
           if (Math.abs(i - row) > 1 || Math.abs(j - column) > 1) {
             colorValue = colorValue + image.getPixelAt(i,j).getColors().get(color) / -8;
           } else if (Math.abs(i - row) == 1 || Math.abs(j - column) == 1) {
@@ -45,8 +45,6 @@ public class CommandSharpen extends ACommandImageOp {
           } else if (i == row && column == j) {
             colorValue = colorValue + image.getPixelAt(i,j).getColors().get(color);
           }
-        } catch (ArrayIndexOutOfBoundsException ignored) {
-
         }
       }
     }

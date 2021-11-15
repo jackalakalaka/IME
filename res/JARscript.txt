@@ -1,0 +1,38 @@
+load goatPPM goat.ppm
+load goatJPG goat.jpg
+load goatPNG goat.png
+load goatBMP goat.bmp
+
+red goatPPM redGoatPPM
+blue goatJPG blueGoatJPG
+green goatPNG greenGoatPNG
+intensity goatBMP intenseGoatBMP
+value goatPPM valuedGoatPPM
+luma goatJPG luminousGoatJPG
+brightness goatPNG 50 brightGoatPNG
+brightness goatBMP -50 darkGoatBMP
+horizontal goatPPM horizontalGoatPPM
+vertical goatJPG verticalGoatJPG
+blur goatPNG blurryGoatPNG
+greyscale goatBMP greyGoatBMP
+sharpen goatPPM sharpGoatPPM
+sepia goatJPG sepiaGoatJPG
+
+save redGoatPPM test/redGoat.ppm
+save blueGoatJPG test/blueGoat.ppm
+save greenGoatPNG test/greenGoat.ppm
+save intenseGoatBMP test/intenseGoat.ppm
+save valuedGoatPPM test/valuedGoat.jpg
+save luminousGoatJPG test/luminousGoat.jpg
+save brightGoatPNG test/brightGoat.jpg
+save darkGoatBMP test/darkGoat.jpg
+save horizontalGoatPPM test/horizontalGoat.png
+save verticalGoatJPG test/verticalGoat.png
+save blurryGoatPNG test/blurryGoat.png
+save greyGoatBMP test/greyGoat.png
+save sharpGoatPPM test/sharpGoat.bmp
+save sepiaGoatJPG test/sepiaGoat.bmp
+save greenGoatPNG test/greenGoat.bmp
+save intenseGoatBMP test/intenseGoat.bmp
+
+quit

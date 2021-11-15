@@ -141,7 +141,7 @@ public class IMEModelTest {
    */
   @Test
   public void getCommandList() {
-    assertEquals(new ArrayList<>(mtCommands.values()), this.mtModel.getCommandList());
+    assertEquals(new ArrayList<>(mtCommands.values()), mtModel.getCommandList());
     assertEquals(new ArrayList<>(this.model1Cmds.values()), this.model1.getCommandList());
   }
 

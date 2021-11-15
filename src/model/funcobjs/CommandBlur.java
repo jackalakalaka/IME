@@ -38,7 +38,7 @@ public class CommandBlur extends ACommandImageOp {
     int colorValue = 0;
     for (int i = row - 1; i < row + 2; i++) {
       for (int j = column - 1; j < column + 2; j++) {
-        try {
+        if (i >= 0 && i <= image.getHeight() - 1 && j >= 0 && j <= image.getWidth() - 1) {
           switch (Math.abs(i - row) + Math.abs(j - column)) {
             case 0:
               colorValue = colorValue + image.getPixelAt(i, j).getColors().get(color) / 4;
@@ -51,7 +51,6 @@ public class CommandBlur extends ACommandImageOp {
               break;
             default:
           }
-        } catch (ArrayIndexOutOfBoundsException ignored) {
         }
       }
     }
