@@ -11,14 +11,14 @@ import model.funcobjs.ICommands;
 /**
  * Implementation of an image viewer.
  */
-public class IMEViewImpl implements IMEView {
+public class IMEViewText implements IMEView {
   private final Appendable appendable;
 
 
   /**
    * Default constructor for the view.
    */
-  public IMEViewImpl() {
+  public IMEViewText() {
     this.appendable = System.out;
   }
 
@@ -27,7 +27,7 @@ public class IMEViewImpl implements IMEView {
    *
    * @param appendable The appendable for the model or messages.
    */
-  public IMEViewImpl(Appendable appendable) {
+  public IMEViewText(Appendable appendable) {
     this.appendable = Objects.requireNonNull(appendable);
   }
 

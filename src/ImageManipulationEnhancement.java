@@ -1,5 +1,4 @@
 import controller.IMEController;
-import controller.IMEControllerCompact;
 
 /**
  * The main class for running the controller.
@@ -12,7 +11,10 @@ public final class ImageManipulationEnhancement {
    * @param args Arguments to augment how main runs. (Not implemented)
    */
   public static void main(String[] args) {
-    IMEController ctrl = new IMEControllerCompact();
-    ctrl.runIME();
+    IMEController ctrlr;
+
+    // N/A
+    // -file path-of-script-file
+    // -text
   }
 }

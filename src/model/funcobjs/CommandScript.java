@@ -7,10 +7,10 @@ import java.io.StringReader;
 import java.util.Objects;
 import java.util.Scanner;
 
-import controller.IMEControllerCompact;
+import controller.IMEControllerText;
 import model.IMEModelImpl;
 import view.IMEView;
-import view.IMEViewImpl;
+import view.IMEViewText;
 
 /**
  * A function object that takes a file path to a text document and then runs an instance of IME.
@@ -27,7 +27,7 @@ public class CommandScript {
     this.view = Objects.requireNonNull(view);
     String filePath = scanner.next();
     Appendable appendable = new StringBuilder();
-    new IMEControllerCompact(new IMEModelImpl(), new IMEViewImpl(appendable),
+    new IMEControllerText(new IMEModelImpl(), new IMEViewText(appendable),
             getReadable(filePath)).runIME();
   }
 

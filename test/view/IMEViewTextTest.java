@@ -24,20 +24,20 @@ import static org.junit.Assert.assertEquals;
  * Tests the view, which takes in or has a default list of commands that give the menu. The view
  * also allows system messaging whose string appends are tested.
  */
-public class IMEViewImplTest {
+public class IMEViewTextTest {
   private static final List<ICommands> mtCommands = new ArrayList<>();
   private final List<ICommands> allCommands;
   private static final Appendable invalidMockAppendable = new InvalidMockAppendable();
   private final Appendable appendable1 = new StringWriter();
   private final Appendable appendable2 = new StringWriter();
-  private final IMEViewImpl invalidAppendableView = new IMEViewImpl(invalidMockAppendable);
-  private final IMEViewImpl view1 = new IMEViewImpl(appendable1);
-  private final IMEViewImpl view2 = new IMEViewImpl(appendable2);
+  private final IMEViewText invalidAppendableView = new IMEViewText(invalidMockAppendable);
+  private final IMEViewText view1 = new IMEViewText(appendable1);
+  private final IMEViewText view2 = new IMEViewText(appendable2);
 
   /**
    * Initialize test variables.
    */
-  public IMEViewImplTest() {
+  public IMEViewTextTest() {
     HashMap<String, ICommands> commandsHashmap = new HashMap<>();
     commandsHashmap.put("horizontal", new ConvertByHorizontal());
     commandsHashmap.put("vertical", new ConvertByVertical());
@@ -55,11 +55,11 @@ public class IMEViewImplTest {
    */
   @Test(expected = NullPointerException.class)
   public void constructor1ArgAppendableNull() throws IOException {
-    IMEViewImpl invalidView = new IMEViewImpl(null);
+    IMEViewText invalidView = new IMEViewText(null);
   }
 
   /**
-   * Test invalid null appendable to method printMenu of IMEViewImpl class.
+   * Test invalid null appendable to method printMenu of IMEViewText class.
    */
   @Test(expected = NullPointerException.class)
   public void printMenuNullAppendable() throws IOException {
@@ -67,7 +67,7 @@ public class IMEViewImplTest {
   }
 
   /**
-   * Test method printMenu of IMEViewImpl class when appendable cannot be appended to.
+   * Test method printMenu of IMEViewText class when appendable cannot be appended to.
    *
    * @throws IOException when the appendable cannot be used
    */
@@ -77,7 +77,7 @@ public class IMEViewImplTest {
   }
 
   /**
-   * Test invalid null string to method renderMsg of IMEViewImpl class.
+   * Test invalid null string to method renderMsg of IMEViewText class.
    */
   @Test(expected = NullPointerException.class)
   public void renderMsgNullStr() throws IllegalStateException {
@@ -85,7 +85,7 @@ public class IMEViewImplTest {
   }
 
   /**
-   * Test method renderMsg of IMEViewImpl class when appendable cannot be appended to.
+   * Test method renderMsg of IMEViewText class when appendable cannot be appended to.
    *
    * @throws IOException when the appendable cannot be used
    */
@@ -95,7 +95,7 @@ public class IMEViewImplTest {
   }
 
   /**
-   * Test default behavior of method printMenu of IMEViewImpl class.
+   * Test default behavior of method printMenu of IMEViewText class.
    *
    * @throws IOException when the appendable cannot be used
    */
@@ -133,7 +133,7 @@ public class IMEViewImplTest {
   }
 
   /**
-   * Test default behavior of method renderMsg of IMEViewImpl class.
+   * Test default behavior of method renderMsg of IMEViewText class.
    *
    * @throws IOException when the appendable cannot be used
    */

@@ -10,13 +10,13 @@ import model.IMEModelImpl;
 import model.Image;
 import model.funcobjs.CommandScript;
 import view.IMEView;
-import view.IMEViewImpl;
+import view.IMEViewText;
 
 /**
  * This is the controller class for IME which by default prints to system out.
  * And takes input from system in. It can be created with custom model/view/readable.
  */
-public class IMEControllerCompact implements IMEController {
+public class IMEControllerGUI implements IMEController {
   private final IMEModel model;
   private final IMEView view;
   private final Readable readable;
@@ -24,10 +24,10 @@ public class IMEControllerCompact implements IMEController {
   /**
    * This is the default constructor which sets all fields to their default and the scanner.
    */
-  public IMEControllerCompact() {
+  public IMEControllerGUI() {
     this.readable = new InputStreamReader(System.in);
     this.model = new IMEModelImpl();
-    this.view = new IMEViewImpl();
+    this.view = new IMEViewText();
   }
 
   /**
@@ -37,7 +37,7 @@ public class IMEControllerCompact implements IMEController {
    * @param view     View has the appendable.
    * @param readable Scanner gives info to the controller.
    */
-  public IMEControllerCompact(IMEModel model, IMEView view, Readable readable) {
+  public IMEControllerGUI(IMEModel model, IMEView view, Readable readable) {
     if (model == null || view == null || readable == null) {
       throw new IllegalArgumentException("Controller cannot take null as an argument.");
     }
