@@ -6,16 +6,13 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 
 import javax.swing.*;
-import javax.swing.text.View;
 
 import model.IPixel;
 import model.Image;
-import model.Pixel;
 
 
 /**
@@ -34,7 +31,7 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
   private final JButton load;
   private final JButton save;
   private final JFileChooser fc;
-  private final List<String> images = new Vector<>();
+  private final Vector<String> images = new Vector<>();
   private JComboBox<String> imageSelection;
 
   private JTextArea systemMessages;
@@ -62,7 +59,7 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
 
     fc = new JFileChooser();
 
-    this.systemMessages = new JTextArea(1,30);
+    this.systemMessages = new JTextArea(1, 30);
     this.systemMessages.setEditable(false);
 
     this.buttonPanel = new JPanel();
@@ -85,7 +82,7 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
     this.filePanel.add(this.systemMessages);
     this.filePanel.add(this.load);
     this.filePanel.add(this.save);
-    this.imageSelection = new JComboBox<String>((Vector<String>) this.images);
+    this.imageSelection = new JComboBox<>(this.images);
     this.filePanel.add(this.imageSelection);
     this.imageSelection.addActionListener(this);
     this.imageSelection.setPrototypeDisplayValue("long file name goes here");
@@ -104,13 +101,20 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == imageSelection) {
+      //drop down menu swap to selected image
+      String imageName = (String) imageSelection.getSelectedItem();
+      for (ViewListener listener : listenerList) {
+        listener.selectImageEvent(imageName);
+      }
+    }
     if (e.getSource() == load) {
       int returnVal = fc.showOpenDialog(this);
 
       if (returnVal == JFileChooser.APPROVE_OPTION) {
         File file = fc.getSelectedFile();
         //This is where the controller would be called to load the file.
-        for (ViewListener listener : listenerList){
+        for (ViewListener listener : listenerList) {
           listener.loadFileEvent(file.getName());
         }
       } else {
@@ -123,7 +127,7 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
       if (returnValue == JFileChooser.APPROVE_OPTION) {
         File file = fc.getSelectedFile();
         //This is where the controller would be called to save the file.
-        for (ViewListener listener : listenerList){
+        for (ViewListener listener : listenerList) {
           listener.saveFileEvent(file.getName());
         }
       } else {
@@ -137,11 +141,16 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
   public void refresh(Image selectedImage) {
     BufferedImage image = getBuff(selectedImage);
     JLabel picture = new JLabel(new ImageIcon(image));
+    this.imagePanel.removeAll();
     this.imagePanel.add(picture);
     this.imagePanel.updateUI();
-
-    for (ViewListener listener : listenerList){
-      images.addAll(listener.getImageNames());
+    for (ViewListener listener : listenerList) {
+      for (int i = 0; i < listener.getImageNames().size(); i++) {
+        boolean contains = images.contains(listener.getImageNames().get(i));
+        if (!contains) {
+          images.add(listener.getImageNames().get(i));
+        }
+      }
     }
   }
 
@@ -160,20 +169,20 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
     this.setVisible(show);
   }
 
-  private BufferedImage getBuff(Image image){
+  private BufferedImage getBuff(Image image) {
     BufferedImage buff = new BufferedImage(image.getWidth(), image.getHeight(),
             BufferedImage.TYPE_3BYTE_BGR);
     for (int i = 0; i < image.getHeight(); i++) {
       for (int j = 0; j < image.getWidth(); j++) {
         int alpha = 255;
-        int red = image.getPixelAt(i,j).getColors().get(IPixel.Color.Red);
-        int green = image.getPixelAt(i,j).getColors().get(IPixel.Color.Green);
-        int blue = image.getPixelAt(i,j).getColors().get(IPixel.Color.Blue);
+        int red = image.getPixelAt(i, j).getColors().get(IPixel.Color.Red);
+        int green = image.getPixelAt(i, j).getColors().get(IPixel.Color.Green);
+        int blue = image.getPixelAt(i, j).getColors().get(IPixel.Color.Blue);
         int rgb = (alpha << 24);
         rgb = rgb | (red << 16);
         rgb = rgb | (green << 8);
         rgb = rgb | (blue);
-        buff.setRGB(j,i,rgb);//note that the position call is inverted for JPG/PNG.
+        buff.setRGB(j, i, rgb);//note that the position call is inverted for JPG/PNG.
       }
     }
     return buff;

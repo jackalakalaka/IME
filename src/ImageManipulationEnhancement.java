@@ -1,6 +1,5 @@
 import controller.GUIControllerImpl;
 import controller.IGUIController;
-import controller.IMEController;
 import model.IMEModelImpl;
 import view.IMEViewGUI;
 

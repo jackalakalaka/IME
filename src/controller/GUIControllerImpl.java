@@ -55,7 +55,7 @@ public class GUIControllerImpl implements IGUIController, ViewListener {
 
   @Override
   public void selectImageEvent(String name) {
-    this.selectedImage = this.model.getImageFromModel(name);
+    this.switchImage(name);
     this.view.refresh(this.selectedImage);
   }
 
