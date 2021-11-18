@@ -99,9 +99,9 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
     this.systemMessages = new JTextArea(1, 30);
     this.systemMessages.setEditable(false);
 
+
     this.buttonPanel = new JPanel();
     this.buttonPanel.setBackground(Color.GRAY);
-    this.buttonPanel.setLayout(new GridLayout(12, 1));
     this.functionButtons.add(this.Red);
     this.functionButtons.add(this.Green);
     this.functionButtons.add(this.Blue);
@@ -114,6 +114,7 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
     this.functionButtons.add(this.Intensity);
     this.functionButtons.add(this.Horizontal);
     this.functionButtons.add(this.Vertical);
+    this.buttonPanel.setLayout(new GridLayout(this.functionButtons.size(), 1));
     for (JButton button : functionButtons) {
       button.addActionListener(this);
       buttonPanel.add(button);
