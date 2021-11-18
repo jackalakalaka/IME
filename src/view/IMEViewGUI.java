@@ -22,6 +22,16 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
   private final JButton Red;
   private final JButton Green;
   private final JButton Blue;
+  private final JButton Horizontal;
+  private final JButton Vertical;
+  private final JButton Sepia;
+  private final JButton Greyscale;
+  private final JButton Intensity;
+  private final JButton Blur;
+  private final JButton Sharpen;
+  private final JButton Luma;
+  private final JButton Value;
+  private final List<JButton> functionButtons = new ArrayList<>();
 
   private final JPanel buttonPanel;
   private final JPanel imagePanel;
@@ -32,7 +42,7 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
   private final JButton save;
   private final JFileChooser fc;
   private final Vector<String> images = new Vector<>();
-  private JComboBox<String> imageSelection;
+  private final JComboBox<String> imageSelection;
 
   private JTextArea systemMessages;
   private final List<ViewListener> listenerList;
@@ -43,19 +53,46 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
     setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     this.Red = new JButton("Red");
-    this.Red.setActionCommand("Red");
+    this.Red.setActionCommand("red");
 
     this.Green = new JButton("Green");
-    this.Green.setActionCommand("Green");
+    this.Green.setActionCommand("green");
 
     this.Blue = new JButton("Blue");
-    this.Blue.setActionCommand("Blue");
+    this.Blue.setActionCommand("blue");
 
     this.save = new JButton("Save");
     this.save.addActionListener(this);
 
     this.load = new JButton("Load");
     this.load.addActionListener(this);
+
+    this.Blur = new JButton("Blur");
+    this.Blur.setActionCommand("blur");
+
+    this.Sharpen = new JButton("Sharpen");
+    this.Sharpen.setActionCommand("sharpen");
+
+    this.Luma = new JButton("Luma");
+    this.Luma.setActionCommand("luma");
+
+    this.Value = new JButton("Value");
+    this.Value.setActionCommand("value");
+
+    this.Greyscale = new JButton("Greyscale");
+    this.Greyscale.setActionCommand("greyscale");
+
+    this.Sepia = new JButton("Sepia");
+    this.Sepia.setActionCommand("sepia");
+
+    this.Intensity = new JButton("Intensity");
+    this.Intensity.setActionCommand("intensity");
+
+    this.Horizontal = new JButton("Horizontal");
+    this.Horizontal.setActionCommand("horizontal");
+
+    this.Vertical = new JButton("Vertical");
+    this.Vertical.setActionCommand("vertical");
 
     fc = new JFileChooser();
 
@@ -64,10 +101,34 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
 
     this.buttonPanel = new JPanel();
     this.buttonPanel.setBackground(Color.GRAY);
-    this.buttonPanel.setLayout(new GridLayout(10, 1));
+    this.buttonPanel.setLayout(new GridLayout(12, 1));
     this.buttonPanel.add(this.Red);
     this.buttonPanel.add(this.Green);
     this.buttonPanel.add(this.Blue);
+    this.buttonPanel.add(this.Blur);
+    this.buttonPanel.add(this.Sharpen);
+    this.buttonPanel.add(this.Luma);
+    this.buttonPanel.add(this.Value);
+    this.buttonPanel.add(this.Greyscale);
+    this.buttonPanel.add(this.Sepia);
+    this.buttonPanel.add(this.Intensity);
+    this.buttonPanel.add(this.Horizontal);
+    this.buttonPanel.add(this.Vertical);
+    this.functionButtons.add(this.Red);
+    this.functionButtons.add(this.Green);
+    this.functionButtons.add(this.Blue);
+    this.functionButtons.add(this.Blur);
+    this.functionButtons.add(this.Sharpen);
+    this.functionButtons.add(this.Luma);
+    this.functionButtons.add(this.Value);
+    this.functionButtons.add(this.Greyscale);
+    this.functionButtons.add(this.Sepia);
+    this.functionButtons.add(this.Intensity);
+    this.functionButtons.add(this.Horizontal);
+    this.functionButtons.add(this.Vertical);
+    for (JButton button : functionButtons) {
+      button.addActionListener(this);
+    }
 
     this.imagePanel = new JPanel();
     this.imagePanel.setBackground(Color.BLACK);
@@ -101,6 +162,9 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
+    if (e == null) {
+      throw new IllegalArgumentException("Action event is null;");
+    }
     if (e.getSource() == imageSelection) {
       //drop down menu swap to selected image
       String imageName = (String) imageSelection.getSelectedItem();
@@ -135,7 +199,19 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
         this.systemMessages.append("Image not saved; User canceled selection.");
       }
     }
+    if (this.functionButtons.contains(e.getSource())) {
+
+      for (ViewListener listener : listenerList) {
+        listener.commandEvent(e.getActionCommand());
+      }
+      }
+    this.systemMessages.setText("");
+    this.systemMessages.append(e.getActionCommand());
+
+    this.systemMessages.append(" successful!");
+
   }
+
 
   @Override
   public void refresh(Image selectedImage) {

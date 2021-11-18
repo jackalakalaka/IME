@@ -10,7 +10,7 @@ public abstract class AHistogram implements IHistogram {
 
   public AHistogram(Image img) {
     counts = new HashMap<>();
-    for (int i = 0; i < 256; i++) {
+    for (int i = 0; i < 255; i++) {
       counts.put(i,0);
     }
     for (int i = 0; i < img.getHeight(); i++) {

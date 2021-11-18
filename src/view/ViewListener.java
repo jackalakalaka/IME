@@ -11,4 +11,6 @@ public interface ViewListener {
   void saveFileEvent(String name);
   void selectImageEvent(String name);
   List<String> getImageNames();
+
+  void commandEvent(String actionCommand);
 }

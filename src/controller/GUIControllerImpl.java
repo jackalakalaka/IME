@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
@@ -15,6 +16,7 @@ public class GUIControllerImpl implements IGUIController, ViewListener {
   private final IMEModel model;
   private final IGUIView view;
   private Image selectedImage;
+  private String selectedImageName = "";
   private List<String> images;
 
   public GUIControllerImpl(IMEModel model, IGUIView view) {
@@ -22,7 +24,7 @@ public class GUIControllerImpl implements IGUIController, ViewListener {
     this.view = Objects.requireNonNull(view);
     this.view.addListener(this);
     this.selectedImage = null;
-    this.images = new Vector<>();
+    this.images = new ArrayList<>();
   }
 
   @Override
@@ -38,12 +40,13 @@ public class GUIControllerImpl implements IGUIController, ViewListener {
   @Override
   public void switchImage(String imageName) {
     this.selectedImage = this.model.getImageFromModel(imageName);
+    this.selectedImageName = imageName;
   }
 
   @Override
   public void loadFileEvent(String name) {
     this.model.addImage(name,new ImageFactory().createImage(name));
-    this.switchImage(name);
+    this.selectImageEvent(name);
     this.images.add(name);
     this.view.refresh(this.selectedImage);
   }
@@ -62,5 +65,12 @@ public class GUIControllerImpl implements IGUIController, ViewListener {
   @Override
   public List<String> getImageNames() {
     return this.images;
+  }
+
+  @Override
+  public void commandEvent(String actionCommand) {
+    this.model.applyCommand(actionCommand,selectedImageName,selectedImageName);
+    this.selectedImage = this.model.getImageFromModel(selectedImageName);
+    this.view.refresh(selectedImage);
   }
 }

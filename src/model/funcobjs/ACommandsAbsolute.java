@@ -1,5 +1,7 @@
 package model.funcobjs;
 
+import java.util.Objects;
+
 import factory.ImageFactory;
 import model.IPixel;
 import model.Image;
@@ -17,6 +19,7 @@ public abstract class ACommandsAbsolute implements ICommands {
    * @return the function result
    */
   public Image apply(Image initModel) {
+    Objects.requireNonNull(initModel);
     int h = initModel.getHeight();
     int w = initModel.getWidth();
     Pixel[][] pixels = new Pixel[h][w];
