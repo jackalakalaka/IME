@@ -102,18 +102,6 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
     this.buttonPanel = new JPanel();
     this.buttonPanel.setBackground(Color.GRAY);
     this.buttonPanel.setLayout(new GridLayout(12, 1));
-    this.buttonPanel.add(this.Red);
-    this.buttonPanel.add(this.Green);
-    this.buttonPanel.add(this.Blue);
-    this.buttonPanel.add(this.Blur);
-    this.buttonPanel.add(this.Sharpen);
-    this.buttonPanel.add(this.Luma);
-    this.buttonPanel.add(this.Value);
-    this.buttonPanel.add(this.Greyscale);
-    this.buttonPanel.add(this.Sepia);
-    this.buttonPanel.add(this.Intensity);
-    this.buttonPanel.add(this.Horizontal);
-    this.buttonPanel.add(this.Vertical);
     this.functionButtons.add(this.Red);
     this.functionButtons.add(this.Green);
     this.functionButtons.add(this.Blue);
@@ -128,6 +116,7 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
     this.functionButtons.add(this.Vertical);
     for (JButton button : functionButtons) {
       button.addActionListener(this);
+      buttonPanel.add(button);
     }
 
     this.imagePanel = new JPanel();
@@ -199,7 +188,7 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
         this.systemMessages.append("Image not saved; User canceled selection.");
       }
     }
-    if (this.functionButtons.contains(e.getSource())) {
+    if (this.functionButtons.contains((JButton) e.getSource())) {
 
       for (ViewListener listener : listenerList) {
         listener.commandEvent(e.getActionCommand());
