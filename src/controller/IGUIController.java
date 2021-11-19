@@ -8,6 +8,4 @@ public interface IGUIController {
 
   void performCommand();
 
-  void switchImage(String imageName);
-
 }

@@ -2,7 +2,6 @@ package view;
 
 import java.util.HashMap;
 
-import model.IPixel;
 import model.Image;
 
 public abstract class AHistogram implements IHistogram {

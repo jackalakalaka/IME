@@ -134,6 +134,7 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
     this.filePanel.add(this.load);
     this.filePanel.add(this.save);
     this.imageSelection = new JComboBox<>(this.images);
+    this.imageSelection.setActionCommand("Image selection");
     this.filePanel.add(this.imageSelection);
     this.imageSelection.addActionListener(this);
     this.imageSelection.setPrototypeDisplayValue("long file name goes here");
@@ -189,11 +190,12 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
         this.systemMessages.append("Image not saved; User canceled selection.");
       }
     }
-    if (this.functionButtons.contains((JButton) e.getSource())) {
-
-      for (ViewListener listener : listenerList) {
-        listener.commandEvent(e.getActionCommand());
-      }
+     for (JButton button : functionButtons) {
+       if (e.getSource() == button) {
+         for (ViewListener listener : listenerList) {
+           listener.commandEvent(e.getActionCommand());
+         }
+       }
       }
     this.systemMessages.setText("");
     this.systemMessages.append(e.getActionCommand());

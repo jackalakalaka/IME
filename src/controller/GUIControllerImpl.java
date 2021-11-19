@@ -1,10 +1,8 @@
 package controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Vector;
 
 import factory.ImageFactory;
 import model.IMEModel;
@@ -17,7 +15,7 @@ public class GUIControllerImpl implements IGUIController, ViewListener {
   private final IGUIView view;
   private Image selectedImage;
   private String selectedImageName = "";
-  private List<String> images;
+  private final List<String> images;
 
   public GUIControllerImpl(IMEModel model, IGUIView view) {
     this.model = Objects.requireNonNull(model);
@@ -38,12 +36,6 @@ public class GUIControllerImpl implements IGUIController, ViewListener {
   }
 
   @Override
-  public void switchImage(String imageName) {
-    this.selectedImage = this.model.getImageFromModel(imageName);
-    this.selectedImageName = imageName;
-  }
-
-  @Override
   public void loadFileEvent(String name) {
     this.model.addImage(name,new ImageFactory().createImage(name));
     this.selectImageEvent(name);
@@ -60,6 +52,11 @@ public class GUIControllerImpl implements IGUIController, ViewListener {
   public void selectImageEvent(String name) {
     this.switchImage(name);
     this.view.refresh(this.selectedImage);
+  }
+
+  private void switchImage(String imageName) {
+    this.selectedImage = this.model.getImageFromModel(imageName);
+    this.selectedImageName = imageName;
   }
 
   @Override
