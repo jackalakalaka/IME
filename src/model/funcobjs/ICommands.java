@@ -2,7 +2,7 @@ package model.funcobjs;
 
 import java.util.function.Function;
 
-import model.Image;
+import model.image.Image;
 
 /**
  * An interface for command function objects. Can take in a subclass-decided amount of arguments.

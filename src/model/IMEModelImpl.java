@@ -17,6 +17,7 @@ import model.funcobjs.CommandsValue;
 import model.funcobjs.ConvertByHorizontal;
 import model.funcobjs.ConvertByVertical;
 import model.funcobjs.ICommands;
+import model.image.Image;
 
 /**
  * A representation of an IME model.

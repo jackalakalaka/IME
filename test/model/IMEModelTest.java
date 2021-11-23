@@ -14,6 +14,10 @@ import model.funcobjs.CommandsValue;
 import model.funcobjs.ConvertByHorizontal;
 import model.funcobjs.ConvertByVertical;
 import model.funcobjs.ICommands;
+import model.image.IPixel;
+import model.image.Image;
+import model.image.ImagePPM;
+import model.image.MockPixel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

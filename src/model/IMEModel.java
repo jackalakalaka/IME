@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 
 import model.funcobjs.ICommands;
+import model.image.Image;
 
 /**
  * Interface for models used by IME.

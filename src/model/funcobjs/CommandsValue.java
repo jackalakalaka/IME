@@ -1,6 +1,6 @@
 package model.funcobjs;
 
-import model.IPixel;
+import model.image.IPixel;
 
 /**
  * A function object for getting the value of a pixel.

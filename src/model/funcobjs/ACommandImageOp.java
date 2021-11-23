@@ -1,8 +1,8 @@
 package model.funcobjs;
 
 import factory.ImageFactory;
-import model.IPixel;
-import model.Image;
+import model.image.IPixel;
+import model.image.Image;
 
 /**
  * An abstract class for function objects that require the whole image to work.

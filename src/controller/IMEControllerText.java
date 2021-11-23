@@ -7,9 +7,9 @@ import java.util.Scanner;
 import factory.ImageFactory;
 import model.IMEModel;
 import model.IMEModelImpl;
-import model.Image;
+import model.image.Image;
 import model.funcobjs.CommandScript;
-import view.IMEView;
+import view.IMETextView;
 import view.IMEViewText;
 
 /**
@@ -18,7 +18,7 @@ import view.IMEViewText;
  */
 public class IMEControllerText implements IMEController {
   private final IMEModel model;
-  private final IMEView view;
+  private final IMETextView view;
   private final Readable readable;
 
   /**
@@ -37,7 +37,7 @@ public class IMEControllerText implements IMEController {
    * @param view     View has the appendable.
    * @param readable Scanner gives info to the controller.
    */
-  public IMEControllerText(IMEModel model, IMEView view, Readable readable) {
+  public IMEControllerText(IMEModel model, IMETextView view, Readable readable) {
     if (model == null || view == null || readable == null) {
       throw new IllegalArgumentException("Controller cannot take null as an argument.");
     }

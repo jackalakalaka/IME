@@ -1,7 +1,7 @@
 package model.funcobjs;
 
-import model.IPixel;
-import model.Pixel;
+import model.image.IPixel;
+import model.image.Pixel;
 
 /**
  * A function object for getting the blue value of a pixel.

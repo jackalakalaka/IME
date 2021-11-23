@@ -3,9 +3,9 @@ package model.funcobjs;
 import java.util.Objects;
 
 import factory.ImageFactory;
-import model.IPixel;
-import model.Image;
-import model.Pixel;
+import model.image.IPixel;
+import model.image.Image;
+import model.image.Pixel;
 
 /**
  * An abstract class for function objects that get a single value from pixels.

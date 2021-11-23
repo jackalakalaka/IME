@@ -1,10 +1,20 @@
 ## To run IME:
 
-- Please run the ImageManipulationEnhancement.java class file's main method via the ./res/IME.JAR file.
-- The example script `script.txt` contains a comprehensive example run of the app.
+- Please run the ImageManipulationEnhancement.java class file's main method via the ./res/IME.JAR file. Command options are:
+  - `java -jar ./res/IME.JAR` to run the GUI-based version
+  - `java -jar ./res/IME.JAR -file <script_file_path>` to run the script-based version
+  - `java -jar ./res/IME.JAR -text` to run the real time text-based version
+- The example script `script.txt` contains a comprehensive example run of the app's text-based functionality.
 
-## Commands for using IME:
+## Further info:
+### GUI-based version
+- To load an image, click on the bottom-center load button and choose an image to edit.
+- To save the image, click on the bottom-center save button and choose a file path at which to save it.
+- To switch between previously-loaded images to edit, select from the bottom-right dropdown menu.
+- To manipulate the image, choose between the operation buttons on the left of the window.
 
+### Text and script based version
+A corresponding script file uses the same syntax but simply returns after each command.
 - To quit type: `quit` into the command line.
 - To run the program with a custom script type: `-file <file_path>` into the command line.
 - To load an image type: `load <image-name> <file-path>` into the command line.

@@ -1,6 +1,21 @@
 package view;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -9,227 +24,316 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.*;
 
-import model.IPixel;
-import model.Image;
+import model.image.IPixel;
+import model.image.Image;
 
 
 /**
- * Implementation of an image viewer.
+ * Implementation of a GUI-based image viewer. This view adds an object implementing the
+ * ViewListener interface which, in this case, is implemented by the GUI-based controller.
  */
-public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
-  private final JButton Red;
-  private final JButton Green;
-  private final JButton Blue;
-  private final JButton Horizontal;
-  private final JButton Vertical;
-  private final JButton Sepia;
-  private final JButton Greyscale;
-  private final JButton Intensity;
-  private final JButton Blur;
-  private final JButton Sharpen;
-  private final JButton Luma;
-  private final JButton Value;
-  private final List<JButton> functionButtons = new ArrayList<>();
+public class IMEViewGUI extends JFrame implements IMEGUIView, ActionListener {
+  private final List<ViewListener> listenerList;
+  private final Vector<String> loadedImgs;
+  private final List<JButton> functionButtons;
+  private final Histogram[] histograms = new Histogram[4];
 
-  private final JPanel buttonPanel;
-  private final JPanel imagePanel;
-  private final JPanel histogramPanel;
+  private final JPanel histogramsPanel = new JPanel();
+  private final JPanel imagePanel = new JPanel();
+  private final JPanel filePanel = new JPanel();
 
-  private final JPanel filePanel;
   private final JButton load;
   private final JButton save;
   private final JFileChooser fc;
-  private final Vector<String> images = new Vector<>();
   private final JComboBox<String> imageSelection;
 
-  private JTextArea systemMessages;
-  private final List<ViewListener> listenerList;
+  private final JTextArea systemMessages;
 
+  /**
+   * Auto-sets fields.
+   */
   public IMEViewGUI() {
     super();
     this.listenerList = new ArrayList<>();
-    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    this.functionButtons = new ArrayList<>();
+    this.loadedImgs = new Vector<>();
 
-    this.Red = new JButton("Red");
-    this.Red.setActionCommand("red");
+    // Button panel containing each image manipulation command.
 
-    this.Green = new JButton("Green");
-    this.Green.setActionCommand("green");
+    JButton red = new JButton("Red");
+    red.setActionCommand("red");
+    this.functionButtons.add(red);
+    JButton green = new JButton("Green");
+    green.setActionCommand("green");
+    this.functionButtons.add(green);
+    JButton blue = new JButton("Blue");
+    blue.setActionCommand("blue");
+    this.functionButtons.add(blue);
+    JButton blur = new JButton("Blur");
+    blur.setActionCommand("blur");
+    this.functionButtons.add(blur);
+    JButton sharpen = new JButton("Sharpen");
+    sharpen.setActionCommand("sharpen");
+    this.functionButtons.add(sharpen);
+    JButton luma = new JButton("Luma");
+    luma.setActionCommand("luma");
+    this.functionButtons.add(luma);
+    JButton value = new JButton("Value");
+    value.setActionCommand("value");
+    this.functionButtons.add(value);
+    JButton greyscale = new JButton("Greyscale");
+    greyscale.setActionCommand("greyscale");
+    this.functionButtons.add(greyscale);
+    JButton sepia = new JButton("Sepia");
+    sepia.setActionCommand("sepia");
+    this.functionButtons.add(sepia);
+    JButton intensity = new JButton("Intensity");
+    intensity.setActionCommand("intensity");
+    this.functionButtons.add(intensity);
+    JButton horizontal = new JButton("Horizontal");
+    horizontal.setActionCommand("horizontal");
+    this.functionButtons.add(horizontal);
+    JButton vertical = new JButton("Vertical");
+    vertical.setActionCommand("vertical");
+    this.functionButtons.add(vertical);
 
-    this.Blue = new JButton("Blue");
-    this.Blue.setActionCommand("blue");
-
-    this.save = new JButton("Save");
-    this.save.addActionListener(this);
-
-    this.load = new JButton("Load");
-    this.load.addActionListener(this);
-
-    this.Blur = new JButton("Blur");
-    this.Blur.setActionCommand("blur");
-
-    this.Sharpen = new JButton("Sharpen");
-    this.Sharpen.setActionCommand("sharpen");
-
-    this.Luma = new JButton("Luma");
-    this.Luma.setActionCommand("luma");
-
-    this.Value = new JButton("Value");
-    this.Value.setActionCommand("value");
-
-    this.Greyscale = new JButton("Greyscale");
-    this.Greyscale.setActionCommand("greyscale");
-
-    this.Sepia = new JButton("Sepia");
-    this.Sepia.setActionCommand("sepia");
-
-    this.Intensity = new JButton("Intensity");
-    this.Intensity.setActionCommand("intensity");
-
-    this.Horizontal = new JButton("Horizontal");
-    this.Horizontal.setActionCommand("horizontal");
-
-    this.Vertical = new JButton("Vertical");
-    this.Vertical.setActionCommand("vertical");
-
-    fc = new JFileChooser();
-
-    this.systemMessages = new JTextArea(1, 30);
-    this.systemMessages.setEditable(false);
-
-
-    this.buttonPanel = new JPanel();
-    this.buttonPanel.setBackground(Color.GRAY);
-    this.functionButtons.add(this.Red);
-    this.functionButtons.add(this.Green);
-    this.functionButtons.add(this.Blue);
-    this.functionButtons.add(this.Blur);
-    this.functionButtons.add(this.Sharpen);
-    this.functionButtons.add(this.Luma);
-    this.functionButtons.add(this.Value);
-    this.functionButtons.add(this.Greyscale);
-    this.functionButtons.add(this.Sepia);
-    this.functionButtons.add(this.Intensity);
-    this.functionButtons.add(this.Horizontal);
-    this.functionButtons.add(this.Vertical);
-    this.buttonPanel.setLayout(new GridLayout(this.functionButtons.size(), 1));
-    for (JButton button : functionButtons) {
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.setBackground(Color.GRAY);
+    buttonPanel.setLayout(new GridLayout(this.functionButtons.size(), 1));
+    for (JButton button : this.functionButtons) {
       button.addActionListener(this);
       buttonPanel.add(button);
     }
 
-    this.imagePanel = new JPanel();
+
+    // Image panel.
+
     this.imagePanel.setBackground(Color.BLACK);
     this.imagePanel.setPreferredSize(new Dimension(1000, 1000));
+    JScrollPane imagePanelScrollPane = new JScrollPane(this.imagePanel);
 
-    this.histogramPanel = new JPanel();
-    this.histogramPanel.setBackground(Color.red);
+    // Histogram panel.
+    this.histogramsPanel.setBackground(Color.PINK);
+    this.histogramsPanel.setLayout(new GridLayout(1, this.histograms.length));
+    for (int i = 0; i < 4; i += 1) {
+      this.histograms[i] = new Histogram(300, 200);
+      this.histogramsPanel.add(this.histograms[i]); // Placeholder histogram panels
+    }
 
-    this.filePanel = new JPanel();
+    // File panel.
+
+    this.systemMessages = new JTextArea(1, 30);
+    this.systemMessages.setEditable(false);
+    this.load = new JButton("Load");
+    this.load.addActionListener(this);
+    this.save = new JButton("Save");
+    this.save.addActionListener(this);
+    fc = new JFileChooser();
+    this.imageSelection = new JComboBox<>(this.loadedImgs);
+    this.imageSelection.setActionCommand("Image selection");
+    this.imageSelection.addActionListener(this);
+    this.imageSelection.setPrototypeDisplayValue("long file name goes here");
+
     this.filePanel.setBackground(Color.CYAN);
     this.filePanel.setLayout(new FlowLayout());
     this.filePanel.add(this.systemMessages);
     this.filePanel.add(this.load);
     this.filePanel.add(this.save);
-    this.imageSelection = new JComboBox<>(this.images);
-    this.imageSelection.setActionCommand("Image selection");
     this.filePanel.add(this.imageSelection);
+
+    // Add panels
+
+    this.add(this.histogramsPanel, BorderLayout.NORTH);
+    this.add(imagePanelScrollPane, BorderLayout.CENTER);
+    this.add(buttonPanel, BorderLayout.WEST);
+    this.add(this.filePanel, BorderLayout.SOUTH);
+
+    // Config.
+
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    this.setFocusable(true);
+    this.requestFocus();
+    this.pack();
+  }
+
+  /**
+   * Allows composition with custom structures.
+   * @param listenerList list of view listeners
+   * @param loadedImgs images currently loaded in the program
+   * @param functionButtons buttons corresponding to function object commands
+   * @param load load filesystem command button
+   * @param save save filesystem command button
+   * @param fc file chooser
+   * @param imageSelection image selection area for loaded images
+   */
+  public IMEViewGUI(List<ViewListener> listenerList, Vector<String> loadedImgs,
+                    List<JButton> functionButtons, JButton load, JButton save, JFileChooser fc,
+                    JComboBox<String> imageSelection) {
+    super();
+    this.listenerList = listenerList;
+    this.loadedImgs = loadedImgs;
+    this.functionButtons = functionButtons;
+    this.load = load;
+    this.save = save;
+    this.fc = fc;
+    this.imageSelection = imageSelection;
+
+    // Button panel containing each image manipulation command.
+
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.setBackground(Color.GRAY);
+    buttonPanel.setLayout(new GridLayout(this.functionButtons.size(), 1));
+    for (JButton button : this.functionButtons) {
+      button.addActionListener(this);
+      buttonPanel.add(button);
+    }
+
+    // Image panel.
+
+    this.imagePanel.setBackground(Color.BLACK);
+    this.imagePanel.setPreferredSize(new Dimension(1000, 1000));
+    JScrollPane imagePanelScrollPane = new JScrollPane(this.imagePanel);
+
+    // Histogram panel.
+    this.histogramsPanel.setBackground(Color.PINK);
+    this.histogramsPanel.setLayout(new GridLayout(1, this.histograms.length));
+    for (int i = 0; i < 4; i += 1) {
+      this.histograms[i] = new Histogram(300, 200);
+      this.histogramsPanel.add(this.histograms[i]); // Placeholder histogram panels
+    }
+
+    // File panel.
+
+    this.systemMessages = new JTextArea(1, 30);
+    this.systemMessages.setEditable(false);
+    this.load.addActionListener(this);
+    this.save.addActionListener(this);
+    this.imageSelection.setActionCommand("Image selection");
     this.imageSelection.addActionListener(this);
     this.imageSelection.setPrototypeDisplayValue("long file name goes here");
 
+    this.filePanel.setBackground(Color.CYAN);
+    this.filePanel.setLayout(new FlowLayout());
+    this.filePanel.add(this.systemMessages);
+    this.filePanel.add(this.load);
+    this.filePanel.add(this.save);
+    this.filePanel.add(this.imageSelection);
 
-    this.add(this.histogramPanel, BorderLayout.NORTH);
-    this.add(this.imagePanel, BorderLayout.CENTER);
-    this.add(this.buttonPanel, BorderLayout.WEST);
+    // Add panels
+
+    this.add(this.histogramsPanel, BorderLayout.NORTH);
+    this.add(imagePanelScrollPane, BorderLayout.CENTER);
+    this.add(buttonPanel, BorderLayout.WEST);
     this.add(this.filePanel, BorderLayout.SOUTH);
 
+    // Config.
+
+    setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     this.setFocusable(true);
     this.requestFocus();
-
     this.pack();
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e == null) {
-      throw new IllegalArgumentException("Action event is null;");
+      throw new IllegalArgumentException("Action event cannot be null.");
     }
-    if (e.getSource() == imageSelection) {
-      //drop down menu swap to selected image
-      String imageName = (String) imageSelection.getSelectedItem();
-      for (ViewListener listener : listenerList) {
+    String actionCmd = e.getActionCommand();
+    System.out.println(actionCmd);
+    Object eventSrc = e.getSource();
+
+    if (eventSrc == this.imageSelection) {
+      String imageName = (String) this.imageSelection.getSelectedItem();
+
+      // Drop down menu swaps to the selected image out of pre-loaded images.
+      for (ViewListener listener : this.listenerList) {
         listener.selectImageEvent(imageName);
+        this.renderMsg(actionCmd + " successful!");
       }
     }
-    if (e.getSource() == load) {
-      int returnVal = fc.showOpenDialog(this);
+
+    if (eventSrc == this.load) {
+      int returnVal = this.fc.showOpenDialog(this);
 
       if (returnVal == JFileChooser.APPROVE_OPTION) {
-        File file = fc.getSelectedFile();
-        //This is where the controller would be called to load the file.
-        for (ViewListener listener : listenerList) {
-          listener.loadFileEvent(file.getName());
+        File file = this.fc.getSelectedFile();
+        for (ViewListener listener : this.listenerList) {
+          // The controller is called as a view listener to load the file.
+          listener.loadFileEvent(file.getPath(), file.getName());
         }
       } else {
-        this.systemMessages.setText("");
-        this.systemMessages.append("Image not loaded; User canceled selection.");
+        this.renderMsg("Image not loaded; User canceled selection.");
       }
     }
-    if (e.getSource() == save) {
-      int returnValue = fc.showSaveDialog(this);
-      if (returnValue == JFileChooser.APPROVE_OPTION) {
-        File file = fc.getSelectedFile();
-        //This is where the controller would be called to save the file.
-        for (ViewListener listener : listenerList) {
-          listener.saveFileEvent(file.getName());
-        }
-      } else {
-        this.systemMessages.setText("");
-        this.systemMessages.append("Image not saved; User canceled selection.");
-      }
-    }
-     for (JButton button : functionButtons) {
-       if (e.getSource() == button) {
-         for (ViewListener listener : listenerList) {
-           listener.commandEvent(e.getActionCommand());
-         }
-       }
-      }
-    this.systemMessages.setText("");
-    this.systemMessages.append(e.getActionCommand());
 
-    this.systemMessages.append(" successful!");
+    if (eventSrc == this.save) {
+      int returnValue = fc.showSaveDialog(this);
+
+      if (returnValue == JFileChooser.APPROVE_OPTION) {
+        File file = this.fc.getSelectedFile();
+        // The controller is called as a view listener to save the file.
+        for (ViewListener listener : this.listenerList) {
+          listener.saveFileEvent(file.getPath());
+          this.renderMsg(actionCmd + " successful!");
+        }
+      } else {
+        this.renderMsg("Image not saved; User canceled selection.");
+      }
+    }
+
+    for (JButton button : this.functionButtons) {
+      if (eventSrc == button) {
+        for (ViewListener listener : this.listenerList) {
+          // If an image is not currently loaded, a command cannot be called.
+          if (listener.getImageNames().size() == 0) {
+            continue;
+          }
+          listener.commandEvent(actionCmd);
+          this.renderMsg(actionCmd + " successful!");
+        }
+      }
+    }
 
   }
 
 
   @Override
   public void refresh(Image selectedImage) {
-    BufferedImage image = getBuff(selectedImage);
-    JLabel picture = new JLabel(new ImageIcon(image));
+    // Update image panel.
+    BufferedImage imgModel = getBuff(selectedImage);
+    JLabel picture = new JLabel(new ImageIcon(imgModel));
     this.imagePanel.removeAll();
     this.imagePanel.add(picture);
     this.imagePanel.updateUI();
-    for (ViewListener listener : listenerList) {
-      for (int i = 0; i < listener.getImageNames().size(); i++) {
-        boolean contains = images.contains(listener.getImageNames().get(i));
-        if (!contains) {
-          images.add(listener.getImageNames().get(i));
+
+    // Ensure any new image (added in the current session, likely by a controller) is registered in
+    // the loaded-image selection dropdown.
+    for (ViewListener listener : this.listenerList) {
+      for (String imgNm : listener.getImageNames()) {
+        if (!this.loadedImgs.contains(imgNm)) {
+          this.loadedImgs.add(imgNm);
         }
       }
     }
+    this.filePanel.updateUI();
+
+    // Update histograms.
+    this.histogramsPanel.removeAll();
+    this.histograms[0].setImgAndComponent(selectedImage, IPixel.Color.Red);
+    this.histograms[1].setImgAndComponent(selectedImage, IPixel.Color.Green);
+    this.histograms[2].setImgAndComponent(selectedImage, IPixel.Color.Blue);
+    this.histograms[3].setImgAndComponent(selectedImage, null);
+    for (Histogram hist : this.histograms) {
+      this.histogramsPanel.add(hist);
+    }
+    this.histogramsPanel.updateUI();
   }
 
   @Override
   public void addListener(ViewListener viewListener) {
     this.listenerList.add(viewListener);
-  }
-
-  @Override
-  public void requestViewFocus() {
-
   }
 
   @Override
@@ -256,5 +360,15 @@ public class IMEViewGUI extends JFrame implements IGUIView, ActionListener {
     return buff;
   }
 
+  /**
+   * Renders a message to the view's appendable.
+   *
+   * @param str The message to be appended.
+   */
+  @Override
+  public void renderMsg(String str) {
+    this.systemMessages.setText("");
+    this.systemMessages.append(str);
+  }
 }
 

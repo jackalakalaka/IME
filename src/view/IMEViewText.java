@@ -9,9 +9,10 @@ import model.funcobjs.ICommands;
 
 
 /**
- * Implementation of an image viewer.
+ * Implementation of an image viewer in text form. Renders command-line messages and shows progress
+ * updates.
  */
-public class IMEViewText implements IMEView {
+public class IMEViewText implements IMETextView {
   private final Appendable appendable;
 
 

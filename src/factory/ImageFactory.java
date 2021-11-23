@@ -3,12 +3,12 @@ package factory;
 import java.io.File;
 import java.util.Objects;
 
-import model.IPixel;
-import model.Image;
-import model.ImageBMP;
-import model.ImageJPG;
-import model.ImagePNG;
-import model.ImagePPM;
+import model.image.IPixel;
+import model.image.Image;
+import model.image.ImageBMP;
+import model.image.ImageJPG;
+import model.image.ImagePNG;
+import model.image.ImagePPM;
 
 /**
  * This class allows for the creation of certain types of images given different inputs.
@@ -23,10 +23,12 @@ public class ImageFactory {
    * @return A new image from the file.
    */
   public Image createImage(String filePath) {
+    System.out.println(filePath);
     Objects.requireNonNull(filePath);
     String[] pathSplit = filePath.split("\\.");
     String fileType = pathSplit[(pathSplit.length - 1)];
     File file = new File(filePath);
+    System.out.println(filePath);
     if (!file.exists()) {
       throw new IllegalArgumentException("File path given does not exist.");
     }

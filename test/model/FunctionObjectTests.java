@@ -6,6 +6,12 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.Collections;
 
+import model.image.IPixel;
+import model.image.Image;
+import model.image.ImageJPG;
+import model.image.ImagePPM;
+import model.image.Pixel;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

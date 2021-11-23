@@ -1,7 +1,7 @@
 package model.funcobjs;
 
-import model.IPixel;
-import model.Image;
+import model.image.IPixel;
+import model.image.Image;
 
 /**
  * A function object for getting the pixel on the other side of the image horizontally.

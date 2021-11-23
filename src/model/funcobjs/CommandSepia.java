@@ -1,8 +1,8 @@
 package model.funcobjs;
 
-import model.IPixel;
-import model.Image;
-import model.Pixel;
+import model.image.IPixel;
+import model.image.Image;
+import model.image.Pixel;
 
 /**
  * Function object that returns the sepia version of a given pixel.

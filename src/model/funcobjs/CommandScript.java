@@ -9,21 +9,21 @@ import java.util.Scanner;
 
 import controller.IMEControllerText;
 import model.IMEModelImpl;
-import view.IMEView;
+import view.IMETextView;
 import view.IMEViewText;
 
 /**
  * A function object that takes a file path to a text document and then runs an instance of IME.
  */
 public class CommandScript {
-  IMEView view;
+  private IMETextView view;
 
   /**
    * Sets IO variables and prepares to read in a script.
    * @param scanner scanner
    * @param view IME view
    */
-  public CommandScript(Scanner scanner, IMEView view) {
+  public CommandScript(Scanner scanner, IMETextView view) {
     this.view = Objects.requireNonNull(view);
     String filePath = scanner.next();
     Appendable appendable = new StringBuilder();

@@ -1,6 +1,6 @@
 package model.funcobjs;
 
-import model.IPixel;
+import model.image.IPixel;
 
 /**
  * A function object that returns the greyscale version of a pixel.
